@@ -38,7 +38,9 @@
     <h1>WCAG 4.1.3 - Status Messages Example</h1>
 
     <!-- Scenario 1: Form Success and Error Messages -->
-    <h2>Scenario 1: Form Submission</h2>
+    <h2>Scenario 1: Form Submission. <br>
+    Success or error messages appear after submission
+    </h2>
     <form id="contactForm" aria-describedby="formStatus">
       <label for="name">Enter your name:</label><br />
       <input type="text" id="name" name="name" /><br />
@@ -51,21 +53,27 @@
     <hr />
 
     <!-- Scenario 2: Dynamic Content Update (like loading or saving) -->
-    <h2>Scenario 2: Dynamic Updates</h2>
+    <h2>Scenario 2: Dynamic Updates<br>
+      Loading data, please wait..., Data loaded successfully!
+    </h2>
     <button id="loadBtn">Load Data</button>
     <div id="dataStatus" class="message info" role="status"></div>
 
     <hr />
 
     <!-- Scenario 3: Urgent Alert Message -->
-    <h2>Scenario 3: Urgent Alert</h2>
+    <h2>Scenario 3: Urgent Alert(Immediate attention (like deletion warning))</h2>
     <button id="deleteBtn">Delete Item</button>
     <div id="alertBox" class="message" role="alert"></div>
 
     <hr />
 
     <!-- Scenario 4: Progress Indicator -->
-    <h2>Scenario 4: Loading / Progress Message</h2>
+    <h2>Scenario 4: Loading / Progress Message(Describes background progress)
+      <br>
+      
+Processing started, Processing 25% complete, Process completed successfully!
+    </h2>
     <button id="startProcess">Start Process</button>
     <div id="progress" class="message" role="status" aria-live="polite"></div>
 

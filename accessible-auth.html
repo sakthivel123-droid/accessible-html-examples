@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 3.3.8 Accessible Authentication (Minimum)</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #f6f7fb;
+  }
+  h2 {
+    background: #004aad;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  h3 {
+    color: #333;
+  }
+  .section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  }
+  .bad {
+    border-left: 6px solid #d33;
+    background: #ffecec;
+  }
+  .good {
+    border-left: 6px solid #2a8a2a;
+    background: #eaffea;
+  }
+  input, button {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 1rem;
+  }
+  .info {
+    margin-top: 10px;
+    background: #eef;
+    padding: 8px;
+    border-radius: 6px;
+  }
+</style>
+</head>
+<body>
+
+<h2>WCAG 2.2 — 3.3.8 Accessible Authentication (Minimum)</h2>
+<p>This demo shows <strong>bad (non-accessible)</strong> and <strong>good (accessible)</strong> login examples.</p>
+
+<!-- =================== BAD EXAMPLE 1 =================== -->
+<div class="section bad">
+  <h3>❌ Bad Example 1: CAPTCHA and Memory Challenge</h3>
+  <p>This login form requires solving a visual CAPTCHA and remembering a secret word — both violate WCAG 3.3.8.</p>
+
+  <form>
+    <label for="username1">Username:</label>
+    <input type="text" id="username1" name="username1" placeholder="Enter username">
+
+    <label for="password1">Password:</label>
+    <input type="password" id="password1" name="password1" placeholder="Enter password">
+
+    <p>Prove you are human:</p>
+    <img src="https://dummyimage.com/150x50/000/fff&text=J5K7Q" alt="CAPTCHA image showing J5K7Q">
+    <input type="text" placeholder="Type the text you see above">
+
+    <p>Security Question: What was your first pet’s name?</p>
+    <input type="text" placeholder="Enter your answer">
+
+    <button type="submit">Login</button>
+  </form>
+  <div class="info">
+    🚫 Problem: Requires visual recognition (CAPTCHA) and memorization (security question).  
+    Users with cognitive or visual impairments may not be able to complete login.
+  </div>
+</div>
+
+<!-- =================== GOOD EXAMPLE 1 =================== -->
+<div class="section good">
+  <h3>✅ Good Example 1: Autofill and Password Manager Support</h3>
+  <p>This version allows browser autofill and password manager, avoiding memory burden.</p>
+
+  <form id="good1">
+    <label for="username2">Username:</label>
+    <input type="text" id="username2" name="username" autocomplete="username" placeholder="Email or Username">
+
+    <label for="password2">Password:</label>
+    <input type="password" id="password2" name="password" autocomplete="current-password" placeholder="Password">
+
+    <button type="submit">Login</button>
+  </form>
+  <div class="info" id="good1msg" role="status" aria-live="polite"></div>
+</div>
+
+<!-- =================== BAD EXAMPLE 2 =================== -->
+<div class="section bad">
+  <h3>❌ Bad Example 2: Puzzle-based Authentication</h3>
+  <p>Here, user must click on all images with cars — a visual puzzle that fails accessibility.</p>
+
+  <p>Select all images that contain cars:</p>
+  <div>
+    <img src="https://dummyimage.com/80x80/999/fff&text=Car" alt="image 1" style="margin:5px;">
+    <img src="https://dummyimage.com/80x80/ccc/fff&text=Tree" alt="image 2" style="margin:5px;">
+    <img src="https://dummyimage.com/80x80/666/fff&text=Bus" alt="image 3" style="margin:5px;">
+  </div>
+  <button>Verify</button>
+
+  <div class="info">
+    🚫 Problem: Relies on visual recognition. Screen readers or cognitive users may not identify car images.
+  </div>
+</div>
+
+<!-- =================== GOOD EXAMPLE 2 =================== -->
+<div class="section good">
+  <h3>✅ Good Example 2: Passwordless Email Link</h3>
+  <p>User can log in via an email link — no need to remember a password.</p>
+
+  <form id="emailLoginForm">
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" autocomplete="email" placeholder="example@mail.com">
+    <button type="submit">Send Login Link</button>
+  </form>
+
+  <div id="emailMessage" class="info" role="status" aria-live="polite"></div>
+</div>
+
+<!-- =================== GOOD EXAMPLE 3 =================== -->
+<div class="section good">
+  <h3>✅ Good Example 3: Biometric / Device-based Authentication (Simulated)</h3>
+  <p>Uses device-based authentication — no memory or visual challenge required.</p>
+  <button id="biometricBtn">Login with Fingerprint (Simulated)</button>
+  <div id="bioMessage" class="info" role="status" aria-live="polite"></div>
+</div>
+
+<script>
+document.getElementById('good1').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('good1msg').textContent = 
+    "✅ Login successful. Autofill/password manager allowed, no memory test needed.";
+});
+
+document.getElementById('emailLoginForm').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('emailMessage').textContent =
+    "📩 Secure login link sent to your email. No password memory required.";
+});
+
+document.getElementById('biometricBtn').addEventListener('click', () => {
+  document.getElementById('bioMessage').textContent =
+    "🔒 Biometric authentication successful (simulated). No CAPTCHA or puzzle needed.";
+});
+</script>
+
+</body>
+</html>
