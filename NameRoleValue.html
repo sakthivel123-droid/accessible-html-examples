@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WCAG 4.1.2 - Name, Role, Value Example</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+    section { margin-bottom: 40px; padding: 15px; border: 2px solid #ccc; border-radius: 10px; }
+    h2 { color: darkred; }
+    .good { background-color: #e8ffe8; border-color: green; }
+    .bad { background-color: #ffe8e8; border-color: red; }
+    .custom-button, .custom-button-good {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .custom-button { background: gray; color: white; }
+    .custom-button-good { background: darkblue; color: white; }
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 4.1.2 - Name, Role, Value</h1>
+  <p>This page shows bad and good examples for common accessibility issues related to <strong>name, role, and value</strong>.</p>
+
+  <!-- 1️⃣ Missing label on input -->
+  <section class="bad">
+    <h2>❌ Bad Example 1: Missing label</h2>
+    <p>User doesn’t know what to enter in the field because there’s no accessible name.</p>
+    <input type="text" placeholder="Enter text">
+  </section>
+
+  <section class="good">
+    <h2>✅ Good Example 1: Proper label</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" aria-required="true">
+  </section>
+
+  <!-- 2️⃣ Custom button without role -->
+  <section class="bad">
+    <h2>❌ Bad Example 2: Custom button without role</h2>
+    <div class="custom-button" onclick="alert('Submitted!')">Submit</div>
+    <p>Screen readers do not recognize this as a button. Keyboard users cannot activate it using Enter or Space.</p>
+  </section>
+
+  <section class="good">
+    <h2>✅ Good Example 2: Custom button with role and keyboard support</h2>
+    <div class="custom-button-good" role="button" tabindex="0" 
+         onclick="alert('Submitted!')" 
+         onkeypress="if(event.key==='Enter'||event.key===' ') this.click();">
+      Submit
+    </div>
+    <p>Now the element has a <code>role="button"</code> and can be activated via keyboard.</p>
+  </section>
+
+  <!-- 3️⃣ Dynamic element without ARIA update -->
+  <section class="bad">
+    <h2>❌ Bad Example 3: Missing ARIA state update</h2>
+    <button id="toggleBad" onclick="toggleBad()">Show Details</button>
+    <div id="badPanel" style="display:none;">Secret information...</div>
+
+    <script>
+      function toggleBad() {
+        const panel = document.getElementById('badPanel');
+        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        // No ARIA updates → screen reader won't know state change
+      }
+    </script>
+  </section>
+
+  <section class="good">
+    <h2>✅ Good Example 3: Proper ARIA state update</h2>
+    <button id="toggleGood" aria-expanded="false" aria-controls="goodPanel">Show Details</button>
+    <div id="goodPanel" hidden>Secret information...</div>
+
+    <script>
+      const toggleBtn = document.getElementById('toggleGood');
+      const goodPanel = document.getElementById('goodPanel');
+      toggleBtn.addEventListener('click', () => {
+        const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+        toggleBtn.setAttribute('aria-expanded', !expanded);
+        goodPanel.hidden = expanded;
+      });
+    </script>
+  </section>
+
+  <!-- 4️⃣ Missing role for complex widget -->
+  <section class="bad">
+    <h2>❌ Bad Example 4: Custom checkbox without proper role/state</h2>
+    <div class="custom-button" onclick="this.classList.toggle('checked')">
+      Subscribe
+    </div>
+  </section>
+
+  <section class="good">
+    <h2>✅ Good Example 4: Custom checkbox with role and state</h2>
+    <div id="customCheckbox" class="custom-button-good" 
+         role="checkbox" aria-checked="false" tabindex="0"
+         onclick="toggleCheck()" 
+         onkeypress="if(event.key==='Enter'||event.key===' ') toggleCheck()">
+      Subscribe
+    </div>
+
+    <script>
+      function toggleCheck() {
+        const cb = document.getElementById('customCheckbox');
+        const checked = cb.getAttribute('aria-checked') === 'true';
+        cb.setAttribute('aria-checked', !checked);
+        cb.style.background = checked ? 'darkblue' : 'green';
+      }
+    </script>
+  </section>
+
+</body>
+</html>
