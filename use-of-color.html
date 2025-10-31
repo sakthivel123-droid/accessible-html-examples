@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 1.4.1 Use of Color Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    line-height: 1.6;
+  }
+
+  /* 1. Links */
+  a {
+    color: blue;
+    text-decoration: underline; /* ensures link visible without color */
+  }
+
+  /* 2. Form */
+  input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  .error {
+    border: 2px solid red;
+  }
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+
+  /* 3. Chart simulation */
+  .chart {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  .bar {
+    width: 60px;
+    height: 100px;
+    text-align: center;
+    color: white;
+    padding-top: 70px;
+    font-weight: bold;
+  }
+  .sales {
+    background-color: red;
+  }
+  .profit {
+    background-color: blue;
+  }
+
+  /* Add pattern using background-image (for color-blind accessibility) */
+  .sales {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  }
+
+  /* 4. Buttons */
+  .button {
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  .start {
+    background-color: green;
+  }
+  .stop {
+    background-color: red;
+  }
+
+  /* 5. Status indicator */
+  .status {
+    display: inline-block;
+    width: 80px;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+  }
+  .pass {
+    background-color: green;
+  }
+  .fail {
+    background-color: red;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 1.4.1 — Use of Color Example</h1>
+
+<!-- 1️⃣ Links -->
+<section>
+  <h2>1. Links should not rely on Color only</h2>
+  <p>Click the <a href="#">contact page</a> for more information.</p>
+  <!-- Underline helps color-blind users identify links -->
+</section>
+
+<!-- 2️⃣ Form Error -->
+<section>
+  <h2>2. Form validation not only by color</h2>
+  <form>
+    <label for="email">Email:</label>
+    <input id="email" type="text" class="error" aria-describedby="emailError">
+    <span id="emailError" class="error-message">Error: Please enter a valid email.</span>
+  </form>
+  <!-- Red border + error text makes it accessible -->
+</section>
+
+<!-- 3️⃣ Chart Example -->
+<section>
+  <h2>3. Chart using both color and labels</h2>
+  <div class="chart">
+    <div class="bar sales">Sales</div>
+    <div class="bar profit">Profit</div>
+  </div>
+  <!-- Text labels help users distinguish bars -->
+</section>
+
+<!-- 4️⃣ Instructions -->
+<section>
+  <h2>4. Instructions should not depend on color</h2>
+  <p>Incorrect: "Click the <span style="color: green;">green</span> button to start."</p>
+  <p>Correct: "Click the button labeled <strong>Start</strong> to begin."</p>
+
+  <button class="button start">Start</button>
+  <button class="button stop">Stop</button>
+</section>
+
+<!-- 5️⃣ Status -->
+<section>
+  <h2>5. Status indicators with text and color</h2>
+  <div class="status pass">Pass</div>
+  <div class="status fail">Fail</div>
+</section>
+
+</body>
+</html>
