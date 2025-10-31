@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 3.3.1 Error Identification Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+  }
+  .section {
+    border: 2px solid #ccc;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+  }
+  h2 {
+    margin-top: 0;
+  }
+  .error {
+    color: red;
+    font-size: 0.9em;
+  }
+  input.error-field {
+    border: 2px solid red;
+  }
+  .good {
+    background-color: #e9f8e9;
+  }
+  .bad {
+    background-color: #fde9e9;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.2 - 3.3.1 Error Identification</h1>
+
+<!-- ❌ BAD EXAMPLE -->
+<div class="section bad">
+  <h2>❌ Bad Example (Fails WCAG 3.3.1)</h2>
+  <form id="badForm" onsubmit="validateBadForm(event)">
+    <label for="badEmail">Email:</label><br>
+    <input type="text" id="badEmail" name="badEmail"><br><br>
+
+    <label for="badPassword">Password:</label><br>
+    <input type="password" id="badPassword" name="badPassword"><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p><strong>Issues:</strong></p>
+  <ul>
+    <li>No visible text error message when input is wrong.</li>
+    <li>Errors only shown by color or not shown at all.</li>
+    <li>Screen reader users won't know which field is wrong.</li>
+  </ul>
+</div>
+
+<!-- ✅ GOOD EXAMPLE -->
+<div class="section good">
+  <h2>✅ Good Example (Passes WCAG 3.3.1)</h2>
+  <form id="goodForm" novalidate onsubmit="validateGoodForm(event)">
+    <label for="goodEmail">Email: <span aria-hidden="true">*</span></label><br>
+    <input type="email" id="goodEmail" name="goodEmail" aria-describedby="emailError"><br>
+    <span id="emailError" class="error" role="alert"></span><br>
+
+    <label for="goodPassword">Password (min 8 chars): <span aria-hidden="true">*</span></label><br>
+    <input type="password" id="goodPassword" name="goodPassword" aria-describedby="passwordError"><br>
+    <span id="passwordError" class="error" role="alert"></span><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p><strong>Accessible Features:</strong></p>
+  <ul>
+    <li>Text error message clearly describes what went wrong.</li>
+    <li>Each error message linked using <code>aria-describedby</code>.</li>
+    <li>Error messages use <code>role="alert"</code> so screen readers announce them immediately.</li>
+    <li>Error shown with both color <em>and</em> text.</li>
+  </ul>
+</div>
+
+<script>
+  // BAD FORM VALIDATION
+  function validateBadForm(event) {
+    event.preventDefault();
+    const email = document.getElementById("badEmail");
+    const password = document.getElementById("badPassword");
+
+    // Clear any previous red borders
+    email.style.border = "";
+    password.style.border = "";
+
+    if (!email.value.includes("@")) {
+      email.style.border = "2px solid red"; // Only color, no text
+    }
+    if (password.value.length < 8) {
+      password.style.border = "2px solid red";
+    }
+  }
+
+  // GOOD FORM VALIDATION
+  function validateGoodForm(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("goodEmail");
+    const password = document.getElementById("goodPassword");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+
+    // Reset
+    emailError.textContent = "";
+    passwordError.textContent = "";
+    email.classList.remove("error-field");
+    password.classList.remove("error-field");
+
+    let valid = true;
+
+    if (!email.value.includes("@")) {
+      emailError.textContent = "Please enter a valid email address (e.g., user@example.com).";
+      email.classList.add("error-field");
+      valid = false;
+    }
+
+    if (password.value.length < 8) {
+      passwordError.textContent = "Password must be at least 8 characters long.";
+      password.classList.add("error-field");
+      valid = false;
+    }
+
+    if (valid) {
+      alert("Form submitted successfully!");
+    }
+  }
+</script>
+
+</body>
+</html>
