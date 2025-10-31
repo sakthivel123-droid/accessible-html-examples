@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 1.3.1 – Info & Relationships (All Scenarios)</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    line-height: 1.6;
+  }
+  h1, h2 {
+    color: #0a58ca;
+  }
+  section {
+    margin-bottom: 40px;
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #555;
+    padding: 10px;
+  }
+  th {
+    background-color: #f0f0f0;
+  }
+  ul, ol {
+    margin-left: 30px;
+  }
+  input[type="radio"]:focus + label {
+    outline: 3px solid #007BFF;
+    outline-offset: 3px;
+    background-color: #EAF4FF;
+    border-radius: 4px;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: 3px solid #007BFF;
+    outline-offset: 3px;
+  }
+  .custom-button {
+    display: inline-block;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  .custom-button:focus {
+    outline: 3px solid #000;
+  }
+</style>
+</head>
+
+<body>
+<h1>WCAG 1.3.1 – Info & Relationships (All Scenarios)</h1>
+
+<!-- 1️⃣ Headings -->
+<section>
+  <h2>1. Headings Show Structure</h2>
+  <h3>1.1 Main Section</h3>
+  <p>This paragraph belongs to the main section. Headings give structure to the content.</p>
+  <h4>1.1.1 Sub Section</h4>
+  <p>Sub-sections are represented using lower-level headings (h4, h5, etc.).</p>
+</section>
+
+<!-- 2️⃣ Lists -->
+<section>
+  <h2>2. Ordered and Unordered Lists</h2>
+  <h3>Ordered List Example</h3>
+  <ol>
+    <li>First Step</li>
+    <li>Second Step</li>
+    <li>Third Step</li>
+  </ol>
+
+  <h3>Unordered List Example</h3>
+  <ul>
+    <li>Apples</li>
+    <li>Oranges</li>
+    <li>Bananas</li>
+  </ul>
+</section>
+
+<!-- 3️⃣ Table -->
+<section>
+  <h2>3. Data Table with Proper Header Association</h2>
+  <table>
+    <caption>Monthly Expenses</caption>
+    <thead>
+      <tr>
+        <th scope="col">Month</th>
+        <th scope="col">Rent</th>
+        <th scope="col">Utilities</th>
+        <th scope="col">Groceries</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">January</th>
+        <td>$1000</td>
+        <td>$150</td>
+        <td>$300</td>
+      </tr>
+      <tr>
+        <th scope="row">February</th>
+        <td>$1000</td>
+        <td>$140</td>
+        <td>$280</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 4️⃣ Emphasis -->
+<section>
+  <h2>4. Text Emphasis using Semantic Tags</h2>
+  <p>This is <strong>important</strong> information. It uses the <code>&lt;strong&gt;</code> tag for strong emphasis.</p>
+  <p>Please <em>read carefully</em> before proceeding. It uses the <code>&lt;em&gt;</code> tag for emphasis.</p>
+</section>
+
+<!-- 5️⃣ Links -->
+<section>
+  <h2>5. Links with Descriptive Text</h2>
+  <p>
+    Visit <a href="https://www.w3.org/WAI/" target="_blank">W3C Web Accessibility Initiative (WAI)</a>
+    for accessibility guidelines.
+  </p>
+</section>
+
+<!-- 6️⃣ Form with Proper Labels -->
+<section>
+  <h2>6. Form with Proper Labels (Accessible + Placeholders)</h2>
+  <form>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" placeholder="Enter your full name"><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" placeholder="example@domain.com"><br><br>
+
+    <label for="comments">Comments:</label><br>
+    <textarea id="comments" name="comments" placeholder="Write your message here..."></textarea><br><br>
+
+    <fieldset>
+      <legend>Gender</legend>
+      <div>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+      </div>
+      <div>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+      </div>
+    </fieldset>
+
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<!-- 7️⃣ Fieldset + Legend -->
+<section>
+  <h2>7. Fieldset and Legend for Related Form Elements</h2>
+  <form>
+    <fieldset>
+      <legend>Contact Preference</legend>
+      <div>
+        <input type="checkbox" id="emailPref" name="contact" value="email">
+        <label for="emailPref">Email</label>
+      </div>
+      <div>
+        <input type="checkbox" id="phonePref" name="contact" value="phone">
+        <label for="phonePref">Phone</label>
+      </div>
+    </fieldset>
+  </form>
+</section>
+
+<!-- 8️⃣ ARIA Role Example -->
+<section>
+  <h2>8. ARIA Roles for Custom Elements</h2>
+  <div role="button" tabindex="0" class="custom-button" 
+       aria-label="Custom Save Button"
+       onclick="alert('Custom Button Clicked!')" 
+       onkeydown="if(event.key==='Enter' || event.key===' '){this.click();}">
+    Custom Button (ARIA Role)
+  </div>
+</section>
+
+<!-- 9️⃣ ARIA Landmark Regions -->
+<section>
+  <h2>9. ARIA Landmark Regions</h2>
+  <header role="banner">
+    <h3>Header Section (Banner)</h3>
+  </header>
+
+  <nav role="navigation">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main role="main">
+    <h3>Main Content Area</h3>
+    <p>This area contains the primary content of the page.</p>
+  </main>
+
+  <aside role="complementary">
+    <h3>Sidebar Section (Complementary)</h3>
+    <p>This section contains related information.</p>
+  </aside>
+
+  <footer role="contentinfo">
+    <h3>Footer Section</h3>
+    <p>Copyright © 2025 Accessibility Demo</p>
+  </footer>
+</section>
+
+</body>
+</html>

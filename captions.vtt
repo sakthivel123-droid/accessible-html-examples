@@ -1,0 +1,82 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.000
+Hello, it's Eugenia again and this is the WCAG Documents project focused on web accessibility.
+
+00:00:06.000 --> 00:00:12.000
+In this video, I will talk about the WCAG criterion 1.2.2 Captions Pre-recorded.
+
+00:00:12.000 --> 00:00:16.000
+You can also read it online at accessibility.actumdigital.com where you will find more information.
+
+00:00:16.000 --> 00:00:27.000
+Let's get into it.
+
+00:00:27.000 --> 00:00:33.000
+The intent of this success criterion is to enable people who are deaf or hard of hearing to understand the auditory information in pre-recorded, which means not live-streamed, synchronized media by providing captions.
+
+00:00:33.000 --> 00:00:39.000
+Who benefits from it? People who can adhere an audio content of a video can read synchronized captions to understand the content.
+
+00:00:39.000 --> 00:00:46.000
+People who have difficulties understanding the language of the audio track in a video can benefit from reading the caption in parallel.
+
+00:00:46.000 --> 00:00:53.000
+People in a sound-sensitive environment such as library, public transport, or at work can understand the media content without audio.
+
+00:00:53.000 --> 00:00:59.000
+People who want to hear and read the content at the same time to understand it better also benefit from captions.
+
+00:00:59.000 --> 00:01:18.000
+So what are the synchronized media? It is audio or video content synchronized with another format for presenting information such as video plus audio, video plus captions, or video plus audio descriptions.
+
+00:01:18.000 --> 00:01:32.000
+A note about captions. Subtitles and captions are often inaccurately considered the same thing, but there are some differences.
+
+00:01:32.000 --> 00:01:38.000
+Subtitles convey the content of the spoken dialogue only. The purpose is to translate spoken audio into a language that viewer understands.
+
+00:01:38.000 --> 00:01:50.000
+Captions not only include the dialogue but also identify who is speaking, meaningful sound effects, and non-speech information conveyed through sound.
+
+00:01:50.000 --> 00:02:03.000
+If users turn off the sound of a video, they must not miss any important audio content and captions. There are two types of captions, open and closed.
+
+00:02:03.000 --> 00:02:10.000
+Open captions are part of the video and cannot be turned off.
+
+00:02:10.000 --> 00:02:16.000
+Users have no option to change their color, size, position, or other preferences that are essential for some people.
+
+00:02:16.000 --> 00:02:23.000
+Closed captions can be turned on and off by the viewer, usually with the possibility to change their color, size, position, and other styles.
+
+00:02:23.000 --> 00:02:36.000
+This success criterion has the following exceptions. Captions are not needed when the synchronized media itself is the alternative.
+
+00:02:36.000 --> 00:02:43.000
+For instance, if text information on a page has also a synchronized media presentation that offers the same information as the text, this media presentation does not have to have captions.
+
+00:02:43.000 --> 00:02:49.000
+Let's take a look at some examples.
+
+00:02:49.000 --> 00:03:03.000
+The following example shows the correct usage or implementation of accessibility. Captions.
+
+00:03:03.000 --> 00:03:07.000
+A video about the life of pigs picturing a pig running over grass while squealing.
+
+00:03:07.000 --> 00:03:13.000
+The video has captions so people relying on captions can understand that pig is squealing.
+
+00:03:13.000 --> 00:03:19.000
+The following example shows the incorrect usage or implementation of accessibility.
+
+00:03:19.000 --> 00:03:25.000
+Missing captions. A video picturing a dialogue between two people.
+
+00:03:25.000 --> 00:03:32.000
+The dialogue is an essential part of the video and because there are no available captions, users who rely on captions completely miss important auditory information.
+
+00:03:32.000 --> 00:03:41.000
+And that was all for this video. Thank you for watching and see you in the next one. Have a nice day!

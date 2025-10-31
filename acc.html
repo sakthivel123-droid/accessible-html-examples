@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>	<html class="no-js lt-ie9 lt-ie8 lt-ie7">	<![endif]-->
+<!--[if IE 7]>	<html class="no-js lt-ie9 lt-ie8">	<![endif]-->
+<!--[if IE 8]>	<html class="no-js lt-ie9">	<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+
+<head></head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>PsykTrek: Aspects of Color and Color Mixing</title>
+	<meta name="viewport1" content="width=device-width, initial-scale=1.0" />
+	<!-- initial-scale=1.0 -->
+	<link type="image/x-icon" href="favicon.html" rel="shortcut icon" />
+
+	<link rel="stylesheet" href="css/main.css" type="text/css">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/tooltips.css" type="text/css">
+	<link rel="stylesheet" href="css/custom.css" type="text/css">
+	<script type="text/javascript" src="js/vendor/modernizr_min.js"></script>
+	<script type="text/javascript" src="js/vendor/jquery_min.js"></script>
+	<script type="text/javascript" src="js/vendor/jquery_migrate_min.js"></script>
+	<script type="text/javascript" src="js/tweenmax.min.js"></script>
+	<script type="text/javascript" src="js/jquery.gsap.min.js"></script>
+	<script type="text/javascript" src="js/preload.js"></script>
+	<script type="text/javascript" src="js/audio.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.touch-punch.js"></script>
+	</script>
+</head>
+
+<body id="body">
+	<div id="livevc" aria-live="polite" class="sr-only"></div>
+	<div class="scale-container">
+		<div id="wrapper">
+			<div class="in-wrapper">
+				<header>
+					<nav aria-label="Top controls">
+						<ul class="top-controls">
+							<li class="block-left">
+								<button type="button" class="volume" aria-label="Volume Unmuted">volume</button>
+								<!-- <a href="javascript:void(0)" class="volume">volume</a> -->
+							</li>
+							<li class="block-left">
+								<button type="button" class="icon-credit" aria-label="View image credit">image credit</button>
+								<!-- <a href="javascript:void(0)" class="icon-credit">image credit</a> -->
+							</li>
+							<li class="block-right">
+								<h1 id="title" class="title">Aspects of Color and Color Mixing</h1>
+								<!-- <a id="title" class="title">Aspects of Color and Color Mixing</a> -->
+							</li>
+						</ul>
+					</nav>
+				</header>
+					<!-- data-animate = slide | fade | false -->
+				<main class="content">
+					<h2 class="concept_check" aria-label="Concept Check">Concept Check</h2>
+					<div class="content-block">
+						<div id="page_0" class="screen0" data-role="page" data-forward_animateIn="slide"
+							data-forward_animateOut="slide" data-backword_animateIn="slide" data-backword_animateOut="fade">
+							<div class="container">
+								<h1 class="titlescreen">Aspects of Color and Color Mixing</h1>
+							</div>
+						</div>
+						<div id="page_1" class="screen1" data-role="page" data-forward_animateIn="slide"
+							data-forward_animateOut="slide" data-backword_animateIn="slide" data-backword_animateOut="slide"
+							data-footer="fade">
+							<div class="container"></div>
+						</div>
+						<div id="page_2" class="screen2" data-role="page" data-forward_animateIn="slide"
+							data-forward_animateOut="slide" data-backword_animateIn="slide" data-backword_animateOut="slide"
+							data-footer="fade">
+							<div class="container"></div>
+						</div>
+						<div id="page_3" class="screen3" data-role="page" data-forward_animateIn="slide"
+							data-forward_animateOut="none" data-backword_animateIn="slide" data-backword_animateOut="none"
+							data-footer="fade">
+							<div class="container" role="region" aria-label="Types of color mixing: Subtractive and Additive"></div>
+						</div>
+						<div id="page_4" class="screen4" data-role="page" data-forward_animateIn="slide"
+							data-forward_animateOut="slide" data-backword_animateIn="slide" data-backword_animateOut="slide"
+							data-footer="fade">
+							<div class="container"></div>
+						</div>
+						<div id="page_5" class="screen5" data-role="page" data-forward_animateIn="slide"
+							data-forward_animateOut="slide" data-backword_animateIn="slide" data-backword_animateOut="slide"
+							data-footer="fade">
+							<div class="container">
+								<canvas width="698" height="340" id="canvas"></canvas>
+								<div id="dragarea">
+									<div id="drag1" class="drags"></div>
+									<div id="drag2" class="drags"></div>
+									<div id="drag3" class="drags"></div>
+									<div class="babules"><span id="dColor1" class="dColor"></span><span id="dColor2"
+											class="dColor"></span><span id="dColor3" class="dColor"></span></div>
+									<div id="drop" class="drop">
+										<div id="text" style="position: relative; top: 40px;">Drop Here</div>
+									</div>
+									<div id="reset" class="reset">Reset</div>
+								</div>
+
+								<div class="circle-container" role="application">
+									<button id="newCyan" class="ring cyan" value="Cyan" aria-label="Drag and mix the Cyan circle">Cyan</button>
+									<button id="newMagenta" class="ring magenta" value="Magenta" aria-label="Drag and mix the Magenta circle">Magenta</button>
+									<button id="newYellow" class="ring yellow" value="Yellow" aria-label="Drag and mix the Yellow circle">Yellow</button>
+								</div>
+							</div>
+						</div>
+						<div id="page_6" class="screen6" data-role="page" data-forward_animateIn="slide"
+							data-forward_animateOut="none" data-backword_animateIn="slide" data-backword_animateOut="slide"
+							data-footer="fade">
+							<div class="container"></div>
+						</div>
+						<div id="page_7" class="screen7" data-role="page" data-forward_animateIn="none"
+							data-forward_animateOut="slide" data-backword_animateIn="none" data-backword_animateOut="fade"
+							data-footer="fade">
+							<div class="container">
+								<div id="projector11" class="projectors1 projector11"></div>
+								<div id="projector22" class="projectors1 projector22"></div>
+								<div id="projector33" class="projectors1 projector33"></div>
+							</div>
+						</div>
+						<div id="page_8" class="screen8" data-role="page" data-forward_animateIn="none"
+							data-forward_animateOut="none" data-backword_animateIn="none" data-backword_animateOut="none"
+							data-footer="fade">
+							<div class="container"></div>
+						</div>
+						<div id="page_9" class="screen9" data-role="page" data-forward_animateIn="slide"
+							data-forward_animateOut="none" data-backword_animateIn="slide" data-backword_animateOut="none"
+							data-footer="fade">
+							<div class="container">
+								<div id="perceptions1" class="perceptions">
+									<img id="concept_image1" class="concept map" src='images/perceptions.png' usemap='#Map1' alt='3D color solid showing hue, brightness, and saturation.' aria-describedby="que1" />
+									<map name='Map1' class="location-map">
+										<area id="preCep1" data-tab="true" tabindex="0" class="answer" data-answer="false" shape="poly" data-title="one"
+											coords="147,124,156,133,156,129,178,134,206,140,211,141,210,147,218,140,215,137,210,133,211,137,185,132,156,124,155,118,147,125,148,124,153,119"
+											href="javascript:void(0)" alt="Saturation">
+										<area data-tab="true" tabindex="0" class="answer" data-answer="false" shape="poly" data-title="two"
+											coords="122,137,130,145,138,137,134,136,134,45,138,44,131,37,125,40,124,44,129,45,129,74,128,134"
+											href="javascript:void(0)" alt="Brightness ">
+										<area data-tab="true" tabindex="0" class="answer" data-answer="true" shape="poly" data-title="three"
+											coords="268,164,266,160,283,158,278,167,272,167,251,176,225,184,203,189,171,194,141,195,117,193,96,190,72,186,58,182,41,177,30,170,26,171,21,160,34,162,34,165,42,170,51,173,64,178,75,181,89,184,111,187,131,188,153,189,186,187,208,182,232,177,255,169,270,163"
+											href="javascript:void(0)" alt="Hue">
+									</map>
+								</div>
+							</div>
+						</div>
+						<div id="page_10" class="screen10" data-role="page" data-forward_animateIn="none"
+							data-forward_animateOut="none" data-backword_animateIn="none" data-backword_animateOut="none"
+							data-footer="fade">
+							<div class="container">
+								<div id="perceptions2" class="perceptions">
+									<img id="concept_image2" class="concept map" src='images/perceptions.png' usemap='#Map2' alt='3D color solid showing hue, brightness, and saturation.' aria-describedby="que2" />
+									<map name='Map2' class="location-map">
+										<area id="preCep2" data-tab="true" tabindex="0" class="answer" data-answer="false" shape="poly" data-title="one"
+											coords="147,124,156,133,156,129,178,134,206,140,211,141,210,147,218,140,215,137,210,133,211,137,185,132,156,124,155,118,147,125,148,124,153,119"
+											href="javascript:void(0)" alt="Saturation">
+										<area data-tab="true" tabindex="0" class="answer" data-answer="true" shape="poly" data-title="two"
+											coords="122,137,130,145,138,137,134,136,134,45,138,44,131,37,125,40,124,44,129,45,129,74,128,134"
+											href="javascript:void(0)" alt="Brightness">
+										<area data-tab="true" tabindex="0" class="answer" data-answer="false" shape="poly" data-title="three"
+											coords="268,164,266,160,283,158,278,167,272,167,251,176,225,184,203,189,171,194,141,195,117,193,96,190,72,186,58,182,41,177,30,170,26,171,21,160,34,162,34,165,42,170,51,173,64,178,75,181,89,184,111,187,131,188,153,189,186,187,208,182,232,177,255,169,270,163"
+											href="javascript:void(0)" alt="Hue">
+									</map>
+								</div>
+							</div>
+						</div>
+						<div id="page_11" class="screen11" data-role="page" data-forward_animateIn="none"
+							data-forward_animateOut="none" data-backword_animateIn="none" data-backword_animateOut="none"
+							data-footer="fade">
+							<div class="container">
+								<div id="perceptions3" class="perceptions">
+									<img id="concept_image3" class="concept map" src='images/color_mixing.png' alt="Color Mixing Image" usemap='#Map3' aria-describedby="que3" />
+									<map name='Map3' class="location-map">
+										<area id="opT1" data-tab="true" tabindex="0" alt="Option 1" role="button" class="answer" data-answer="true" shape="poly" data-title="one"
+											coords="196,133,218,137,234,139,258,140,281,139,309,137,328,134,349,126,356,117,349,109,320,100,281,94,255,95,225,97,206,100,192,102,162,95,127,92,101,94,76,94,55,96,33,101,18,105,11,109,5,115,9,123,19,129,38,135,56,139,85,142,114,143,145,140"
+											href="javascript:void(0)">
+										<area data-tab="false" class="answer" alt="Option 1" data-answer="true" shape="poly" data-title="one"
+											coords="344,42,340,49,329,62,323,68,315,71,311,71,280,39,280,32,286,25,291,18,300,13,307,8,313,8,322,16,326,19,327,24,341,38,344,43"
+											>
+										<area data-tab="false" class="answer" alt="Option 1" data-answer="true" shape="poly" data-title="one"
+											coords="52,71,83,40,82,33,76,24,69,18,63,12,56,9,51,8,43,16,39,18,37,23,21,40,21,46,25,50,30,58,42,68,51,71"
+											>
+										<area data-tab="true" tabindex="0" role="button" alt="Option 2"  class="answer" data-answer="false" shape="poly" data-title="two"
+											coords="473,5,473,82,618,83,617,4,472,4" href="javascript:void(0)">
+										<area data-tab="false" class="answer" data-answer="false" shape="poly" data-title="two"
+											coords="427,111,415,120,415,136,420,137,424,135,464,140,468,143,471,143,473,138,488,126,491,125,493,120,503,116,506,106,503,96,504,93,489,107,484,102,491,86,475,83,465,89,459,98,447,97,432,101,428,106,428,113">
+										<area data-tab="false" class="answer" alt="Option 1" data-answer="false" shape="poly" data-title="two"
+											coords="519,143,565,143,569,146,572,143,573,131,573,115,578,109,579,95,574,88,568,83,565,103,558,102,552,87,548,87,543,91,539,98,536,101,526,103,520,106,517,109,513,109,513,129,514,141,515,145,518,144">
+										<area data-tab="false" class="answer" alt="Option 1" data-answer="false" shape="poly" data-title="two"
+											coords="601,126,614,139,618,143,621,140,668,134,672,136,674,134,673,123,661,111,659,103,651,99,639,97,630,97,630,88,619,82,598,84,597,88,607,100,601,104,584,97,583,105,586,111,594,112,596,122,600,125">
+									</map>
+								</div>
+							</div>
+						</div>
+					</div><!-- content-block -->
+					<div class="narration">
+						<button type="button" data-blink="false" class="previous icon-previous" id="prev">previous screen</button>
+						<div class="footer_text" id="footer_txt">
+							<span data-reference="page_1">This <a href="#" class="tooltipcl"
+									aria-label="A three-dimensional model that shows how color varies along three perceptual dimensions: brightness, hue, and saturation.">color
+									solid</a> shows how color varies along three perceptual dimensions. <a href="#" class="tooltipcl" 
+									aria-label="The perceptual dimension of color correlated with light intensity.">Brightness</a>
+								increases from the bottom to the top of the solid, <a href="#" class="tooltipcl" 
+									aria-label="The perceptual dimension of color correlated with light wavelength, which is typically referred to as color in common language.">hue</a>
+								changes around the solid’s perimeter, and <a href="#" class="tooltipcl" 
+									aria-label="The perceptual dimension of color correlated with chromatic purity.">saturation</a>
+								increases toward the periphery of the solid.</span>
+							<span data-reference="page_2">The perception of color depends on complex blends of all three properties
+								of light. Hue depends primarily on light wavelength, brightness on the amplitude of the light waves,
+								and saturation on the purity of the light mixture.</span>
+							<span data-reference="page_3">As a color solid demonstrates, people can perceive many different colors.
+								Most of these variations are the result of mixing a few basic colors. There are two kinds of color
+								mixing: subtractive and additive.</span>
+							<span data-reference="page_4"><a href="#" class="tooltipcl"
+									aria-label="Formation of colors by removing some wavelengths of light, leaving less light than was originally there.">Subtractive
+									color mixing</a> works by removing some wavelengths of light, leaving less light than was
+								originally present. For example, you can mix yellow and blue paints to make green. Paints yield
+								subtractive mixing because pigments absorb most wavelengths, selectively reflecting specific
+								wavelengths that give rise to particular colors.</span>
+							<span data-reference="page_5">Subtractive color mixing can also be demonstrated by stacking color
+								filters. If you look through a sandwich of yellow and blue cellophane filters, they will block out
+								certain wavelengths. Drag the filters together to see for yourself.</span>
+							<span data-reference="page_6"><a href="#" class="tooltipcl"
+									aria-label="Formation of colors by superimposing lights, putting more light in the mixture than exists in any one light by itself.">Additive
+									color mixing</a> works by superimposing lights, putting more light in the mixture than
+								exists in any one light by itself. To see an example, click each projector to turn it on.</span>
+							<span data-reference="page_7">If you mix beams from red, green, and blue spotlights, you’ll get the
+								additive mixture shown here. Human color perception parallels additive color mixing much more
+								closely than it parallels subtractive mixing.</span>
+							<span data-reference="page_8">Let's check your understanding of the concepts just discussed.</span>
+							<span data-reference="page_9">
+								<div class="answer_image"></div>
+								<div id="finalTx1" class="finalText">
+									
+								</div>
+							</span>
+							<span data-reference="page_10">
+								<div class="answer_image"></div>
+								<div id="finalTx2" class="finalText"> 
+
+								</div>
+							</span>
+							<span data-reference="page_11">
+								<div class="answer_image"></div>
+								<div id="finalTx" class="finalText" > 
+								</div>
+							</span>
+						</div>
+						<!-- <ul class="footer-controls" role="navigation" aria-label="Page navigation">
+									<li></li>
+									<li></li>
+								</ul> -->
+						<button type="button" data-blink="false" class="next icon-next" id="next">next screen</button>
+					</div><!-- narration -->
+				</main> <!-- content -->
+			</div>
+		</div>
+		<!-- wrapper -->
+	</div>
+
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/jquery.maphilight.min.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
+	<script type="text/javascript" src="js/tooltips.js"></script>
+	<script src="js/fit_to_screen.js"></script>
+</body>
+
+</html>

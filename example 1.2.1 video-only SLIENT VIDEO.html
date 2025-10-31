@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 1.2.1 Example — Video-only (Prerecorded)</title>
+</head>
+<body>
+  <h1>Video-only Example (Prerecorded)</h1>
+
+  <!-- Video player -->
+  <video controls width="480" aria-describedby="video-desc">
+    <!-- This video has no sound -->
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Text alternative / Description -->
+  <div id="video-desc">
+    <h2>Video Description</h2>
+    <p>
+      The video shows an animated rabbit named Big Buck Bunny standing in a grassy field 
+      with butterflies flying around. He smiles and looks at the camera.
+      There is no dialogue or background sound in this video.
+    </p>
+  </div>
+</body>
+</html>

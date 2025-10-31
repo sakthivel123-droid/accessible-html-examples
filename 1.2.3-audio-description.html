@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WCAG 1.2.3 — Audio Description Example</title>
+</head>
+<body>
+  <h1>WCAG 1.2.3 — Audio Description (Prerecorded)</h1>
+
+  <!-- Video with description text track -->
+  <video controls width="640">
+    <source src="1.2.2 video.mp4" type="video/mp4">
+    <track src="street-scene-desc.vtt"
+           kind="descriptions"
+           srclang="en"
+           label="English description"
+           default>
+    Your browser does not support the video tag.
+  </video>
+
+  <p>
+    This example shows how to provide a description of the visual content
+    for people who cannot see the video.
+  </p>
+</body>
+</html>
