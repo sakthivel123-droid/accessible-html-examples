@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>WCAG 1.3.5 Identify Input Purpose Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+
+        form {
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #005ea0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>WCAG 1.3.5 – Identify Input Purpose Example</h1>
+    <h2>All input fields that collect user information
+        (like name, email, address, phone, etc.) should have proper HTML attributes that identify their purpose</h2>
+    <h3> Also autocomplete should provide, so that the user no need to type again and again</h3>
+    <h3>
+        All Possible Scenarios (Where This Criterion Applies) <br>
+        🧍 Personal info Name, DOB, gender, etc. <br>
+        🏠 Address fields Street, City, State,Country <br>
+        📞 Contact info Email, phone <br>
+        🔐 Login forms Username, password <br>
+        💳 Payment Credit card info, expiration, CVV <br>
+        🧭 Identification National ID, passport, etc. <br>
+        🧩 Custom UI fields For non-native input<br>
+    </h3>
+    <p>This form shows how each input field uses the <code>autocomplete</code> attribute to identify its purpose for
+        assistive technologies and browsers.</p>
+
+    <form>
+        <!-- Name Fields -->
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="fname" autocomplete="given-name" />
+
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lname" autocomplete="family-name" />
+
+        <!-- Contact Info -->
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" />
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" />
+
+        <!-- Address -->
+        <label for="address">Street Address</label>
+        <input type="text" id="address" name="address" autocomplete="street-address" />
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" autocomplete="address-level2" />
+
+        <label for="state">State / Province</label>
+        <input type="text" id="state" name="state" autocomplete="address-level1" />
+
+        <label for="zip">Postal Code</label>
+        <input type="text" id="zip" name="zip" autocomplete="postal-code" />
+
+        <!-- Login -->
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" />
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 1.3.3 Sensory Characteristics Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 30px;
+    }
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+    .btn-green { background-color: green; }
+    .btn-red { background-color: red; }
+
+    /* shape example */
+    .shape-buttons {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .circle, .square {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .circle {
+      border-radius: 50%;
+      background-color: royalblue;
+    }
+    .square {
+      background-color: orange;
+    }
+
+    /* sound example */
+    audio {
+      margin-top: 1rem;
+    }
+    .message {
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f0f0f0;
+      font-size: 18px;
+      max-width: 600px;
+    }
+    .orientation-info {
+      margin-top: 20px;
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: royalblue;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    h2 { color: #2a4d8f; }
+    hr { margin: 2rem 0; }
+
+    .stripe-area {
+      width: 150px;
+      height: 80px;
+      background-image: repeating-linear-gradient(
+        45deg, #ccc, #ccc 10px, white 10px, white 20px
+      );
+      border: 2px solid #999;
+      margin-top: 10px;
+    }
+
+    .shake {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      background-color: tomato;
+      border-radius: 8px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      line-height: 80px;
+      margin-top: 10px;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0px, 0px) rotate(0deg); }
+      25% { transform: translate(3px, 0px) rotate(1deg); }
+      50% { transform: translate(-3px, 0px) rotate(-1deg); }
+      75% { transform: translate(3px, 0px) rotate(1deg); }
+      100% { transform: translate(0px, 0px) rotate(0deg); }
+    }
+
+    .brightness-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 10px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn-light { background-color: #ddd; }
+    .btn-dark { background-color: #333; color: white; }
+
+    .depth-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 10px;
+    }
+    .depth-btn {
+      padding: 15px 25px;
+      border: 2px solid #999;
+      border-radius: 10px;
+      background-color: lightblue;
+      transition: transform 0.3s;
+    }
+    .depth-btn.near {
+      transform: scale(1.2);
+      background-color: skyblue;
+    }
+
+    .icon-only {
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .accessible-label {
+      font-size: 16px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 2.2 – 1.3.3 Sensory Characteristics Example</h1>
+
+  <h2>1️⃣ Example using Color</h2>
+  <p><strong>Bad:</strong> Click the <span style="color:green;">green</span> button to continue.</p>
+
+  <p><strong>Good:</strong> Click the <strong>“Continue”</strong> button below (labelled clearly):</p>
+  <div class="buttons">
+    <button class="btn btn-green">Continue</button>
+    <button class="btn btn-red">Cancel</button>
+  </div>
+
+  <hr>
+
+  <h2>2️⃣ Example using Shape</h2>
+  <p><strong>Bad:</strong> Press the round button to play.</p>
+  <p><strong>Good:</strong> Press the button <strong>labelled “Play”</strong> instead of relying on shape.</p>
+  <div class="shape-buttons">
+    <button class="circle" aria-label="Play"></button>
+    <button class="square" aria-label="Stop"></button>
+  </div>
+
+  <hr>
+
+  <h2>3️⃣ Example using Position</h2>
+  <p><strong>Bad:</strong> The button on the right submits the form.</p>
+  <p><strong>Good:</strong> Select the <strong>“Submit”</strong> button (clearly labelled):</p>
+  <div class="buttons">
+    <button class="btn btn-red">Reset</button>
+    <button class="btn btn-green">Submit</button>
+  </div>
+
+  <hr>
+
+  <h2>4️⃣ Example using Sound</h2>
+  <p><strong>Bad:</strong> When you hear a beep, click start.</p>
+  <p><strong>Good:</strong> A visible message is shown when it’s time to start.</p>
+
+  <button onclick="playBeep()">Play Beep</button>
+  <audio id="beep" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+  <p id="message" style="color: blue; font-weight: bold;"></p>
+
+  <script>
+    function playBeep() {
+      document.getElementById("beep").play();
+      document.getElementById("message").textContent = 
+        "Beep played — You can now click 'Start'!";
+    }
+  </script>
+
+  <button>Start</button>
+
+  <hr>
+
+  <h2>5️⃣ Example using Size or Visual Cue</h2>
+  <p><strong>Bad:</strong> Select the biggest icon to proceed.</p>
+  <p><strong>Good:</strong> Select the icon labelled “Proceed”.</p>
+
+  <div class="buttons">
+    <button style="font-size: 12px;">Back</button>
+    <button style="font-size: 20px;" aria-label="Proceed">Proceed</button>
+  </div>
+<h1>6 Example using Orientation</h1>
+
+  <h2>❌ Incorrect Example</h2>
+  <p><strong>Instruction:</strong> “Rotate your phone to landscape to see the image.”</p>
+  <p>This fails accessibility because users with screen-rotation lock or disabilities cannot perform this action.</p>
+
+  <hr>
+
+  <h2>✅ Correct Accessible Example</h2>
+  <div class="message" id="orientationMessage">
+    Please <strong>tap the button below</strong> to view the image — rotation is optional.
+  </div>
+  <div class="orientation-info" id="orientationInfo"></div>
+
+  <button onclick="showImage()">View Image</button>
+
+  <div id="imageContainer" style="margin-top:20px; display:none;">
+    <img src="https://www.w3schools.com/html/img_chania.jpg" alt="Scenic view of a city and blue sky" width="300">
+    <p>Image Description: Beautiful city landscape under a clear blue sky.</p>
+  </div>
+
+  <script>
+    function showImage() {
+      document.getElementById("imageContainer").style.display = "block";
+    }
+
+    // Detect device orientation and inform users, without forcing layout.
+    function handleOrientationChange() {
+      let orientation = (window.innerWidth > window.innerHeight) ? "landscape" : "portrait";
+      document.getElementById("orientationInfo").textContent = 
+        "You are currently using " + orientation + " orientation. Both orientations work fine!";
+    }
+
+    window.addEventListener("resize", handleOrientationChange);
+    handleOrientationChange();
+  </script>
+    <h1>WCAG 2.2 – 1.3.3 Extended Sensory Characteristics Examples</h1>
+
+  <!-- 1️⃣ Texture / Pattern -->
+  <h2> 7 Texture / Pattern 1.3.3</h2>
+  <p><strong>❌ Incorrect:</strong> “Click the striped area.”</p>
+  <p><strong>✅ Correct:</strong> Click the <strong>‘Pattern Area’</strong> below (it’s labeled for screen readers).</p>
+  <div class="stripe-area" role="button" tabindex="0" aria-label="Pattern Area - Click here"></div>
+
+  <hr>
+
+  <!-- 2️⃣ Movement / Animation -->
+  <h2>8 Movement / Animation 2.3.3</h2>
+  <p><strong>❌ Incorrect:</strong> “When the icon shakes, press it.”</p>
+  <p><strong>✅ Correct:</strong> “When the message says ‘Ready’, press the red button below.”</p>
+
+  <div id="animatedIcon" class="shake" aria-label="Shaking Button" onclick="confirmAction()">Wait</div>
+  <p id="animMsg" style="font-weight:bold;"></p>
+
+  <script>
+    // Animate icon after delay
+    setTimeout(() => {
+      document.getElementById("animatedIcon").style.animation = "shake 0.5s infinite";
+      document.getElementById("animatedIcon").textContent = "Press";
+      document.getElementById("animMsg").textContent = "Ready - You may now press the red button.";
+    }, 3000);
+    function confirmAction() {
+      document.getElementById("animMsg").textContent = "Button Pressed!";
+    }
+  </script>
+
+  <hr>
+
+  <!-- 3️⃣ Brightness / Contrast -->
+  <h2>9 Brightness / Contrast 1.4.3 Contrast</h2>
+  <p><strong>❌ Incorrect:</strong> “Click the lighter icon.”</p>
+  <p><strong>✅ Correct:</strong> Click the button labelled “Light Mode” or “Dark Mode”.</p>
+
+  <div class="brightness-buttons">
+    <button class="btn btn-light">Light Mode</button>
+    <button class="btn btn-dark">Dark Mode</button>
+  </div>
+
+  <hr>
+
+  <!-- 4️⃣ Gestures (touch direction) -->
+  <h2>10 Gestures (Touch Direction) 2.5.1 Pointer</h2>
+  <p><strong>❌ Incorrect:</strong> “Swipe left to delete.”</p>
+  <p><strong>✅ Correct:</strong> Provide a “Delete” button or keyboard method also.</p>
+
+  <div style="border:1px solid #ccc; padding:15px; width:200px;">
+    <p id="gestureText">Item: Meeting Notes</p>
+    <button onclick="deleteItem()">Delete</button>
+  </div>
+
+  <script>
+    // Optional gesture detection (non-essential)
+    let startX;
+    const box = document.querySelector("div[style*='Meeting Notes']");
+    box.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    box.addEventListener('touchend', e => {
+      const endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) deleteItem(); // swipe left
+    });
+    function deleteItem() {
+      document.getElementById("gestureText").textContent = "Item Deleted ✅";
+    }
+  </script>
+
+  <hr>
+
+  <!-- 5️⃣ Haptic Feedback -->
+  <h2>11 Haptic Feedback (Vibration) 1.3.3 + 2.1.1</h2>
+  <p><strong>❌ Incorrect:</strong> “When the phone vibrates, confirm the action.”</p>
+  <p><strong>✅ Correct:</strong> Show a visible and textual confirmation as well.</p>
+
+  <button onclick="vibrateAndShow()">Start Action</button>
+  <p id="vibrateMsg"></p>
+
+  <script>
+    function vibrateAndShow() {
+      if (navigator.vibrate) navigator.vibrate(300);
+      document.getElementById("vibrateMsg").textContent = 
+        "Vibration triggered. You can now confirm the action.";
+    }
+  </script>
+
+  <hr>
+
+  <!-- 6️⃣ Spatial / Depth Cues -->
+  <h2>12 Spatial / Depth (3D appearance) 1.3.3</h2>
+  <p><strong>❌ Incorrect:</strong> “Select the button closer to you.”</p>
+  <p><strong>✅ Correct:</strong> Select the button labelled “Front” or “Back”.</p>
+
+  <div class="depth-buttons">
+    <button class="depth-btn near">Front Button</button>
+    <button class="depth-btn">Back Button</button>
+  </div>
+
+  <hr>
+
+  <!-- 7️⃣ Visual indicators only (icons without text) -->
+  <h2>13 Visual Indicators Only (Icons without text) 1.1.1 + 1.3.3</h2>
+  <p><strong>❌ Incorrect:</strong> “Look for the 🔔 icon to subscribe.”</p>
+  <p><strong>✅ Correct:</strong> Provide accessible text or tooltip.</p>
+
+  <div>
+    <span class="icon-only" role="button" aria-label="Subscribe to notifications" title="Subscribe">🔔</span>
+    <span class="accessible-label">Subscribe</span>
+  </div>
+
+  <hr>
+  <p><strong>✅ Summary:</strong> Each example above replaces sensory-only cues (like texture, animation, sound, gestures) with clear text labels, buttons, or programmatic alternatives for assistive technologies.</p>
+
+</body>
+</html>
