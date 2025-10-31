@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 3.3.3 Error Suggestion Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+  }
+  section {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    padding: 20px;
+  }
+  h2 {
+    margin-top: 0;
+  }
+  input, button {
+    margin: 5px 0;
+    padding: 8px;
+    width: 250px;
+  }
+  .error {
+    color: red;
+    margin-top: 5px;
+  }
+  .good {
+    border-left: 5px solid green;
+    background-color: #eaffea;
+  }
+  .bad {
+    border-left: 5px solid red;
+    background-color: #ffeaea;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.2 - 3.3.3 Error Suggestion</h1>
+<p>This example shows <strong>BAD</strong> and <strong>GOOD</strong> implementations for providing error suggestions when a user makes a mistake in form fields.</p>
+
+<!-- ❌ BAD EXAMPLE -->
+<section class="bad">
+  <h2>❌ Bad Example - No Helpful Error Suggestions</h2>
+  <form id="badForm">
+    <label for="badEmail">Email:</label><br>
+    <input type="text" id="badEmail" placeholder="Enter your email"><br>
+    <span id="badError" class="error" aria-live="polite"></span><br>
+
+    <button type="button" onclick="validateBadForm()">Submit</button>
+  </form>
+
+  <p><strong>Issues:</strong></p>
+  <ul>
+    <li>Error message only says "Invalid input" without explaining why.</li>
+    <li>No specific guidance or correction suggestion is provided.</li>
+    <li>Screen readers get unclear feedback.</li>
+  </ul>
+</section>
+
+<!-- ✅ GOOD EXAMPLE -->
+<section class="good">
+  <h2>✅ Good Example - Clear, Actionable Error Suggestions</h2>
+  <form id="goodForm">
+    <label for="goodEmail">Email:</label><br>
+    <input type="text" id="goodEmail" placeholder="e.g. name@example.com" aria-describedby="emailHelp"><br>
+    <span id="emailHelp">Enter a valid email address (e.g. name@example.com).</span><br>
+    <span id="goodError" class="error" aria-live="polite"></span><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" placeholder="Enter password"><br>
+
+    <label for="confirmPassword">Confirm Password:</label><br>
+    <input type="password" id="confirmPassword" placeholder="Re-enter password"><br>
+    <span id="passwordError" class="error" aria-live="polite"></span><br>
+
+    <button type="button" onclick="validateGoodForm()">Submit</button>
+  </form>
+
+  <p><strong>Accessible Features:</strong></p>
+  <ul>
+    <li>Gives clear, specific suggestions (“Use a valid email format like name@example.com”).</li>
+    <li>Describes how to fix errors (e.g., “Passwords must match”).</li>
+    <li>Error messages are announced by screen readers using <code>aria-live="polite"</code>.</li>
+  </ul>
+</section>
+
+<script>
+  // BAD EXAMPLE VALIDATION
+  function validateBadForm() {
+    const email = document.getElementById("badEmail").value;
+    const error = document.getElementById("badError");
+    error.textContent = "";
+
+    // Basic invalid check
+    if (!email.includes("@") || !email.includes(".")) {
+      error.textContent = "Invalid input!";
+    } else {
+      alert("Form submitted successfully!");
+    }
+  }
+
+  // GOOD EXAMPLE VALIDATION
+  function validateGoodForm() {
+    const email = document.getElementById("goodEmail").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    const emailError = document.getElementById("goodError");
+    const passwordError = document.getElementById("passwordError");
+
+    emailError.textContent = "";
+    passwordError.textContent = "";
+
+    let valid = true;
+
+    // Email format check
+    if (!email.match(/^[^@]+@[^@]+\.[^@]+$/)) {
+      emailError.textContent = "Please enter a valid email address (e.g., name@example.com).";
+      valid = false;
+    }
+
+    // Password match check
+    if (password !== confirmPassword) {
+      passwordError.textContent = "Passwords do not match. Please re-enter the same password.";
+      valid = false;
+    }
+
+    if (valid) {
+      alert("Form submitted successfully!");
+    }
+  }
+</script>
+
+<hr>
+<h3>🔍 Summary of Possible Scenarios Related to WCAG 3.3.3:</h3>
+<ul>
+  <li><strong>Missing Required Field:</strong> Suggest what’s missing (“Please enter your name.”).</li>
+  <li><strong>Incorrect Format:</strong> Suggest correct format (“Use a valid date format: YYYY-MM-DD”).</li>
+  <li><strong>Invalid Selection:</strong> Suggest valid choices (“Please select a country from the list.”).</li>
+  <li><strong>Mismatch Error:</strong> Suggest correction (“Passwords must match.”).</li>
+  <li><strong>Numeric or Range Errors:</strong> Suggest acceptable range (“Enter a number between 1 and 100”).</li>
+</ul>
+
+</body>
+</html>
