@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 3.2.6 Consistent Help Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+  }
+  .section {
+    border: 2px solid #ccc;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+  }
+  h2 {
+    margin-top: 0;
+  }
+  .bad {
+    background-color: #fde9e9;
+  }
+  .good {
+    background-color: #e9f8e9;
+  }
+  .help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .help-link {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: blue;
+  }
+  .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    width: 200px;
+  }
+  .help-button:focus + .tooltip,
+  .help-button:hover + .tooltip {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.2 - 3.2.6 Consistent Help</h1>
+
+<!-- ❌ BAD EXAMPLE -->
+<div class="section bad">
+  <h2>❌ Bad Example (Fails WCAG 3.2.6)</h2>
+  <p>This is the <strong>Home Page</strong>. On this page, help is provided inconsistently.</p>
+
+  <!-- Help link is in top-left -->
+  <a href="mailto:support@example.com" class="help-link">Need Help?</a>
+
+  <p><strong>Issues:</strong></p>
+  <ul>
+    <li>Help link position changes across pages (top-left here, bottom-right elsewhere).</li>
+    <li>Label text changes (“Need Help?” vs “Contact Us”).</li>
+    <li>Help type changes (sometimes chat, sometimes email link).</li>
+    <li>Screen reader users cannot predict where to find help.</li>
+  </ul>
+</div>
+
+<!-- ✅ GOOD EXAMPLE -->
+<div class="section good">
+  <h1>
+    If a page within a set of web pages provides help <br>
+    (like contact support, chat, FAQs, or tooltips), <br>
+that help mechanism must appear in the same relative location <br>
+and be available consistently across all pages where it is provided.<br>
+  </h1>
+  <h2>✅ Good Example (Passes WCAG 3.2.6)</h2>
+  <p>This is the <strong>Home Page</strong>. Here, help is consistent in placement, labeling, and type across all pages.</p>
+
+  <!-- Consistent Help Button -->
+  <button class="help-button" aria-haspopup="true" aria-controls="helpTooltip">
+    Help
+  </button>
+  <div id="helpTooltip" class="tooltip" role="dialog" aria-label="Help options">
+    <p><strong>Need support?</strong></p>
+    <ul>
+      <li><a href="mailto:support@example.com" style="color:yellow;">Email Support</a></li>
+      <li><a href="tel:+1800123456" style="color:yellow;">Call Us</a></li>
+      <li><a href="#" style="color:yellow;">Live Chat</a></li>
+    </ul>
+  </div>
+
+  <p><strong>Accessible Features:</strong></p>
+  <ul>
+    <li>Help button appears in the same position (bottom-right) on every page.</li>
+    <li>Same label “Help” used across all pages (not “Need Help?” or “Contact Us”).</li>
+    <li>Same interaction type (tooltip dialog with email, call, chat options).</li>
+    <li>Keyboard accessible (<code>Tab</code> and <code>Enter</code> activate it).</li>
+    <li>Screen readers announce it as a dialog (via <code>role="dialog"</code>).</li>
+  </ul>
+</div>
+
+<script>
+// This would normally be repeated across all pages to maintain consistency
+// Example: Help button script reused via a shared JS component
+</script>
+
+</body>
+</html>
