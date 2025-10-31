@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WCAG 2.2 - 3.3.4 Error Prevention (Legal & Financial)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
+    h1 { color: darkblue; }
+    section { border: 2px solid #ccc; padding: 15px; margin-bottom: 25px; border-radius: 10px; }
+    .bad { background-color: #ffe6e6; }
+    .good { background-color: #e8fbe8; }
+    .hidden { display: none; }
+    button { padding: 8px 14px; margin: 5px; }
+    hr { margin: 30px 0; }
+  </style>
+</head>
+<body>
+  <h1>WCAG 2.2 – 3.3.4 Error Prevention (Legal, Financial, Data)</h1>
+  <p><strong>Goal:</strong> Users must be able to review, confirm, or correct important submissions (like payments or legal agreements) to avoid serious mistakes.</p>
+
+  <!-- ===================== BAD EXAMPLE ===================== -->
+  <section class="bad">
+    <h2>❌ Bad Example (Non-Compliant)</h2>
+    <p>This form immediately processes payment without giving the user a chance to review or confirm details.</p>
+
+    <form action="process-payment.html" method="post">
+      <label for="bad-name">Full Name:</label>
+      <input id="bad-name" name="name" type="text" required><br><br>
+
+      <label for="bad-amount">Payment Amount (₹):</label>
+      <input id="bad-amount" name="amount" type="number" required><br><br>
+
+      <label for="bad-card">Card Number:</label>
+      <input id="bad-card" name="card" type="text" required><br><br>
+
+      <!-- ❌ Immediate irreversible submission -->
+      <button type="submit">Pay Now</button>
+    </form>
+
+    <p><strong>Problem:</strong> If the user types the wrong amount or card number, payment is sent instantly without any review, confirmation, or cancel option.</p>
+  </section>
+
+  <hr>
+
+  <!-- ===================== GOOD EXAMPLE ===================== -->
+  <section class="good">
+    <h2>✅ Good Example (Compliant)</h2>
+    <p>This form allows the user to review, edit, or cancel before the final submission — meeting WCAG 3.3.4 requirements.</p>
+
+    <form id="paymentForm">
+      <label for="name">Full Name:</label>
+      <input id="name" name="name" type="text" required><br><br>
+
+      <label for="amount">Payment Amount (₹):</label>
+      <input id="amount" name="amount" type="number" required><br><br>
+
+      <label for="card">Card Number:</label>
+      <input id="card" name="card" type="text" required><br><br>
+
+      <button type="button" id="reviewBtn">Review Details</button>
+    </form>
+
+    <div id="reviewSection" class="hidden" aria-live="polite">
+      <h3>🔍 Review Your Payment</h3>
+      <p><strong>Name:</strong> <span id="rName"></span></p>
+      <p><strong>Amount:</strong> ₹<span id="rAmount"></span></p>
+      <p><strong>Card:</strong> <span id="rCard"></span></p>
+
+      <button id="editBtn">Edit</button>
+      <button id="confirmBtn">Confirm Payment</button>
+      <button id="cancelBtn">Cancel</button>
+    </div>
+
+    <div id="confirmation" class="hidden" role="status" aria-live="assertive">
+      <h3>✅ Payment Submitted Successfully!</h3>
+      <p>You will receive a confirmation email shortly.</p>
+      <button id="undoBtn">Undo Payment</button>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('paymentForm');
+    const reviewSection = document.getElementById('reviewSection');
+    const confirmation = document.getElementById('confirmation');
+
+    document.getElementById('reviewBtn').addEventListener('click', () => {
+      document.getElementById('rName').textContent = form.name.value;
+      document.getElementById('rAmount').textContent = form.amount.value;
+      document.getElementById('rCard').textContent = form.card.value;
+      form.classList.add('hidden');
+      reviewSection.classList.remove('hidden');
+    });
+
+    document.getElementById('editBtn').addEventListener('click', () => {
+      reviewSection.classList.add('hidden');
+      form.classList.remove('hidden');
+    });
+
+    document.getElementById('confirmBtn').addEventListener('click', () => {
+      reviewSection.classList.add('hidden');
+      confirmation.classList.remove('hidden');
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+      reviewSection.classList.add('hidden');
+      form.reset();
+      form.classList.remove('hidden');
+    });
+
+    document.getElementById('undoBtn').addEventListener('click', () => {
+      confirmation.classList.add('hidden');
+      form.reset();
+      form.classList.remove('hidden');
+      alert('Payment action has been undone.');
+    });
+  </script>
+
+  <hr>
+
+  <h2>🧠 Accessibility Explanation</h2>
+  <ul>
+    <li><strong>Review:</strong> Users see a summary before final submission.</li>
+    <li><strong>Confirm:</strong> “Confirm Payment” ensures deliberate action.</li>
+    <li><strong>Edit / Cancel:</strong> Users can fix or cancel details easily.</li>
+    <li><strong>Undo:</strong> Users can revert even after submission (reversible).</li>
+    <li><strong>ARIA live region:</strong> Screen readers are notified of changes.</li>
+  </ul>
+
+</body>
+</html>
