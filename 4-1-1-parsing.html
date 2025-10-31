@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 4.1.1 Parsing Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #f6f7fb;
+  }
+  .section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  }
+  .bad {
+    border-left: 6px solid #d33;
+    background: #ffecec;
+  }
+  .good {
+    border-left: 6px solid #2a8a2a;
+    background: #eaffea;
+  }
+  code {
+    background: #eee;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+  h2 {
+    background: #004aad;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h2>WCAG 2.2 – 4.1.1 Parsing</h2>
+<p>This demo shows <strong>incorrect (bad)</strong> and <strong>correct (good)</strong> HTML code examples for parsing issues.</p>
+
+<!-- =================== BAD EXAMPLE 1 =================== -->
+<div class="section bad">
+  <h3>❌ Bad Example 1: Unclosed and Mis-nested Tags</h3>
+  <p><strong>Problem:</strong> Tags are not properly nested or closed. Screen readers may skip or misread text.</p>
+
+  <!-- BAD HTML (shown as text for understanding) -->
+  <pre>
+&lt;p&gt;This is <b><i>badly nested</b></i> text.&lt;/p&gt;
+&lt;div&gt;
+  &lt;p&gt;Unclosed paragraph
+&lt;/div&gt;
+  </pre>
+
+  <!-- Actual broken code output below -->
+  <p>This is <b><i>badly nested</b></i> text.</p>
+  <div>
+    <p>Unclosed paragraph
+  </div>
+
+  <p>🚫 Error: Elements are not properly nested and one <code>&lt;p&gt;</code> is not closed.</p>
+</div>
+
+<!-- =================== GOOD EXAMPLE 1 =================== -->
+<div class="section good">
+  <h3>✅ Good Example 1: Properly Nested and Closed Tags</h3>
+  <p><strong>Fix:</strong> Tags must open and close in correct order and structure.</p>
+
+  <pre>
+&lt;p&gt;This is &lt;b&gt;&lt;i&gt;properly nested&lt;/i&gt;&lt;/b&gt; text.&lt;/p&gt;
+&lt;div&gt;
+  &lt;p&gt;All elements are closed properly.&lt;/p&gt;
+&lt;/div&gt;
+  </pre>
+
+  <!-- Working code -->
+  <p>This is <b><i>properly nested</i></b> text.</p>
+  <div>
+    <p>All elements are closed properly.</p>
+  </div>
+</div>
+
+<!-- =================== BAD EXAMPLE 2 =================== -->
+<div class="section bad">
+  <h3>❌ Bad Example 2: Duplicate IDs and Missing Quotes</h3>
+  <p><strong>Problem:</strong> Two elements use the same ID and attributes are missing quotes.</p>
+
+  <pre>
+&lt;div id=sample&gt;First box&lt;/div&gt;
+&lt;div id=sample&gt;Second box&lt;/div&gt;
+  </pre>
+
+  <div id=sample>First box</div>
+  <div id=sample>Second box</div>
+
+  <p>🚫 Error: Duplicate IDs cause confusion for assistive technologies. Missing quotes can cause parsing errors.</p>
+</div>
+
+<!-- =================== GOOD EXAMPLE 2 =================== -->
+<div class="section good">
+  <h3>✅ Good Example 2: Unique IDs and Proper Quoting</h3>
+  <p><strong>Fix:</strong> Each <code>id</code> must be unique and attribute values should be quoted.</p>
+
+  <pre>
+&lt;div id="sample1"&gt;First box&lt;/div&gt;
+&lt;div id="sample2"&gt;Second box&lt;/div&gt;
+  </pre>
+
+  <div id="sample1">First box</div>
+  <div id="sample2">Second box</div>
+</div>
+
+<!-- =================== BAD EXAMPLE 3 =================== -->
+<div class="section bad">
+  <h3>❌ Bad Example 3: Missing Start or End Tags</h3>
+  <p><strong>Problem:</strong> List items are not properly closed.</p>
+
+  <pre>
+&lt;ul&gt;
+  &lt;li&gt;Item 1
+  &lt;li&gt;Item 2
+&lt;/ul&gt;
+  </pre>
+
+  <ul>
+    <li>Item 1
+    <li>Item 2
+  </ul>
+
+  <p>🚫 Error: Missing <code>&lt;/li&gt;</code> closing tags may confuse screen readers.</p>
+</div>
+
+<!-- =================== GOOD EXAMPLE 3 =================== -->
+<div class="section good">
+  <h3>✅ Good Example 3: All Elements Properly Closed</h3>
+  <p><strong>Fix:</strong> Always close all tags properly.</p>
+
+  <pre>
+&lt;ul&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;
+  </pre>
+
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+</div>
+
+<!-- =================== BAD EXAMPLE 4 =================== -->
+<div class="section bad">
+  <h3>❌ Bad Example 4: Incorrect Doctype and Missing HTML Structure</h3>
+  <p><strong>Problem:</strong> Omitting required structural elements causes assistive tools to misinterpret the page.</p>
+
+  <pre>
+&lt;html&gt;
+  &lt;title&gt;No Head or Body&lt;/title&gt;
+  &lt;p&gt;Missing structure!&lt;/p&gt;
+&lt;/html&gt;
+  </pre>
+
+  <p>🚫 Error: Missing <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> structure breaks valid parsing.</p>
+</div>
+
+<!-- =================== GOOD EXAMPLE 4 =================== -->
+<div class="section good">
+  <h3>✅ Good Example 4: Complete and Valid Structure</h3>
+  <p><strong>Fix:</strong> Always include <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code>.</p>
+
+  <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Proper Structure&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;This page has valid structure.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+  </pre>
+
+  <p>✅ Correct HTML structure ensures compatibility with assistive tools.</p>
+</div>
+
+</body>
+</html>
