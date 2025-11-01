@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Accessibility Criteria:
+--------------------------------
+3.1.1 Language of Page:
+    - The default human language of each web page can be programmatically determined.
+    - This means using <html lang="en"> (or any other correct code like "fr", "es", "ta" etc.)
+    - Screen readers use this to read the text in the correct accent/pronunciation.
+
+3.1.2 Language of Parts:
+    - Any content in a different language within a page must be marked with that language code.
+    - Example: A paragraph in French should use <p lang="fr">Bonjour!</p>
+-->
+
+<html lang="en">
+  <!-- GOOD: Correctly defines the default page language as English -->
+  <!-- BAD EXAMPLE BELOW: Missing or incorrect language attribute examples shown later -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.1.1 & 3.1.2 - Language of Page and Parts</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+      .bad {
+        background-color: #ffe5e5;
+      }
+      .good {
+        background-color: #e5ffe5;
+      }
+      h2 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>WCAG 2.2 - 3.1.1 Language of Page & 3.1.2 Language of Parts</h1>
+
+    <!-- ===================== BAD EXAMPLES ===================== -->
+    <section class="bad">
+      <h2>🚫 Bad Example - Language of Page (3.1.1)</h2>
+
+      <!-- BAD 1: Missing lang attribute -->
+      <iframe
+        srcdoc="
+      <html>
+        <head><title>Missing Language Attribute</title></head>
+        <body><p>Hello! This page has no 'lang' attribute.</p></body>
+      </html>
+    "
+        width="100%"
+        height="100"
+        title="Bad Example Missing Lang"
+      ></iframe>
+      <p>
+        <strong>Issue:</strong> The page doesn't specify the main language using
+        <code>lang</code> attribute. Screen readers won’t know how to pronounce
+        the text correctly.
+      </p>
+
+      <!-- BAD 2: Incorrect lang code -->
+      <iframe
+        srcdoc="
+      <html lang='engl'>
+        <head><title>Incorrect Lang Attribute</title></head>
+        <body><p>This page uses an invalid lang code 'engl'.</p></body>
+      </html>
+    "
+        width="100%"
+        height="100"
+        title="Bad Example Invalid Lang"
+      ></iframe>
+      <p>
+        <strong>Issue:</strong> Invalid language code (‘engl’) not recognized by
+        assistive technologies.
+      </p>
+    </section>
+
+    <section class="bad">
+      <h2>🚫 Bad Example - Language of Parts (3.1.2)</h2>
+      <p>
+        Here’s a mixed-language sentence: Bonjour! How are you? Gracias!
+        <br />
+        <strong>Issue:</strong> The French (“Bonjour”) and Spanish (“Gracias”)
+        parts are not marked with their respective language codes. Screen
+        readers will pronounce them incorrectly.
+      </p>
+    </section>
+
+    <!-- ===================== GOOD EXAMPLES ===================== -->
+    <section class="good">
+      <h2>✅ Good Example - Language of Page (3.1.1)</h2>
+      <p>
+        This page correctly uses <code>&lt;html lang="en"&gt;</code> so screen
+        readers know to read in English.
+      </p>
+
+      <iframe
+        srcdoc="
+      <html lang='fr'>
+        <head><title>French Page</title></head>
+        <body><p>Bonjour! Ceci est une page en français.</p></body>
+      </html>
+    "
+        width="100%"
+        height="100"
+        title="Good Example French Lang"
+      ></iframe>
+      <p>
+        <strong>Explanation:</strong> This embedded page sets
+        <code>lang='fr'</code> correctly to indicate it’s French content.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example - Language of Parts (3.1.2)</h2>
+      <p>
+        Here’s a properly marked mixed-language sentence:<br /><br />
+        <span lang="fr">Bonjour</span>! How are you?
+        <span lang="es">Gracias</span>!
+      </p>
+      <p>
+        <strong>Explanation:</strong> The words “Bonjour” and “Gracias” are
+        wrapped in elements with the correct <code>lang</code> attributes (<code
+          >fr</code
+        >
+        for French, <code>es</code> for Spanish). <br />Screen readers will
+        switch pronunciation accordingly.
+      </p>
+    </section>
+
+    <!-- ===================== SUMMARY ===================== -->
+    <section>
+      <h2>📘 Summary of All Scenarios</h2>
+      <ul>
+        <li>
+          <strong>3.1.1 Language of Page:</strong> Must always have a valid
+          <code>lang</code> attribute in the <code>&lt;html&gt;</code> tag.
+        </li>
+        <li>
+          <strong>3.1.1 Failure Example:</strong> Missing or invalid language
+          code (like “engl”).
+        </li>
+        <li>
+          <strong>3.1.2 Language of Parts:</strong> Text in other languages must
+          be wrapped in an element with that language’s
+          <code>lang</code> attribute.
+        </li>
+        <li>
+          <strong>3.1.2 Failure Example:</strong> Foreign words not marked with
+          <code>lang</code> attributes cause wrong pronunciation.
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
