@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 2.5.8 – Target Size (Minimum)
+--------------------------------------------------------
+Requirement:
+  - Touch targets (like buttons, links, icons) must be at least
+    24 by 24 CSS pixels in size.
+  - Targets smaller than 24x24 are acceptable only if:
+      * There is enough spacing (at least 24px gap) between them,
+      * Or they are part of inline text,
+      * Or their size is essential (e.g., a small map point),
+      * Or an equivalent larger target exists elsewhere.
+
+Why Important:
+  - Small targets are hard to activate for users with limited dexterity,
+    touch screens, or assistive technologies.
+
+This file shows BAD and GOOD examples with explanations.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 2.5.8 – Target Size (Minimum)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+
+      .bad {
+        background-color: #ffe5e5;
+      }
+
+      .good {
+        background-color: #e5ffe5;
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      /* Styling for buttons and links */
+      .tiny-btn {
+        background-color: #ff6666;
+        color: white;
+        border: none;
+        width: 14px;
+        height: 14px;
+        font-size: 10px;
+        cursor: pointer;
+      }
+
+      .good-btn {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .spaced-links a {
+        margin-right: 30px; /* 24px+ gap between small links */
+      }
+
+      .icon-link {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-color: #888;
+        border-radius: 50%;
+        text-decoration: none;
+        margin-right: 8px;
+      }
+
+      /* Inline link scenario */
+      p a.inline-link {
+        text-decoration: underline;
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 2.5.8 Target Size (Minimum)</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Small Buttons and Tight Links</h2>
+
+      <p>
+        These buttons and icons are smaller than 24×24px and placed too close
+        together.
+      </p>
+
+      <button class="tiny-btn" title="Delete">X</button>
+      <button class="tiny-btn" title="Edit">✎</button>
+      <button class="tiny-btn" title="Save">💾</button>
+
+      <p>
+        <strong>Issue:</strong> Each button is only 14×14px. Difficult to tap on
+        touch devices or for users with motor impairments.
+      </p>
+
+      <div>
+        <a href="#">Home</a> | <a href="#">About</a> |
+        <a href="#">Contact</a>
+      </div>
+      <p>
+        <strong>Issue:</strong> Links are very close together (no 24px spacing).
+        Users might tap the wrong one accidentally.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Minimum 24×24px Target Size</h2>
+
+      <p>
+        Here, each interactive element (button or link) is large enough (≥24px)
+        or spaced properly.
+      </p>
+
+      <button class="good-btn" title="Delete">Delete</button>
+      <button class="good-btn" title="Edit">Edit</button>
+      <button class="good-btn" title="Save">Save</button>
+
+      <p>
+        <strong>Explanation:</strong> Each button is 24×24px or more, easy to
+        click or tap.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example – Small Targets but with Enough Spacing</h2>
+
+      <div class="spaced-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <p>
+        <strong>Explanation:</strong> Even though the link text is small, there
+        is more than 24px gap between them, meeting the spacing exception.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example – Inline Text Links (Allowed Exception)</h2>
+
+      <p>
+        You can <a href="#" class="inline-link">click here</a> to read more
+        about accessibility.
+      </p>
+
+      <p>
+        <strong>Explanation:</strong> Inline text links (within sentences) are
+        exempt from the 24×24px requirement. They are naturally part of flowing
+        text and don’t need large clickable areas.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example – Small Icon with Larger Clickable Area</h2>
+
+      <a
+        href="#"
+        style="
+          display: inline-block;
+          padding: 12px;
+          background: #007bff;
+          color: white;
+          text-decoration: none;
+          border-radius: 6px;
+        "
+      >
+        <span role="img" aria-label="Share">🔗</span> Share
+      </a>
+
+      <p>
+        <strong>Explanation:</strong> The visible icon is small, but padding
+        increases total hit area to at least 24×24px.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Summary of All Scenarios</h2>
+      <ul>
+        <li>
+          <strong>2.5.8 Target Size (Minimum):</strong> Targets must be at least
+          24×24 CSS pixels or have 24px spacing.
+        </li>
+        <li>
+          <strong>Bad Scenarios:</strong>
+          <ul>
+            <li>Tiny buttons smaller than 24px.</li>
+            <li>Links or icons too close together.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Good Scenarios:</strong>
+          <ul>
+            <li>Buttons at least 24×24px.</li>
+            <li>Smaller links but with 24px spacing.</li>
+            <li>Inline text links (exempt).</li>
+            <li>Small visual icons wrapped in larger hit areas.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
