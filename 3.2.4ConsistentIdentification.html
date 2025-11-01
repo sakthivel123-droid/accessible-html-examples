@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 3.2.4 – Consistent Identification
+-------------------------------------------------------------
+Requirement:
+  - Components that have the same function within a set of web pages
+    must be identified consistently.
+  - That means labels, icons, link texts, or button names used for the same purpose
+    should look and read the same way across all pages.
+
+Why?
+  - Screen reader and cognitive users rely on predictable, consistent labeling.
+  - Inconsistency causes confusion (e.g., “Search” on one page and “Find” on another for same feature).
+
+This file shows both BAD and GOOD examples.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.2.4 – Consistent Identification</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+      .bad {
+        background-color: #ffe5e5;
+      }
+      .good {
+        background-color: #e5ffe5;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      input,
+      button {
+        padding: 5px;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 3.2.4 Consistent Identification</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Inconsistent Labels for Same Function</h2>
+
+      <p>
+        Each of the following inputs does the same thing – search – but is
+        labeled differently.
+      </p>
+
+      <form>
+        <label for="search1">🔍 Find Articles:</label>
+        <input type="text" id="search1" placeholder="Enter keywords" />
+        <button>Go</button>
+      </form>
+
+      <br />
+
+      <form>
+        <label for="search2">🔎 Look Up Content:</label>
+        <input type="text" id="search2" placeholder="Enter keywords" />
+        <button>Submit</button>
+      </form>
+
+      <p>
+        <strong>Issue:</strong> The same function (search) is labeled
+        inconsistently: “Find Articles”, “Look Up Content”, “Go”, “Submit”.
+        Users with assistive tech can’t predict that these do the same task.
+      </p>
+    </section>
+
+    <section class="bad">
+      <h2>🚫 Bad Example – Different Icons for Same Meaning</h2>
+      <p>
+        Here, the same "print" function uses two completely different icons.
+      </p>
+
+      <button aria-label="Print Page">🖨️ Print</button>
+      <button aria-label="Print Page">📄 Print</button>
+
+      <p>
+        <strong>Issue:</strong> Users may not realize both icons perform the
+        same “print” action. Visual or cognitive users expect consistent symbols
+        for repeated tasks.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Consistent Labels and Icons</h2>
+
+      <p>
+        Here, the same “search” function appears twice on a page – same label,
+        same icon, consistent behavior.
+      </p>
+
+      <form>
+        <label for="goodSearch1">🔍 Search:</label>
+        <input type="text" id="goodSearch1" placeholder="Enter keywords" />
+        <button type="submit">Search</button>
+      </form>
+
+      <br />
+
+      <form>
+        <label for="goodSearch2">🔍 Search:</label>
+        <input type="text" id="goodSearch2" placeholder="Enter keywords" />
+        <button type="submit">Search</button>
+      </form>
+
+      <p>
+        <strong>Explanation:</strong> Both instances use the same label
+        “Search”, same icon (🔍), and same button name “Search”. This
+        consistency helps everyone recognize the same action anywhere on the
+        site.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example – Consistent ARIA Labels for Same Components</h2>
+
+      <button aria-label="Download File">⬇️ Download</button>
+      <button aria-label="Download File">⬇️ Download</button>
+
+      <p>
+        <strong>Explanation:</strong> Even though the buttons appear in
+        different areas, they use the same accessible name (“Download File”)
+        ensuring screen readers identify both the same way.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SCENARIO SUMMARY -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Summary of All Scenarios</h2>
+      <ul>
+        <li>
+          <strong>3.2.4 Consistent Identification:</strong> Same functions =
+          same name, icon, label, and role.
+        </li>
+        <li>
+          <strong>Bad Scenarios:</strong>
+          <ul>
+            <li>
+              Different labels (“Find”, “Search”, “Lookup”) for the same
+              function.
+            </li>
+            <li>Different icons for same task (🖨️ vs 📄 both for print).</li>
+            <li>Different ARIA labels for identical buttons.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Good Scenarios:</strong>
+          <ul>
+            <li>Consistent visual text and ARIA labels.</li>
+            <li>Identical iconography for same purpose.</li>
+            <li>Predictable and uniform interaction behavior across pages.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
