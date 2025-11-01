@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 2.5.3 – Label in Name
+-------------------------------------------------
+Requirement:
+  - The **accessible name** (used by assistive technologies like screen readers)
+    must include the **visible label text** shown on the screen.
+  - Users who rely on voice recognition software (e.g., Dragon NaturallySpeaking)
+    need to be able to say the visible label (e.g., “Click ‘Search’ button”)
+    and have it correctly activated.
+
+Why Important:
+  - If a control’s accessible name does not match the visible text,
+    voice command users may not be able to activate it.
+  - Screen reader users also benefit from consistency between visible and spoken labels.
+
+This file shows both BAD and GOOD examples, with all possible scenarios.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 2.5.3 – Label in Name</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+
+      .bad {
+        background-color: #ffe5e5;
+      }
+
+      .good {
+        background-color: #e5ffe5;
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+
+      input[type="text"] {
+        padding: 8px;
+        width: 250px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 2.5.3 Label in Name</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Examples – Mismatch Between Label and Accessible Name</h2>
+
+      <!-- 1️⃣ Example: Visible text says "Search", but accessible name is "Find" -->
+      <button aria-label="Find">Search</button>
+      <p>
+        <strong>Issue:</strong> Visible label says “Search”, but screen reader
+        says “Find”. A voice user saying “Click Search” would fail because the
+        accessible name doesn’t match.
+      </p>
+
+      <!-- 2️⃣ Example: Visible label is "Submit", but aria-label overrides it -->
+      <button aria-label="Send Form">Submit</button>
+      <p>
+        <strong>Issue:</strong> “Submit” is visible, but the accessible name
+        “Send Form” replaces it. Voice command “Click Submit” will not work.
+      </p>
+
+      <!-- 3️⃣ Example: Input field with placeholder but no matching label -->
+      <input
+        type="text"
+        placeholder="Enter name"
+        aria-label="Type your full name"
+      />
+      <p>
+        <strong>Issue:</strong> Placeholder text “Enter name” differs from
+        accessible label “Type your full name”. Users saying “Enter name” won’t
+        activate this field.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Examples – Label Text Matches Accessible Name</h2>
+
+      <!-- 1️⃣ Example: Visible and accessible names match exactly -->
+      <button aria-label="Search">Search</button>
+      <p>
+        <strong>Explanation:</strong> The visible label “Search” matches the
+        accessible name “Search”. Voice command “Click Search” and screen
+        readers both read correctly.
+      </p>
+
+      <!-- 2️⃣ Example: Visible label included in accessible name (extra words are fine) -->
+      <button aria-label="Search this site">Search</button>
+      <p>
+        <strong>Explanation:</strong> “Search this site” includes visible word
+        “Search”. This still passes, as the visible text is part of the
+        accessible name.
+      </p>
+
+      <!-- 3️⃣ Example: Input field with proper label association -->
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" aria-label="Username" />
+      <p>
+        <strong>Explanation:</strong> The label “Username” is both visible and
+        used as accessible name. Perfect match for screen readers and voice
+        input.
+      </p>
+
+      <!-- 4️⃣ Example: Icon button with hidden text but matching aria-label -->
+      <button aria-label="Close">
+        <span aria-hidden="true">❌</span>
+      </button>
+      <p>
+        <strong>Explanation:</strong> Even though the icon is visual only, the
+        accessible name “Close” correctly reflects the intended visible
+        function.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Summary of All Scenarios</h2>
+      <ul>
+        <li>
+          <strong>Requirement:</strong> The visible text label must be included
+          in the accessible name.
+        </li>
+        <li>
+          <strong>Bad Scenarios:</strong>
+          <ul>
+            <li>
+              Visible text and accessible name don’t match (e.g., “Search” vs.
+              “Find”).
+            </li>
+            <li>aria-label replaces visible text with different words.</li>
+            <li>Placeholder text differs from label or accessible name.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Good Scenarios:</strong>
+          <ul>
+            <li>Accessible name matches visible label exactly.</li>
+            <li>
+              Accessible name includes visible label (e.g., “Search this site”).
+            </li>
+            <li>
+              Icon buttons have aria-labels that describe visible purpose (e.g.,
+              “Close”).
+            </li>
+            <li>Form inputs use visible labels that match accessible names.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
