@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 3.2.2 – On Input
+--------------------------------------------
+Requirement:
+  - Changing the value of any user interface component (like a dropdown, checkbox, text input)
+    should NOT automatically cause a change of context unless the user is clearly warned before.
+
+What counts as a “Change of Context”:
+  - Automatically navigating to a new page
+  - Submitting a form automatically
+  - Opening new windows or dialogs
+  - Changing focus or content layout unexpectedly
+
+Goal:
+  - Users must stay in control. They should know that their input will cause a change,
+    and have the opportunity to confirm before it happens.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.2.2 - Context Change (On Input)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+      .bad {
+        background-color: #ffe5e5;
+      }
+      .good {
+        background-color: #e5ffe5;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      select,
+      button,
+      input {
+        padding: 5px;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 3.2.2: Context Change (On Input)</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLE 1 -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Dropdown Auto Redirects on Input Change</h2>
+      <p>
+        In this example, when the user selects a value from the dropdown, it
+        immediately redirects to a new page without any confirmation or warning.
+      </p>
+
+      <form>
+        <label for="badSelect"><strong>Select a page (Bad):</strong></label
+        ><br />
+        <select
+          id="badSelect"
+          name="badSelect"
+          onchange="window.location=this.value;"
+        >
+          <option value="">-- Choose a page --</option>
+          <option value="https://example.com/about">About Us</option>
+          <option value="https://example.com/contact">Contact</option>
+        </select>
+      </form>
+
+      <p>
+        <strong>Issue:</strong> The dropdown triggers navigation automatically
+        upon selection. Users may not expect or be ready for this, causing
+        confusion or data loss. This violates
+        <strong>WCAG 3.2.2 – On Input</strong>.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLE 2 -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Auto Submit on Checkbox Change</h2>
+
+      <form action="#" onsubmit="alert('Form submitted automatically!');">
+        <label>
+          <input type="checkbox" onchange="this.form.submit();" />
+          Subscribe to newsletter
+        </label>
+      </form>
+
+      <p>
+        <strong>Issue:</strong> The form submits automatically when the checkbox
+        is selected, without giving users a chance to review or confirm their
+        choice.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLE 1 -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Dropdown Requires Explicit User Action</h2>
+      <p>
+        Here, the user selects a value but must click the “Go” button to
+        confirm. The input change doesn’t automatically trigger navigation.
+      </p>
+
+      <form id="goodForm" onsubmit="handleSubmit(event)">
+        <label for="goodSelect"><strong>Select a page (Good):</strong></label
+        ><br />
+        <select id="goodSelect" name="goodSelect">
+          <option value="">-- Choose a page --</option>
+          <option value="about">About Us</option>
+          <option value="contact">Contact</option>
+        </select>
+        <button type="submit">Go</button>
+      </form>
+
+      <script>
+        function handleSubmit(event) {
+          event.preventDefault();
+          const value = document.getElementById("goodSelect").value;
+          if (value) {
+            alert("Navigating to " + value + " page...");
+            // window.location = value + ".html"; // (disabled for demo)
+          } else {
+            alert("Please select a page first!");
+          }
+        }
+      </script>
+
+      <p>
+        <strong>Explanation:</strong> The dropdown’s value changes only when the
+        user confirms by pressing the button. This keeps the user in control and
+        avoids unexpected context changes.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLE 2 -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Informing Users About Automatic Changes</h2>
+
+      <p>
+        Sometimes automatic actions are acceptable if users are clearly informed
+        before interaction.
+      </p>
+
+      <form>
+        <p>
+          This dropdown will automatically change the theme once you select an
+          option:
+        </p>
+        <label for="themeSelect">Theme:</label>
+        <select
+          id="themeSelect"
+          name="themeSelect"
+          onchange="changeTheme(this.value)"
+        >
+          <option value="">-- Select Theme --</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </form>
+
+      <script>
+        function changeTheme(theme) {
+          if (!theme) return;
+          alert("Theme changed to " + theme + " mode!");
+          document.body.style.backgroundColor =
+            theme === "dark" ? "#222" : "#fff";
+          document.body.style.color = theme === "dark" ? "#fff" : "#000";
+        }
+      </script>
+
+      <p>
+        <strong>Explanation:</strong> The user is told beforehand that changing
+        this control will change the theme. Because the user is warned, this
+        scenario passes <strong>WCAG 3.2.2</strong>.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Summary of All Scenarios</h2>
+      <ul>
+        <li>
+          <strong>3.2.2 On Input:</strong> Input changes should not
+          automatically cause a context change (navigation, form submission,
+          layout change) unless the user is warned or initiates it deliberately.
+        </li>
+        <li>
+          <strong>Bad Scenarios:</strong>
+          <ul>
+            <li>Dropdown automatically redirects when selection changes.</li>
+            <li>Checkbox automatically submits form on change.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Good Scenarios:</strong>
+          <ul>
+            <li>
+              User explicitly clicks a “Go” or “Submit” button to confirm
+              change.
+            </li>
+            <li>
+              Automatic change allowed only if the user is informed beforehand
+              (e.g., “Theme will change automatically”).
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
