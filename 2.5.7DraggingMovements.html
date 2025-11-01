@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 2.5.7 – Dragging Movements
+------------------------------------------------------
+Requirement:
+  - Users who cannot perform dragging movements (such as click-and-drag)
+    must be able to complete the same action using a single pointer (like a simple tap, click, or button).
+  - Example: If you allow drag-and-drop sorting, you should also provide buttons
+    to move items up or down.
+
+Why Important:
+  - Some users cannot perform precise dragging gestures due to motor impairments,
+    tremors, or when using assistive technologies or keyboard-only navigation.
+
+This file demonstrates both BAD (only drag) and GOOD (drag + simple alternative) examples.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 2.5.7 – Dragging Movements</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+
+      .bad {
+        background-color: #ffe5e5;
+      }
+
+      .good {
+        background-color: #e5ffe5;
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      /* Drag & Drop styling */
+      .drag-container {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 10px;
+        border: 2px dashed #aaa;
+        min-height: 100px;
+      }
+
+      .draggable {
+        background-color: #2196f3;
+        color: white;
+        padding: 10px;
+        width: 80px;
+        text-align: center;
+        cursor: grab;
+        border-radius: 6px;
+      }
+
+      .draggable:active {
+        cursor: grabbing;
+      }
+
+      /* Good example controls */
+      .item {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .item button {
+        margin-left: 10px;
+        background-color: white;
+        color: #4caf50;
+        border: 1px solid #4caf50;
+        padding: 4px 8px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .item button:hover {
+        background-color: #4caf50;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 2.5.7 Dragging Movements</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLE -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Dragging Required</h2>
+      <p>
+        Users can only move items by dragging them. No simple alternative (like
+        buttons or keyboard controls) exists.
+      </p>
+
+      <div class="drag-container" id="bad-container">
+        <div class="draggable" draggable="true">Item 1</div>
+        <div class="draggable" draggable="true">Item 2</div>
+        <div class="draggable" draggable="true">Item 3</div>
+      </div>
+
+      <p>
+        <strong>Issue:</strong> Users who cannot drag with a mouse or touch
+        cannot reorder or interact. Keyboard and switch device users are blocked
+        from performing the task.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLE -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Dragging + Click/Keyboard Alternative</h2>
+
+      <p>Here, users can reorder items by either:</p>
+      <ul>
+        <li>Dragging with a mouse or touch</li>
+        <li>OR using Up / Down buttons (simple pointer actions)</li>
+      </ul>
+
+      <div id="good-list">
+        <div class="item" draggable="true">
+          <span>Item A</span>
+          <span>
+            <button onclick="moveUp(this)">↑</button>
+            <button onclick="moveDown(this)">↓</button>
+          </span>
+        </div>
+        <div class="item" draggable="true">
+          <span>Item B</span>
+          <span>
+            <button onclick="moveUp(this)">↑</button>
+            <button onclick="moveDown(this)">↓</button>
+          </span>
+        </div>
+        <div class="item" draggable="true">
+          <span>Item C</span>
+          <span>
+            <button onclick="moveUp(this)">↑</button>
+            <button onclick="moveDown(this)">↓</button>
+          </span>
+        </div>
+      </div>
+
+      <p>
+        <strong>Explanation:</strong> Even if a user cannot perform
+        drag-and-drop, they can still click or keyboard-navigate to reorder
+        items.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Summary of All Scenarios</h2>
+      <ul>
+        <li>
+          <strong>Requirement:</strong> Actions that involve dragging must have
+          a single-pointer (non-drag) alternative.
+        </li>
+        <li>
+          <strong>Bad Scenarios:</strong>
+          <ul>
+            <li>Only drag-and-drop supported.</li>
+            <li>No buttons or keyboard support for reordering.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Good Scenarios:</strong>
+          <ul>
+            <li>
+              Drag-and-drop supported, but also simple click/tap alternative
+              (buttons).
+            </li>
+            <li>Keyboard users can achieve same result without dragging.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <script>
+      // Enable drag-and-drop for GOOD example (optional)
+      const items = document.querySelectorAll("#good-list .item");
+      const container = document.getElementById("good-list");
+
+      let draggedItem = null;
+
+      items.forEach((item) => {
+        item.addEventListener("dragstart", () => (draggedItem = item));
+        item.addEventListener("dragover", (e) => e.preventDefault());
+        item.addEventListener("drop", (e) => {
+          e.preventDefault();
+          if (draggedItem && draggedItem !== item) {
+            const next =
+              item.nextElementSibling === draggedItem
+                ? item
+                : item.nextElementSibling;
+            container.insertBefore(draggedItem, next);
+          }
+        });
+      });
+
+      // Button-based reordering (accessible alternative)
+      function moveUp(btn) {
+        const item = btn.closest(".item");
+        if (item.previousElementSibling) {
+          container.insertBefore(item, item.previousElementSibling);
+        }
+      }
+
+      function moveDown(btn) {
+        const item = btn.closest(".item");
+        if (item.nextElementSibling) {
+          container.insertBefore(item.nextElementSibling, item);
+        }
+      }
+    </script>
+  </body>
+</html>
