@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 2.5.4 – Motion Actuation
+----------------------------------------------------
+Requirement:
+  - Functionality that can be operated by motion (like device shaking, tilting, 
+    or gestures such as moving your phone) must also be operable by user interface controls.
+  - Users should also be able to disable motion-triggered functionality.
+
+Why Important:
+  - People with motor impairments or who use assistive technology may not be able to 
+    perform motion gestures.
+  - Some users can accidentally trigger motion (e.g., tremors, unsteady hands).
+  - Devices might move unexpectedly in wheelchairs, vehicles, or beds.
+
+This example shows both BAD and GOOD implementations.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WCAG 2.5.4 – Motion Actuation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+
+    .bad {
+      background-color: #ffe5e5;
+    }
+
+    .good {
+      background-color: #e5ffe5;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #4CAF50;
+      margin-top: 20px;
+      transition: transform 0.5s ease;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 2.2 – 2.5.4 Motion Actuation</h1>
+
+  <!-- ============================================================= -->
+  <!-- BAD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Motion-Only Interaction</h2>
+
+    <p>This box only rotates when the device is shaken or tilted.  
+       There is no on-screen button or control alternative.</p>
+
+    <div id="badBox" class="box" style="background-color:#ff6666;"></div>
+
+    <p><strong>Issue:</strong>  
+      Users who can’t physically shake or tilt their device cannot trigger the action.  
+      Also, there is no way to disable motion-triggered functionality.</p>
+
+    <script>
+      // BAD: motion-only control, no alternative UI
+      window.addEventListener('deviceorientation', function(event) {
+        const box = document.getElementById('badBox');
+        const rotate = event.gamma; // Left-right tilt
+        box.style.transform = 'rotate(' + rotate + 'deg)';
+      });
+    </script>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="good">
+    <h2>✅ Good Example – Motion + Button Alternative + Disable Option</h2>
+
+    <p>
+      This green box can rotate either by:
+      <ul>
+        <li>Tilting the device (motion-based), OR</li>
+        <li>Clicking the "Rotate Box" button (simple pointer alternative)</li>
+      </ul>
+    </p>
+
+    <button id="rotateBtn">Rotate Box</button>
+    <button id="toggleMotion">Disable Motion Control</button>
+
+    <div id="goodBox" class="box"></div>
+
+    <p><strong>Explanation:</strong>
+      <ul>
+        <li>✅ Has an alternative input method (button).</li>
+        <li>✅ User can disable motion-triggered behavior.</li>
+        <li>✅ Works for both motor-impaired users and users on desktop devices.</li>
+      </ul>
+    </p>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SUMMARY -->
+  <!-- ============================================================= -->
+  <section>
+    <h2>📘 Summary of All Scenarios</h2>
+    <ul>
+      <li><strong>Requirement:</strong> Functions triggered by motion (e.g., shaking, tilting) must also be operable through a UI component and allow users to disable motion actuation.</li>
+      <li><strong>Bad Scenarios:</strong>
+        <ul>
+          <li>Only motion input (no button, keyboard, or other control).</li>
+          <li>No way to turn off motion detection.</li>
+        </ul>
+      </li>
+      <li><strong>Good Scenarios:</strong>
+        <ul>
+          <li>Motion and simple UI control both available.</li>
+          <li>Motion control can be disabled.</li>
+          <li>Accessible to users with limited mobility or assistive devices.</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <script>
+    // GOOD example – supports both motion and button
+    const goodBox = document.getElementById('goodBox');
+    const rotateBtn = document.getElementById('rotateBtn');
+    const toggleMotionBtn = document.getElementById('toggleMotion');
+
+    let motionEnabled = true;
+    let rotation = 0;
+
+    // Rotate with button
+    rotateBtn.addEventListener('click', () => {
+      rotation += 45;
+      goodBox.style.transform = `rotate(${rotation}deg)`;
+    });
+
+    // Toggle motion enable/disable
+    toggleMotionBtn.addEventListener('click', () => {
+      motionEnabled = !motionEnabled;
+      toggleMotionBtn.textContent = motionEnabled ? "Disable Motion Control" : "Enable Motion Control";
+    });
+
+    // Device tilt motion control
+    window.addEventListener('deviceorientation', function(event) {
+      if (!motionEnabled) return; // motion can be disabled
+      const tilt = event.gamma; // left-right tilt
+      goodBox.style.transform = 'rotate(' + tilt + 'deg)';
+    });
+  </script>
+
+</body>
+</html>
