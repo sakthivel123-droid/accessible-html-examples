@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 3.2.1 – On Focus
+--------------------------------------------
+Requirement:
+    - When a user moves focus to an element (via keyboard tabbing, clicking, etc.),
+      that element should NOT automatically cause a change of context.
+
+Definition of “Change of Context” includes:
+    1. Opening a new window or tab.
+    2. Submitting a form automatically.
+    3. Redirecting to another page.
+    4. Changing the page layout or content unexpectedly.
+
+Goal:
+    - The user should remain in control and decide when an action occurs (for example, by pressing Enter or clicking a button).
+
+Below you’ll see BAD and GOOD examples with explanations.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.2.1 - Context Change (On Focus)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+      .bad {
+        background-color: #ffe5e5;
+      }
+      .good {
+        background-color: #e5ffe5;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      select,
+      button,
+      input {
+        padding: 5px;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 3.2.1: Context Change (On Focus)</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLE -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Unexpected Context Change on Focus</h2>
+
+      <p>
+        In this example, focusing (tabbing or clicking) on the dropdown
+        automatically redirects the user to another page — without the user
+        taking any action like pressing Enter or clicking a button.
+      </p>
+
+      <form>
+        <label for="badSelect"><strong>Select a page (Bad):</strong></label
+        ><br />
+        <select
+          id="badSelect"
+          name="badSelect"
+          onfocus="window.location='https://example.com';"
+        >
+          <option value="">-- Choose --</option>
+          <option value="about">About Us</option>
+          <option value="contact">Contact</option>
+        </select>
+      </form>
+
+      <p>
+        <strong>Issue:</strong> Just by tabbing to the dropdown, the user is
+        redirected — this is a “context change on focus”. This causes confusion,
+        especially for keyboard or screen reader users.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLE 2 -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Auto Submit on Focus</h2>
+
+      <form>
+        <label for="badInput">Enter your name (Bad):</label><br />
+        <input
+          type="text"
+          id="badInput"
+          onfocus="this.form.submit();"
+          placeholder="Type your name here"
+        />
+      </form>
+
+      <p>
+        <strong>Issue:</strong> When this text field receives focus, it
+        automatically submits the form. The user loses control of when the
+        submission happens.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – User-Initiated Context Change</h2>
+
+      <p>
+        In this version, focusing on the dropdown doesn’t cause any change. The
+        page changes only when the user makes a choice and clicks the “Go”
+        button.
+      </p>
+
+      <form id="goodForm" onsubmit="handleSubmit(event)">
+        <label for="goodSelect"><strong>Select a page (Good):</strong></label
+        ><br />
+        <select id="goodSelect" name="goodSelect">
+          <option value="">-- Choose --</option>
+          <option value="about">About Us</option>
+          <option value="contact">Contact</option>
+        </select>
+        <button type="submit">Go</button>
+      </form>
+
+      <script>
+        function handleSubmit(event) {
+          event.preventDefault();
+          const value = document.getElementById("goodSelect").value;
+          if (value) {
+            alert("Navigating to " + value + " page...");
+            // window.location = value + ".html"; // commented for demo
+          } else {
+            alert("Please select a page first!");
+          }
+        }
+      </script>
+
+      <p>
+        <strong>Explanation:</strong> Focus alone does not cause navigation. The
+        user decides when to act, maintaining full control.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example – Focus Highlights, No Context Change</h2>
+
+      <p>
+        Here, focusing on fields simply changes the border color visually for
+        clarity, not the context.
+      </p>
+
+      <form>
+        <label for="nameGood">Name:</label><br />
+        <input
+          type="text"
+          id="nameGood"
+          placeholder="Enter your name"
+        /><br /><br />
+        <label for="emailGood">Email:</label><br />
+        <input type="email" id="emailGood" placeholder="Enter your email" />
+      </form>
+
+      <style>
+        input:focus {
+          border: 2px solid blue;
+          outline: none;
+        }
+      </style>
+
+      <p>
+        <strong>Explanation:</strong> This example visually indicates focus
+        (good for usability) without causing any automatic actions or page
+        changes.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Summary of All Scenarios</h2>
+      <ul>
+        <li>
+          <strong>3.2.1 On Focus:</strong> Elements should not trigger a context
+          change (like submitting, navigating, or opening new pages) just by
+          receiving focus.
+        </li>
+        <li>
+          <strong>Bad Examples:</strong>
+          <ul>
+            <li>Dropdown redirecting user when focused.</li>
+            <li>Form auto-submitting on focus.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Good Examples:</strong>
+          <ul>
+            <li>
+              User explicitly clicks or presses Enter to trigger an action.
+            </li>
+            <li>Focus only highlights an element, not triggers a change.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
