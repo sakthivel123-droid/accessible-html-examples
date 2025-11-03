@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 - 2.4.2 Page Titled (Level A)
+---------------------------------------
+Requirement:
+Each web page must have a descriptive and meaningful <title> element 
+that identifies its purpose or content.
+
+Purpose:
+Page titles are the first thing screen reader users hear and 
+help all users identify the page quickly, especially when multiple tabs are open.
+-->
+
+<html lang="en">
+<head>
+  <!-- BAD EXAMPLE: Missing or Non-descriptive title -->
+  <title>Untitled Page</title>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    .bad { background-color: #ffe8e8; }
+    .good { background-color: #e8ffe8; }
+
+    h2 { margin-top: 0; }
+
+    .note {
+      background: #f9f9f9;
+      border-left: 4px solid #007bff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    code {
+      background-color: #eee;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>WCAG 2.2 – 2.4.2 Page Titled</h1>
+
+  <!-- ============================================================= -->
+  <!-- BAD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Missing or Vague Title</h2>
+    <p>
+      In this example, the page title is <strong>"Untitled Page"</strong>.  
+      It doesn’t describe what the page is about.
+      This makes it difficult for screen reader users and people with multiple browser tabs open.
+    </p>
+
+    <ul>
+      <li>❌ Title: <code>&lt;title&gt;Untitled Page&lt;/title&gt;</code></li>
+      <li>❌ Not descriptive of page purpose or content.</li>
+      <li>❌ Hard for screen reader users to know what page this is.</li>
+      <li>❌ Fails WCAG 2.4.2.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="good">
+    <h2>✅ Good Example – Descriptive Title</h2>
+    <p>
+      Here the page title clearly describes the page content and purpose.  
+      This helps users quickly identify the page among many open tabs or bookmarks.
+    </p>
+
+    <p><strong>Example of good title:</strong></p>
+    <pre><code>&lt;title&gt;Contact Us – GreenLeaf Garden Services&lt;/title&gt;</code></pre>
+
+    <p>
+      When users open this page, the browser tab will show <em>“Contact Us – GreenLeaf Garden Services”</em>,
+      clearly indicating its function.
+    </p>
+
+    <ul>
+      <li>✅ Title is unique and descriptive.</li>
+      <li>✅ Matches the main heading (<code>&lt;h1&gt;</code> or page content).</li>
+      <li>✅ Helps with SEO and bookmarks.</li>
+      <li>✅ Passes WCAG 2.4.2.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ============================================================= -->
+  <section>
+    <h2>📘 Other Possible Scenarios for 2.4.2</h2>
+    <ul>
+      <li><strong>❌ Bad:</strong> Missing <code>&lt;title&gt;</code> element entirely → Fails.</li>
+      <li><strong>❌ Bad:</strong> Generic title like “Welcome”, “Home”, “Page 1” → Fails.</li>
+      <li><strong>❌ Bad:</strong> Same title used across all pages (no unique identifier) → Fails.</li>
+      <li><strong>✅ Good:</strong> Each page has a unique, descriptive title → Pass.</li>
+      <li><strong>✅ Good:</strong> Title reflects primary purpose of page (e.g., “Login – ABC Bank”) → Pass.</li>
+      <li><strong>✅ Good:</strong> Dynamic web app updates <code>&lt;title&gt;</code> when content changes → Pass.</li>
+      <li><strong>✅ Good:</strong> Title matches visible page heading for consistency → Pass.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SUMMARY -->
+  <!-- ============================================================= -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.4.2 – Page Titled (Level A)</li>
+      <li><strong>Goal:</strong> Help users and assistive technologies identify each page easily.</li>
+      <li><strong>Good Practice:</strong> Use descriptive, concise titles that match page purpose.</li>
+      <li><strong>Bad Practice:</strong> Generic, repeated, or missing titles.</li>
+      <li><strong>Examples of Good Titles:</strong></li>
+      <ul>
+        <li>✅ “About Us – Bright Future Academy”</li>
+        <li>✅ “Login – MyAccount Portal”</li>
+        <li>✅ “Search Results for ‘Laptops’ – TechWorld”</li>
+      </ul>
+    </ul>
+  </section>
+
+</body>
+</html>

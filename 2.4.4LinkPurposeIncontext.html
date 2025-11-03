@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- 
+WCAG 2.2 – Success Criterion 2.4.4: Link Purpose (In Context) (Level A)
+----------------------------------------------------------------------
+Requirement:
+The purpose of each link should be clear from its text alone
+or from its text together with its surrounding context.
+Users, including screen-reader and cognitive-disability users,
+must understand where a link will take them before activating it.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.4.4 – Link Purpose (In Context)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+    }
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+    .bad {
+      background-color: #ffeaea;
+    }
+    .good {
+      background-color: #eaffea;
+    }
+    a {
+      color: #0066cc;
+    }
+    .note {
+      background: #f9f9f9;
+      border-left: 4px solid #007bff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>WCAG 2.2 – 2.4.4 Link Purpose (In Context)</h1>
+
+  <!-- ========================================================== -->
+  <!-- BAD EXAMPLES -->
+  <!-- ========================================================== -->
+  <section class="bad">
+    <h2>🚫 Bad Examples – Unclear Link Purpose</h2>
+    <p>
+      These links fail because the purpose is <strong>not clear</strong>
+      when read out of context by a screen reader or listed separately.
+    </p>
+
+    <ul>
+      <li><a href="report.html">Click here</a></li>
+      <li><a href="about.html">Read more</a></li>
+      <li><a href="services.html">More info</a></li>
+      <li>For our latest product updates, <a href="updates.html">here</a>.</li>
+      <li><a href="policy.html" aria-label="link">link</a> without context</li>
+    </ul>
+
+    <p>🔎 Problems:</p>
+    <ul>
+      <li>❌ “Click here” or “Read more” gives no idea what it leads to.</li>
+      <li>❌ Screen-reader link lists just say “Click here” multiple times.</li>
+      <li>❌ Purpose not clear from surrounding context alone.</li>
+      <li>❌ Fails WCAG 2.4.4 (Link Purpose In Context).</li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- GOOD EXAMPLES -->
+  <!-- ========================================================== -->
+  <section class="good">
+    <h2>✅ Good Examples – Clear Link Purpose</h2>
+    <p>
+      These links make sense both visually and when read by screen readers,
+      even out of context.
+    </p>
+
+    <ul>
+      <li><a href="annual-report.html">Download the 2025 Annual Report (PDF)</a></li>
+      <li><a href="about.html">Learn more about our company</a></li>
+      <li><a href="services.html">View our web accessibility services</a></li>
+      <li><a href="updates.html">See latest product updates</a></li>
+      <li>Read our <a href="privacy-policy.html">Privacy Policy</a></li>
+    </ul>
+
+    <p>✅ Benefits:</p>
+    <ul>
+      <li>Clear link text describes destination.</li>
+      <li>Each link is unique and meaningful on its own.</li>
+      <li>Works well for screen-reader link lists and voice commands.</li>
+      <li>Passes WCAG 2.4.4 (Link Purpose In Context).</li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ========================================================== -->
+  <section>
+    <h2>📘 Other Scenarios and Considerations</h2>
+    <ul>
+      <li><strong>Multiple links with same text but different destinations:</strong>  
+          ❌ Avoid repeating “Read more” for different articles.  
+          ✅ Use “Read more about Accessibility Testing”, etc.</li>
+      <li><strong>Links identified only by color:</strong>  
+          ❌ Fails 1.4.1 (Use of Color) and 2.4.4 if purpose isn’t clear in text.</li>
+      <li><strong>Icons only links:</strong>  
+          ❌ Provide descriptive <code>aria-label</code> (e.g., <code>aria-label="Download PDF report"</code>).</li>
+      <li><strong>Contextual clarity:</strong>  
+          ✅ Sometimes surrounding text gives meaning (“To contact us, visit our <a href='contact.html'>contact page</a>”).</li>
+      <li><strong>Hidden text for clarity:</strong>  
+          ✅ Use visually hidden text (e.g., “Read more <span class='sr-only'>about Accessibility Testing</span>”).</li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- SUMMARY -->
+  <!-- ========================================================== -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.4.4 – Link Purpose (In Context) (Level A)</li>
+      <li><strong>Goal:</strong> Ensure link purpose is clear without needing extra context or guessing.</li>
+      <li><strong>Best Practices:</strong></li>
+      <ul>
+        <li>Make link text self-descriptive (“Download Report”, not “Click here”).</li>
+        <li>Use hidden text or ARIA labels if visual space is limited.</li>
+        <li>Don’t rely only on surrounding visual cues or color.</li>
+        <li>Test with a screen reader’s link list feature – each link should make sense alone.</li>
+      </ul>
+    </ul>
+  </section>
+</body>
+</html>

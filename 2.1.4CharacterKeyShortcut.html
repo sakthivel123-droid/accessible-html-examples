@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 – 2.1.4 Character Key Shortcuts (Level A)
+-------------------------------------------------
+Requirement:
+If a keyboard shortcut using only letters, punctuation, numbers, or symbols 
+is implemented for a webpage function, at least one of the following is true:
+
+(a) The shortcut can be turned off.
+(b) The shortcut can be remapped (changed).
+(c) The shortcut is active only when a component has focus.
+
+Purpose:
+To prevent accidental activation of features (for example, speech input or 
+users who press keys accidentally).
+
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.2 – 2.1.4 Character Key Shortcuts</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    .bad {
+      background-color: #ffe5e5;
+    }
+
+    .good {
+      background-color: #e5ffe5;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .bad-btn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .good-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .note {
+      background: #f9f9f9;
+      padding: 10px;
+      border-left: 4px solid #007BFF;
+      border-radius: 5px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 2.2 – 2.1.4 Character Key Shortcuts (Level A)</h1>
+
+  <!-- ============================================================= -->
+  <!-- BAD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Single Character Shortcut Always Active</h2>
+
+    <p>In this example, pressing the letter <strong>"D"</strong> anywhere on the page deletes a message — even if you’re typing in a text box!</p>
+
+    <textarea rows="3" cols="40" placeholder="Try typing here..."></textarea>
+    <div id="message">Message: Hello! I’m visible right now.</div>
+
+    <script>
+      // ❌ BAD: Single-character shortcut always active
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'd' || e.key === 'D') {
+          document.getElementById('message').textContent = '❌ Message deleted!';
+        }
+      });
+    </script>
+
+    <ul>
+      <li>❌ Shortcut <kbd>D</kbd> works even when typing inside a text field.</li>
+      <li>❌ No way to disable or customize shortcut.</li>
+      <li>❌ Users with speech input or motor issues may trigger it unintentionally.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="good">
+    <h2>✅ Good Example – Shortcut Can Be Disabled, Remapped, or Focus-Limited</h2>
+
+    <p>This example provides controls to <strong>turn off</strong> or <strong>remap</strong> the shortcut key.
+       It also only activates when a button has focus.</p>
+
+    <div>
+      <label for="toggleShortcut">
+        <input type="checkbox" id="toggleShortcut" checked /> Enable Shortcut
+      </label>
+
+      <label for="shortcutKey">Shortcut key:</label>
+      <select id="shortcutKey">
+        <option value="d">D</option>
+        <option value="x">X</option>
+        <option value="z">Z</option>
+      </select>
+    </div>
+
+    <br />
+
+    <button id="deleteBtn" class="good-btn">Delete Message (Press key)</button>
+    <div id="goodMessage">Message: Hello! I’m safe until shortcut pressed.</div>
+
+    <script>
+      const deleteBtn = document.getElementById('deleteBtn');
+      const toggle = document.getElementById('toggleShortcut');
+      const keySelect = document.getElementById('shortcutKey');
+      const goodMessage = document.getElementById('goodMessage');
+      let activeKey = keySelect.value;
+
+      // Update shortcut key if user changes it
+      keySelect.addEventListener('change', () => {
+        activeKey = keySelect.value;
+      });
+
+      document.addEventListener('keydown', function(e) {
+        // Only active if:
+        // 1. Shortcut is enabled
+        // 2. Button has focus
+        if (toggle.checked && document.activeElement === deleteBtn && e.key === activeKey) {
+          goodMessage.textContent = '✅ Message deleted using shortcut key "' + activeKey.toUpperCase() + '"';
+        }
+      });
+    </script>
+
+    <ul>
+      <li>✅ Shortcut only active when button has focus.</li>
+      <li>✅ Users can change (remap) or disable shortcut.</li>
+      <li>✅ Prevents accidental triggering while typing.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ============================================================= -->
+  <section>
+    <h2>📘 Other Possible Scenarios for 2.1.4 Character Key Shortcuts</h2>
+    <ul>
+      <li><strong>❌ Bad:</strong> "S" to Save, "D" to Delete – active everywhere (e.g., Gmail once had this issue).</li>
+      <li><strong>✅ Good:</strong> Shortcut active only when a menu or toolbar has focus.</li>
+      <li><strong>✅ Good:</strong> Provide toggle in Settings to turn off single-key shortcuts.</li>
+      <li><strong>✅ Good:</strong> Require modifier keys (Ctrl, Alt, Command) instead of single letters.</li>
+      <li><strong>❌ Bad:</strong> Voice-control users say the letter and accidentally trigger an action.</li>
+      <li><strong>⚠️ Partial Pass:</strong> Shortcut active only in non-editable areas (acceptable if not global).</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SUMMARY -->
+  <!-- ============================================================= -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.1.4 Character Key Shortcuts (WCAG 2.2 Level A)</li>
+      <li><strong>Goal:</strong> Prevent accidental activation of features from single-character shortcuts.</li>
+      <li><strong>Good Practice:</strong> Allow disable/remap or make active only on focused element.</li>
+      <li><strong>Bad Practice:</strong> Global shortcuts triggered by single letters without user control.</li>
+    </ul>
+  </section>
+
+</body>
+</html>

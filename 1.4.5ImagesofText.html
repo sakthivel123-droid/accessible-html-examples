@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 1.4.5 Images of Text Example</title>
+<style>
+  body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+
+  /* BAD EXAMPLE STYLES */
+  .bad-section { background-color: #ffeaea; padding: 20px; border: 2px solid red; }
+  .bad-section h2 { color: red; }
+
+  /* GOOD EXAMPLE STYLES */
+  .good-section { background-color: #eaffea; padding: 20px; border: 2px solid green; }
+  .good-section h2 { color: green; }
+
+  /* For good text alternative style */
+  .banner-text {
+    font-size: 32px;
+    color: white;
+    background-color: #0074D9;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.2 - 1.4.5 Images of Text</h1>
+
+<hr>
+
+<!-- ❌ BAD EXAMPLE -->
+<div class="bad-section">
+  <h2>❌ Bad Example: Using an Image of Text</h2>
+  <p>This banner below uses an <strong>image</strong> to display text, instead of real HTML text:</p>
+
+  <!-- Image of text used as heading -->
+  <img src="https://via.placeholder.com/600x100.png?text=Welcome+to+Our+Store"
+       alt="Welcome to Our Store (text shown in image)"
+       width="600" height="100">
+
+  <p>Problems:</p>
+  <ul>
+    <li>Text inside the image cannot be resized properly without losing quality.</li>
+    <li>Screen readers cannot read or interpret font size, style, or color from the image.</li>
+    <li>Users cannot change color contrast or background based on their needs.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ✅ GOOD EXAMPLE -->
+<div class="good-section">
+  <h2>✅ Good Example: Using Real Text with CSS</h2>
+  <p>This banner uses actual text styled with CSS, which maintains accessibility and flexibility:</p>
+
+  <!-- Real text styled like a banner -->
+  <div class="banner-text">Welcome to Our Store</div>
+
+  <p>Advantages:</p>
+  <ul>
+    <li>Text can be resized up to 200% without losing clarity.</li>
+    <li>Screen readers can read it as normal text.</li>
+    <li>Users can change color schemes and high contrast modes easily.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ✅ EXCEPTION CASE -->
+<div class="good-section">
+  <h2>✅ Exception Example: Logo or Branding</h2>
+  <p>Images of text are allowed when the presentation of the text is <strong>essential</strong> (e.g., logos or stylized branding).</p>
+
+  <img src="https://via.placeholder.com/200x80.png?text=Brand+Logo" alt="Brand Logo">
+
+  <p>This is acceptable because logos are considered essential images of text and their appearance is part of the brand identity.</p>
+</div>
+
+<hr>
+
+<!-- ✅ EXCEPTION CASE -->
+<div class="good-section">
+  <h2>✅ Exception Example: Text within Complex Images</h2>
+  <p>Images that include text as part of essential content (like graphs, charts, or screenshots) are permitted.</p>
+
+  <img src="https://via.placeholder.com/400x250.png?text=Sales+Chart+2025" alt="Bar chart showing sales growth for 2025. Label shows 'Sales 2025' inside the chart.">
+
+  <p>Here, the text 'Sales 2025' is part of the chart and essential to understanding the data — this is acceptable.</p>
+</div>
+
+</body>
+</html>

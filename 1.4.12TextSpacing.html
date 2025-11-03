@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 1.4.12 Text Spacing Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+  }
+
+  h1 { text-align: center; }
+
+  .bad-section {
+    background-color: #ffeaea;
+    border: 2px solid red;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .good-section {
+    background-color: #eaffea;
+    border: 2px solid green;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* ❌ BAD EXAMPLE */
+  .bad-text {
+    font-size: 16px;
+    line-height: 1.1; /* too tight */
+    letter-spacing: 0; /* default */
+    word-spacing: 0; /* default */
+    margin-bottom: 5px;
+    max-width: 400px;
+    background: #fff;
+    padding: 10px;
+  }
+
+  /* ✅ GOOD EXAMPLE */
+  .good-text {
+    font-size: 16px;
+    line-height: 1.6; /* good spacing */
+    letter-spacing: 0.12em; /* 0.12 × font size */
+    word-spacing: 0.16em; /* 0.16 × font size */
+    margin-bottom: 20px; /* good paragraph spacing */
+    max-width: 400px;
+    background: #fff;
+    padding: 10px;
+  }
+
+  /* Optional test class to simulate user override */
+  .user-spacing * {
+    line-height: 1.8 !important;
+    letter-spacing: 0.12em !important;
+    word-spacing: 0.16em !important;
+    margin-bottom: 32px !important;
+  }
+
+  .test-area {
+    border: 1px dashed #888;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.2 - 1.4.12 Text Spacing</h1>
+
+<hr>
+
+<!-- ❌ BAD EXAMPLE -->
+<div class="bad-section">
+  <h2>❌ Bad Example: Fixed and Tight Text Spacing</h2>
+  <p class="bad-text">
+    This paragraph uses tight line height and no extra word or letter spacing.
+    If a user increases text spacing using browser extensions or custom CSS,
+    text may overlap, cut off, or overflow from its container.
+  </p>
+
+  <div class="test-area bad-text">
+    Example text that becomes unreadable when spacing increases.
+  </div>
+
+  <ul>
+    <li>Line height too small (1.1×) — hard to track lines.</li>
+    <li>Word and letter spacing not adjustable.</li>
+    <li>Paragraph spacing too tight — causes dense blocks of text.</li>
+    <li>May break or overflow when users apply custom styles for spacing.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ✅ GOOD EXAMPLE -->
+<div class="good-section">
+  <h2>✅ Good Example: Supports User-Adjusted Text Spacing</h2>
+  <p class="good-text">
+    This paragraph uses sufficient line height, word, and letter spacing.
+    When users increase spacing (for example, via a browser extension like
+    “Accessible Font Spacing” or user CSS), the content remains readable and
+    does not overlap or get cut off.
+  </p>
+
+  <div class="test-area good-text">
+    Example text that remains readable even after spacing adjustments.
+  </div>
+
+  <ul>
+    <li>Line height (1.6×) meets and exceeds 1.5× font size requirement.</li>
+    <li>Word spacing and letter spacing are sufficient and adjustable.</li>
+    <li>Paragraph spacing provides good separation between text blocks.</li>
+    <li>Container expands dynamically when users apply more spacing.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ✅ EXCEPTION CASE -->
+<div class="good-section">
+  <h2>✅ Exception Example: Text in Logos or Essential Images</h2>
+  <p>Text inside a logo or image is exempt from this requirement.</p>
+
+  <img src="https://via.placeholder.com/300x80.png?text=Brand+Logo"
+       alt="Brand Logo with stylized text">
+
+  <p><em>Explanation:</em> Logos or image-based text are allowed exceptions because adjusting their spacing would alter their visual meaning or branding.</p>
+</div>
+
+<hr>
+
+<!-- ✅ TEST INTERACTION -->
+<div class="good-section">
+  <h2>🧪 Try Simulating User-Adjusted Text Spacing</h2>
+  <button onclick="document.body.classList.toggle('user-spacing')">
+    Toggle User-Spacing Simulation
+  </button>
+
+  <p>Click the button to simulate user-defined spacing (line, word, letter). The <strong>good example</strong> should remain readable, while the <strong>bad example</strong> will break layout.</p>
+</div>
+
+<script>
+  // Just toggles spacing for test visualization
+  console.log("Use Ctrl + Plus to zoom and test text spacing or click toggle button.");
+</script>
+
+</body>
+</html>

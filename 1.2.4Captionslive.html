@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 2.2 - 1.2.4 Captions (Live)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+      }
+      section {
+        margin-bottom: 40px;
+      }
+      .good {
+        background-color: #e8f5e9;
+        padding: 15px;
+        border-left: 6px solid green;
+      }
+      .bad {
+        background-color: #ffebee;
+        padding: 15px;
+        border-left: 6px solid red;
+      }
+      video {
+        max-width: 100%;
+        border: 1px solid #ccc;
+        display: block;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 1.2.4 Captions (Live)</h1>
+    <p>
+      This example demonstrates <strong>good</strong> and
+      <strong>bad</strong> implementations for live multimedia that includes
+      audio. Captions are required for
+      <strong>live synchronized media</strong> (e.g., live-streamed webinars,
+      news broadcasts, or events).
+    </p>
+
+    <hr />
+
+    <!-- ========================================================= -->
+    <section class="bad">
+      <h2>❌ Bad Example 1: Live video stream without captions</h2>
+      <!-- This represents a live stream without any captions -->
+      <video controls autoplay muted>
+        <source src="live-event.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <p>
+        <strong>Issue:</strong> No captions are available during the live event.
+        Users who are deaf or hard of hearing miss the spoken content entirely.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 1: Live video stream with real-time captions</h2>
+      <!-- Simulated example of live captions using a pseudo caption overlay -->
+      <div style="position: relative; display: inline-block">
+        <video controls autoplay muted>
+          <source src="live-event.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <!-- Live captions overlay (example only, normally done by a captioning service) -->
+        <div
+          style="
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            text-align: center;
+            font-size: 16px;
+          "
+        >
+          [Live Captions: “Welcome everyone to our annual conference…”]
+        </div>
+      </div>
+      <p>
+        <strong>Fix:</strong> Provide real-time captions using a live captioning
+        service or platform feature. Examples include YouTube Live, Zoom, or
+        Microsoft Teams with auto-captioning enabled.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="bad">
+      <h2>❌ Bad Example 2: Only providing captions after the event</h2>
+      <video controls>
+        <source src="live-event-recording.mp4" type="video/mp4" />
+      </video>
+      <p>
+        <strong>Issue:</strong> Captions are added later (post-event), but
+        during the live broadcast, no captions were available. This fails
+        <strong>1.2.4 Captions (Live)</strong>, although it may satisfy
+        <strong>1.2.2 Captions (Prerecorded)</strong> after the event.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>
+        ✅ Good Example 2: Captions available both live and after the event
+      </h2>
+      <video controls>
+        <source src="live-event-recording.mp4" type="video/mp4" />
+        <track
+          kind="captions"
+          src="captions.vtt"
+          srclang="en"
+          label="English"
+        />
+      </video>
+      <p>
+        <strong>Fix:</strong> Provide captions during the live stream using a
+        live captioning service and include a caption track in the recorded
+        version for later viewing.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="good">
+      <h2>✅ Good Example 3: Live event with third-party caption service</h2>
+      <p>
+        For professional live events, use real-time captioners or AI-based
+        caption systems (e.g., CART, YouTube Live, Zoom Live Transcription).
+      </p>
+      <ul>
+        <li>
+          Integrate a live caption feed within your video player or on-screen
+          text region.
+        </li>
+        <li>
+          Provide a link like:
+          <a href="https://example.com/livecaptions"
+            >View live captions in text format</a
+          >
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <h2>🧩 Summary of All Scenarios</h2>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <tr style="background: #f5f5f5">
+        <th>Scenario</th>
+        <th>Requirement</th>
+        <th>Accessible Solution</th>
+      </tr>
+      <tr>
+        <td>Live video or webinar with audio</td>
+        <td>Provide synchronized captions during the live stream.</td>
+        <td>Use live captioning tools or human captioners (CART).</td>
+      </tr>
+      <tr>
+        <td>Automated livestream (e.g., YouTube Live)</td>
+        <td>Enable platform’s built-in “auto captions.”</td>
+        <td>Ensure captions are visible and accurate as possible.</td>
+      </tr>
+      <tr>
+        <td>Post-event recording</td>
+        <td>Captions required separately under 1.2.2 (Prerecorded).</td>
+        <td>Add caption track (.vtt file) after upload.</td>
+      </tr>
+      <tr>
+        <td>Events with no speech (e.g., instrumental music only)</td>
+        <td>No captions required.</td>
+        <td>Optionally, include alt text: “Instrumental background music.”</td>
+      </tr>
+      <tr>
+        <td>Separate live caption text stream</td>
+        <td>Must be synchronized and clearly available.</td>
+        <td>Provide a visible link or embedded text panel.</td>
+      </tr>
+    </table>
+  </body>
+</html>

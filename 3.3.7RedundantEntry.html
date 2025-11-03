@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 3.3.7 – Redundant Entry
+---------------------------------------------------
+Requirement:
+  - Users must not be required to re-enter the same information multiple times
+    within a single process or session.
+  - If the same data is needed again, it should be auto-filled, auto-populated,
+    or selectable from previously entered information.
+
+Why Important:
+  - Reduces frustration and effort for users (especially users with cognitive or motor disabilities).
+  - Improves form usability and prevents repeated typing errors.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.3.7 – Redundant Entry Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+
+      .bad {
+        background-color: #ffe5e5;
+      }
+
+      .good {
+        background-color: #e5ffe5;
+      }
+
+      input,
+      select {
+        padding: 8px;
+        width: 250px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        display: block;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .note {
+        font-size: 0.95em;
+        color: #333;
+        background: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        border-left: 4px solid #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 3.3.7 Redundant Entry</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – User Forced to Re-enter Same Information</h2>
+
+      <form>
+        <h3>Step 1: Personal Details</h3>
+        <label for="bad-name">Full Name:</label>
+        <input
+          type="text"
+          id="bad-name"
+          name="bad-name"
+          placeholder="John Doe"
+        />
+
+        <label for="bad-email">Email:</label>
+        <input
+          type="email"
+          id="bad-email"
+          name="bad-email"
+          placeholder="john@example.com"
+        />
+
+        <button type="button" onclick="alert('Step 1 submitted')">
+          Next Step
+        </button>
+
+        <hr />
+
+        <h3>Step 2: Shipping Information</h3>
+        <p>
+          Even though the system already has your details, you must type them
+          again 😩
+        </p>
+
+        <label for="bad-name-again">Full Name:</label>
+        <input
+          type="text"
+          id="bad-name-again"
+          name="bad-name-again"
+          placeholder="John Doe"
+        />
+
+        <label for="bad-email-again">Email:</label>
+        <input
+          type="email"
+          id="bad-email-again"
+          name="bad-email-again"
+          placeholder="john@example.com"
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <p>
+        <strong>Issue:</strong> User must retype their name and email again,
+        even though the information was already provided. This increases effort
+        and risk of mistakes. Screen reader and keyboard users are especially
+        burdened.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Auto-fill or Data Reuse</h2>
+
+      <form>
+        <h3>Step 1: Personal Details</h3>
+        <label for="good-name">Full Name:</label>
+        <input
+          type="text"
+          id="good-name"
+          name="good-name"
+          placeholder="John Doe"
+        />
+
+        <label for="good-email">Email:</label>
+        <input
+          type="email"
+          id="good-email"
+          name="good-email"
+          placeholder="john@example.com"
+        />
+
+        <button type="button" onclick="storeData()">Next Step</button>
+
+        <hr />
+
+        <h3>Step 2: Shipping Information</h3>
+        <p>Details from Step 1 are auto-filled for convenience ✅</p>
+
+        <label for="good-name-shipping">Full Name:</label>
+        <input
+          type="text"
+          id="good-name-shipping"
+          name="good-name-shipping"
+          placeholder="John Doe"
+        />
+
+        <label for="good-email-shipping">Email:</label>
+        <input
+          type="email"
+          id="good-email-shipping"
+          name="good-email-shipping"
+          placeholder="john@example.com"
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <script>
+        // Simulate saving data from Step 1 and auto-filling Step 2
+        function storeData() {
+          const name = document.getElementById("good-name").value;
+          const email = document.getElementById("good-email").value;
+
+          // Auto-fill Step 2 fields
+          document.getElementById("good-name-shipping").value = name;
+          document.getElementById("good-email-shipping").value = email;
+
+          alert("Step 1 data stored. Step 2 auto-filled!");
+        }
+      </script>
+
+      <p>
+        <strong>Explanation:</strong> User’s name and email from Step 1 are
+        automatically populated in Step 2. They don’t need to retype the same
+        data, fulfilling WCAG 3.3.7.
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- OTHER SCENARIOS -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Other Possible Scenarios for 3.3.7</h2>
+      <ul>
+        <li>
+          <strong>✅ Auto-fill:</strong> Browser’s built-in autofill or saved
+          session data can populate previously entered info.
+        </li>
+        <li>
+          <strong>✅ "Use same as billing" checkbox:</strong> Users can indicate
+          that shipping info = billing info (no re-entry).
+        </li>
+        <li>
+          <strong>✅ Remember Me:</strong> Applications can save user details
+          temporarily or permanently for reuse.
+        </li>
+        <li>
+          <strong>❌ Manual repetition:</strong> Forms requiring repeated entry
+          of the same data fail this criterion.
+        </li>
+        <li>
+          <strong>⚠️ Exception:</strong> Re-entry is allowed if security or
+          legal reasons require revalidation (e.g., retyping password).
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section class="note">
+      <h2>Summary</h2>
+      <ul>
+        <li>
+          <strong>Criterion:</strong> 3.3.7 Redundant Entry (WCAG 2.2 Level A)
+        </li>
+        <li>
+          <strong>Goal:</strong> Avoid requiring users to re-enter information
+          they already provided.
+        </li>
+        <li>
+          <strong>Good Practice:</strong>
+          - Use autofill, remember data, or provide "Same as previous" options.
+          - Preserve data across multi-step forms.
+        </li>
+        <li>
+          <strong>Bad Practice:</strong>
+          - Force users to retype name, address, or email multiple times in the
+          same session.
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

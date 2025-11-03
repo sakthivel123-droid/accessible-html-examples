@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 2.2 - 1.1.1 Non-text Content Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      section {
+        margin-bottom: 40px;
+      }
+      .good {
+        background-color: #e8f5e9;
+        padding: 10px;
+        border-left: 5px solid green;
+      }
+      .bad {
+        background-color: #ffebee;
+        padding: 10px;
+        border-left: 5px solid red;
+      }
+      img {
+        max-width: 200px;
+        display: block;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 1.1.1 Non-text Content</h1>
+    <p>
+      This page demonstrates <strong>good</strong> and
+      <strong>bad</strong> examples of providing text alternatives for non-text
+      content such as images, icons, charts, and controls.
+    </p>
+
+    <!-- ===================================================== -->
+    <section class="bad">
+      <h2>❌ Bad Example 1: Image without alt text</h2>
+      <!-- Missing alt attribute – screen readers will skip this image -->
+      <img src="images/nature.jpg" />
+      <p>
+        <strong>Issue:</strong> No <code>alt</code> attribute provided. Users
+        with screen readers won’t know what this image represents.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 1: Image with proper alt text</h2>
+      <!-- Descriptive alt text that conveys the purpose -->
+      <img
+        src="images/nature.jpg"
+        alt="A scenic mountain view with a lake and trees."
+      />
+      <p>
+        <strong>Fix:</strong> Added a meaningful <code>alt</code> text
+        describing the image’s content and purpose.
+      </p>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="bad">
+      <h2>❌ Bad Example 2: Decorative image with alt text</h2>
+      <!-- Decorative image should have empty alt="" -->
+      <img src="images/line-decor.png" alt="Decorative line image" />
+      <p>
+        <strong>Issue:</strong> Decorative images should have
+        <code>alt=""</code> or be in CSS. This one distracts screen reader users
+        unnecessarily.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 2: Decorative image handled correctly</h2>
+      <!-- Empty alt for decorative image -->
+      <img src="images/line-decor.png" alt="" />
+      <p>
+        <strong>Fix:</strong> Used <code>alt=""</code> so screen readers skip
+        it. Decorative images should not add noise.
+      </p>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="bad">
+      <h2>❌ Bad Example 3: Image used as button without text alternative</h2>
+      <!-- No alt or aria-label means screen reader users can't know the function -->
+      <button><img src="images/search-icon.png" /></button>
+      <p>
+        <strong>Issue:</strong> Screen reader users won’t know this is a
+        “Search” button.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 3: Image button with accessible name</h2>
+      <!-- Using alt or aria-label to describe button function -->
+      <button><img src="images/search-icon.png" alt="Search" /></button>
+      <!-- OR: <button aria-label="Search"><img src="images/search-icon.png" alt=""></button> -->
+      <p>
+        <strong>Fix:</strong> Added alt text or aria-label describing the
+        control’s purpose (“Search”).
+      </p>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="bad">
+      <h2>❌ Bad Example 4: CAPTCHA without accessible alternative</h2>
+      <img src="images/captcha.png" alt="" />
+      <p>
+        <strong>Issue:</strong> CAPTCHA requires visual identification and
+        provides no text/audio alternative.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 4: CAPTCHA with accessible alternative</h2>
+      <img
+        src="images/captcha.png"
+        alt="Type the characters shown in the image."
+      />
+      <p>
+        Can’t see the image?
+        <a href="audio-captcha.mp3">Try the audio CAPTCHA</a>.
+      </p>
+      <p>
+        <strong>Fix:</strong> Provided a text instruction and an audio
+        alternative for users who cannot see the image.
+      </p>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="bad">
+      <h2>❌ Bad Example 5: Complex chart with no text description</h2>
+      <img src="images/sales-chart.png" alt="Sales chart" />
+      <p>
+        <strong>Issue:</strong> The alt text is too generic and doesn’t convey
+        the chart’s data or purpose.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 5: Complex chart with detailed text alternative</h2>
+      <img
+        src="images/sales-chart.png"
+        alt="Bar chart showing monthly sales for 2025. Detailed data provided below."
+      />
+      <p><strong>Monthly Sales Data (2025):</strong></p>
+      <ul>
+        <li>January: $12,000</li>
+        <li>February: $15,000</li>
+        <li>March: $9,500</li>
+      </ul>
+      <p>
+        <strong>Fix:</strong> Provided a short alt text plus a full text
+        equivalent describing the same data for users who can’t see the chart.
+      </p>
+    </section>
+  </body>
+</html>

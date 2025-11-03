@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 - 2.4.1 Bypass Blocks (Level A)
+-----------------------------------------
+Requirement:
+Provide a mechanism to bypass blocks of repeated content such as navigation menus or headers.
+
+Purpose:
+Users relying on keyboard or screen readers should be able to skip repeated navigation
+and jump directly to the main content.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.2 – 2.4.1 Bypass Blocks</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    header, nav, main, footer {
+      padding: 20px;
+    }
+
+    header, nav {
+      background-color: #f4f4f4;
+    }
+
+    main {
+      background-color: #fff;
+      min-height: 400px;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 20px;
+    }
+
+    .good { background-color: #e8ffe8; }
+    .bad { background-color: #ffe8e8; }
+
+    /* Skip link styling */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      border-radius: 4px;
+      text-decoration: none;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    nav a {
+      margin-right: 15px;
+    }
+
+    .note {
+      background: #f9f9f9;
+      border-left: 4px solid #007bff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="text-align:center;">WCAG 2.2 – 2.4.1 Bypass Blocks</h1>
+
+  <!-- ============================================================= -->
+  <!-- BAD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="bad">
+    <h2>🚫 Bad Example – No Bypass Mechanism</h2>
+    <p>
+      In this example, keyboard users must tab through all navigation links every time
+      before reaching the main content.
+    </p>
+
+    <header>
+      <h3>Website Header (Repeated)</h3>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Portfolio</a>
+        <a href="#">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <h4>Main Content</h4>
+      <p>This is the main content of the page. Keyboard users had to tab through all menu items to reach here.</p>
+    </main>
+
+    <ul>
+      <li>❌ No “Skip to main content” link provided.</li>
+      <li>❌ Repeated navigation traps keyboard users.</li>
+      <li>❌ Screen reader users hear full navigation on every page load.</li>
+      <li>❌ Fails WCAG 2.4.1.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="good">
+    <h2>✅ Good Example – Skip Link Provided</h2>
+    <p>
+      This example includes a “Skip to main content” link that appears when focused.
+      Users can press <strong>Tab</strong> once and then <strong>Enter</strong> to jump directly to main content.
+    </p>
+
+    <!-- Skip link placed first -->
+    <a href="#maincontent" class="skip-link">Skip to main content</a>
+
+    <header>
+      <h3>Website Header (Repeated)</h3>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Portfolio</a>
+        <a href="#">Contact</a>
+      </nav>
+    </header>
+
+    <main id="maincontent" tabindex="-1">
+      <h4>Main Content Area</h4>
+      <p>This is the main content of the page. Thanks to the skip link, users can directly jump here using the keyboard.</p>
+    </main>
+
+    <ul>
+      <li>✅ “Skip to main content” link added and visible on focus.</li>
+      <li>✅ Proper anchor target <code>#maincontent</code>.</li>
+      <li>✅ Reduces repetitive navigation for keyboard and screen reader users.</li>
+      <li>✅ Passes WCAG 2.4.1.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ============================================================= -->
+  <section>
+    <h2>📘 Other Possible Scenarios for 2.4.1</h2>
+    <ul>
+      <li><strong>✅ Good:</strong> “Skip to content” or “Skip to navigation” links visible on focus.</li>
+      <li><strong>✅ Good:</strong> ARIA landmarks used (e.g., <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code>).</li>
+      <li><strong>✅ Good:</strong> Multiple skip links for complex layouts (e.g., “Skip to search”, “Skip to footer”).</li>
+      <li><strong>❌ Bad:</strong> Skip link exists but not focusable (e.g., hidden using <code>display:none;</code>).</li>
+      <li><strong>❌ Bad:</strong> Link scrolls visually but doesn’t focus the target element (missing <code>tabindex="-1"</code>).</li>
+      <li><strong>❌ Bad:</strong> No unique ID on target (skip link doesn’t work).</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SUMMARY -->
+  <!-- ============================================================= -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.4.1 – Bypass Blocks (Level A)</li>
+      <li><strong>Goal:</strong> Allow users to skip repetitive content quickly.</li>
+      <li><strong>Good Practice:</strong> Add visible skip link and proper landmark elements.</li>
+      <li><strong>Bad Practice:</strong> Forcing users to navigate through long, repeated menus each time.</li>
+      <li><strong>Also Helps:</strong> Screen reader and keyboard-only users.</li>
+    </ul>
+  </section>
+
+</body>
+</html>

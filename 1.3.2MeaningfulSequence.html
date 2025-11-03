@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 2.2 - 1.3.2 Meaningful Sequence</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+      }
+      section {
+        margin-bottom: 40px;
+      }
+      .bad {
+        background-color: #ffebee;
+        padding: 15px;
+        border-left: 6px solid red;
+      }
+      .good {
+        background-color: #e8f5e9;
+        padding: 15px;
+        border-left: 6px solid green;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .box {
+        padding: 10px;
+        background: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 1.3.2 Meaningful Sequence</h1>
+    <p>
+      This example demonstrates <strong>good</strong> and
+      <strong>bad</strong> practices for maintaining a
+      <strong>meaningful reading order</strong> in HTML code and visual layout.
+    </p>
+
+    <hr />
+
+    <!-- ====================================================== -->
+    <section class="bad">
+      <h2>
+        ❌ Bad Example 1: Visually logical order, but incorrect HTML order
+      </h2>
+      <p>
+        Visually, this looks fine, but in code, the reading order is confusing.
+      </p>
+
+      <!-- visually arranged using CSS, but wrong HTML order -->
+      <div class="grid">
+        <div class="box" style="order: 3">Step 3: Submit the form</div>
+        <div class="box" style="order: 1">Step 1: Enter your name</div>
+        <div class="box" style="order: 2">Step 2: Select your country</div>
+      </div>
+
+      <p>
+        <strong>Issue:</strong> The visual order is Step 1 → Step 2 → Step 3,
+        but the code (and thus screen reader order) is Step 3 → Step 1 → Step 2.
+        This confuses users relying on assistive technology.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 1: Logical and programmatic order are the same</h2>
+      <p>The HTML structure and visual order match correctly.</p>
+
+      <div class="grid">
+        <div class="box">Step 1: Enter your name</div>
+        <div class="box">Step 2: Select your country</div>
+        <div class="box">Step 3: Submit the form</div>
+      </div>
+
+      <p>
+        <strong>Fix:</strong> Ensure your HTML reading order matches the logical
+        sequence of information or interaction.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="bad">
+      <h2>❌ Bad Example 2: Using CSS positioning that breaks logical flow</h2>
+      <p>Visually the heading appears first, but in the DOM it comes last.</p>
+
+      <div style="position: relative">
+        <p style="position: absolute; top: 50px">
+          This paragraph appears after the heading visually.
+        </p>
+        <h3 style="position: absolute; top: 0">Page Title</h3>
+      </div>
+
+      <p>
+        <strong>Issue:</strong> A screen reader reads
+        <em>“This paragraph appears after the heading visually”</em> before
+        “Page Title” because of DOM order. The visual position doesn’t change
+        programmatic reading order.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 2: Logical source order maintained</h2>
+      <div>
+        <h3>Page Title</h3>
+        <p>
+          This paragraph appears below the heading, both visually and
+          programmatically.
+        </p>
+      </div>
+      <p>
+        <strong>Fix:</strong> Keep the heading first in code, even if styled
+        later with CSS.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="bad">
+      <h2>
+        ❌ Bad Example 3: Table created visually with divs but no logical order
+      </h2>
+      <div style="display: flex">
+        <div>
+          <div><strong>Jan</strong></div>
+          <div>Feb</div>
+          <div>Mar</div>
+        </div>
+        <div>
+          <div>100</div>
+          <div>200</div>
+          <div>300</div>
+        </div>
+      </div>
+      <p>
+        <strong>Issue:</strong> Screen readers read “Jan 100 Feb 200 Mar 300” as
+        a long text, not recognizing the relationship between months and
+        numbers. The reading order loses meaning.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 3: Proper table semantics with logical order</h2>
+      <table border="1" cellpadding="6">
+        <caption>
+          Monthly Sales
+        </caption>
+        <tr>
+          <th>Month</th>
+          <th>Sales</th>
+        </tr>
+        <tr>
+          <td>Jan</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>Feb</td>
+          <td>200</td>
+        </tr>
+        <tr>
+          <td>Mar</td>
+          <td>300</td>
+        </tr>
+      </table>
+      <p>
+        <strong>Fix:</strong> Use semantic HTML elements like
+        <code>&lt;table&gt;</code> so screen readers maintain the correct
+        sequence and relationships.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="good">
+      <h2>✅ Good Example 4: Responsive design keeping sequence</h2>
+      <p>
+        Even in responsive layouts, ensure reading order remains meaningful.
+      </p>
+      <div style="display: flex; flex-wrap: wrap">
+        <div style="flex: 1 1 300px; padding: 10px">
+          Left content (e.g., article summary)
+        </div>
+        <div style="flex: 1 1 300px; padding: 10px">
+          Right content (e.g., related links)
+        </div>
+      </div>
+      <p>
+        <strong>Fix:</strong> Responsive CSS can rearrange content visually, but
+        ensure the HTML order remains logical for reading.
+      </p>
+    </section>
+
+    <hr />
+
+    <h2>🧩 Summary of All Scenarios</h2>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <tr style="background: #f5f5f5">
+        <th>Scenario</th>
+        <th>Requirement</th>
+        <th>Accessible Solution</th>
+      </tr>
+      <tr>
+        <td>Visually rearranged elements using CSS (grid/flex/absolute)</td>
+        <td>Screen reader order must still follow logical reading order.</td>
+        <td>
+          Keep semantic, programmatic sequence aligned with visual intent.
+        </td>
+      </tr>
+      <tr>
+        <td>Tables or lists created with divs</td>
+        <td>Screen readers can’t understand structure.</td>
+        <td>Use semantic HTML elements (table, list, section, etc.).</td>
+      </tr>
+      <tr>
+        <td>Responsive design layouts</td>
+        <td>Reading order must remain meaningful across breakpoints.</td>
+        <td>Test with screen readers on desktop and mobile views.</td>
+      </tr>
+      <tr>
+        <td>Headings or labels positioned visually out of order</td>
+        <td>Maintain logical DOM sequence.</td>
+        <td>Don’t rely on CSS positioning to fix visual flow.</td>
+      </tr>
+    </table>
+  </body>
+</html>

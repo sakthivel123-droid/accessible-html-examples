@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WCAG 1.4.3 Contrast (Minimum) - Good and Bad Examples</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+      }
+      .good,
+      .bad {
+        border: 3px solid;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+      }
+      .good {
+        border-color: green;
+        background-color: #e8f5e9;
+      }
+      .bad {
+        border-color: red;
+        background-color: #ffebee;
+      }
+
+      /* Text samples */
+      .text-sample {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      /* BAD: Poor contrast examples */
+      .bad-contrast {
+        background-color: #ffff00; /* bright yellow */
+        color: #fff700; /* slightly different yellow */
+      }
+
+      .bad-light-gray {
+        background-color: #f0f0f0;
+        color: #cccccc;
+      }
+
+      /* GOOD: Proper contrast examples */
+      .good-contrast {
+        background-color: #ffffff;
+        color: #000000; /* black text on white */
+      }
+
+      .good-dark-bg {
+        background-color: #003366; /* dark blue */
+        color: #ffffff; /* white text - good contrast */
+      }
+
+      /* Large text example */
+      .large-text {
+        font-size: 20pt;
+        font-weight: bold;
+      }
+
+      /* Buttons for contrast testing */
+      .btn {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        font-size: 16px;
+      }
+
+      .bad-btn {
+        background-color: #00ccff;
+        color: #00ffff; /* low contrast */
+      }
+
+      .good-btn {
+        background-color: #005a9e;
+        color: #ffffff; /* high contrast */
+      }
+
+      /* Graphical elements */
+      .chart {
+        width: 200px;
+        height: 50px;
+        margin: 10px;
+      }
+
+      .bad-bar {
+        background-color: #90ee90; /* light green bar on white - poor contrast */
+      }
+
+      .good-bar {
+        background-color: #006400; /* dark green - good contrast */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 1.4.3 Contrast (Minimum)</h1>
+    <p>
+      <strong>Guideline:</strong> Text and interactive elements must have enough
+      color contrast against their background to ensure readability.
+    </p>
+
+    <!-- ❌ BAD EXAMPLES -->
+    <div class="bad">
+      <h2>Bad Examples (Fail Contrast Ratio)</h2>
+
+      <div class="text-sample bad-contrast">
+        Poor contrast: Yellow text on yellow background (fails contrast ratio)
+      </div>
+
+      <div class="text-sample bad-light-gray">
+        Light gray text on light gray background – difficult for low vision
+        users
+      </div>
+
+      <button class="btn bad-btn">Submit</button>
+
+      <div class="chart bad-bar"></div>
+      <p>
+        Graphical element with low contrast between bar and background – fails
+        WCAG 1.4.3.
+      </p>
+    </div>
+
+    <!-- ✅ GOOD EXAMPLES -->
+    <div class="good">
+      <h2>Good Examples (Pass Contrast Ratio)</h2>
+
+      <div class="text-sample good-contrast">
+        Normal text: Black on white – Contrast ratio 21:1 (Excellent)
+      </div>
+
+      <div class="text-sample good-dark-bg">
+        White text on dark blue – Contrast ratio ~12:1 (Pass)
+      </div>
+
+      <div
+        class="text-sample large-text"
+        style="color: #666; background-color: white"
+      >
+        Large text (20pt) with 3:1 contrast still acceptable (Pass for large
+        text)
+      </div>
+
+      <button class="btn good-btn">Submit</button>
+
+      <div class="chart good-bar"></div>
+      <p>Dark green bar on white background – good visual contrast (Pass).</p>
+    </div>
+
+    <hr />
+
+    <h2>Explanation of Scenarios</h2>
+    <ul>
+      <li>
+        <strong>Scenario 1 – Low color contrast text:</strong> Fails if text
+        contrast ratio &lt; 4.5:1 (for normal text).
+      </li>
+      <li>
+        <strong>Scenario 2 – Large or bold text:</strong> Passes with ratio ≥
+        3:1 (since it’s easier to read).
+      </li>
+      <li>
+        <strong>Scenario 3 – Buttons and UI elements:</strong> Must have visible
+        text or icons with ≥ 3:1 contrast ratio.
+      </li>
+      <li>
+        <strong>Scenario 4 – Graphical elements:</strong> Important visual parts
+        (like charts, borders, or indicators) must also meet 3:1 contrast.
+      </li>
+      <li>
+        <strong>Scenario 5 – Background images:</strong> Avoid placing text
+        directly on images unless a solid color overlay ensures contrast.
+      </li>
+    </ul>
+
+    <p><strong>Tools for Testing Contrast:</strong></p>
+    <ul>
+      <li>
+        <a href="https://webaim.org/resources/contrastchecker/" target="_blank"
+          >WebAIM Contrast Checker</a
+        >
+      </li>
+      <li>
+        <a href="https://contrast-ratio.com/" target="_blank"
+          >Contrast Ratio Tool</a
+        >
+      </li>
+    </ul>
+
+    <p>
+      <strong>Note:</strong> Decorative text or disabled elements are exempt,
+      but essential content must always meet contrast standards.
+    </p>
+  </body>
+</html>

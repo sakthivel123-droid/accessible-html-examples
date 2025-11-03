@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 3.3.2 – Labels or Instructions
+-----------------------------------------------------------
+Requirement:
+  - Input fields, forms, and interactive controls must have clear labels or instructions.
+  - Users should know what input is expected before they interact with it.
+
+Why Important:
+  - Screen reader and cognitive users rely on labels and clear instructions.
+  - Missing or unclear labels cause confusion, errors, and make forms unusable.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.3.2 – Labels or Instructions Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+
+      .bad {
+        background-color: #ffe5e5;
+      }
+
+      .good {
+        background-color: #e5ffe5;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 8px;
+        width: 300px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: block;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      button {
+        padding: 10px 18px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .note {
+        background: #f9f9f9;
+        padding: 10px;
+        border-left: 4px solid #007bff;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 3.3.2 Labels or Instructions</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Missing or Unclear Labels</h2>
+
+      <form>
+        <!-- No label for this field -->
+        <input type="text" placeholder="Enter here" />
+
+        <!-- Ambiguous label -->
+        <label>Email:</label>
+        <input type="text" />
+
+        <!-- Required field not indicated -->
+        <label>Password</label>
+        <input type="password" />
+
+        <!-- Dropdown without instruction -->
+        <select>
+          <option>Select</option>
+          <option>1</option>
+          <option>2</option>
+        </select>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <p><strong>Issues:</strong></p>
+      <ul>
+        <li>
+          ❌ First input has no label — screen readers announce it as “edit,
+          blank”.
+        </li>
+        <li>
+          ❌ Email field lacks proper association with <code>for</code> and
+          <code>id</code>.
+        </li>
+        <li>
+          ❌ Password field doesn’t indicate it’s required or needs specific
+          criteria.
+        </li>
+        <li>❌ Dropdown doesn’t explain what to select — unclear purpose.</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Clear Labels and Instructions</h2>
+
+      <form aria-describedby="formInstructions">
+        <p id="formInstructions">
+          Please complete all required fields (<span aria-hidden="true">*</span
+          >).
+        </p>
+
+        <label for="name">Full Name <span aria-hidden="true">*</span></label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          aria-required="true"
+          placeholder="e.g., John Doe"
+        />
+
+        <label for="email"
+          >Email Address <span aria-hidden="true">*</span></label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          aria-required="true"
+          placeholder="e.g., john@example.com"
+        />
+
+        <label for="password">Password <span aria-hidden="true">*</span></label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          aria-describedby="passwordHint"
+          required
+          aria-required="true"
+        />
+        <small id="passwordHint"
+          >Password must be at least 8 characters with one number.</small
+        >
+<br>
+<br>
+        <label for="country">Select Your Country</label> 
+        <select id="country" name="country">
+          <option value="">--Select a country--</option>
+          <option>India</option>
+          <option>USA</option>
+          <option>UK</option>
+        </select>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <p><strong>Explanation:</strong></p>
+      <ul>
+        <li>
+          ✅ Each input has a visible and programmatically associated label
+          using <code>for</code> and <code>id</code>.
+        </li>
+        <li>✅ Instructions appear at the start (required field note).</li>
+        <li>
+          ✅ Additional guidance (e.g., password criteria) is given using
+          <code>aria-describedby</code>.
+        </li>
+        <li>✅ Dropdown clearly describes its purpose.</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- OTHER POSSIBLE SCENARIOS -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Other Possible Scenarios</h2>
+      <ul>
+        <li>
+          <strong>✅ Visual and Programmatic Labels:</strong> Use
+          <code>&lt;label for&gt;</code> + <code>id</code> for screen reader
+          compatibility.
+        </li>
+        <li>
+          <strong>✅ Group Labels:</strong> Use
+          <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> for
+          radio or checkbox groups.
+        </li>
+        <li>
+          <strong>✅ Instructions:</strong> Provide hints or examples near
+          fields (e.g., date format, password strength).
+        </li>
+        <li>
+          <strong>✅ ARIA Support:</strong> Use
+          <code>aria-describedby</code> for additional info without cluttering
+          visual UI.
+        </li>
+        <li>
+          <strong>❌ Avoid Placeholder-only Labels:</strong> Placeholders
+          disappear when typing and are not treated as true labels.
+        </li>
+        <li>
+          <strong>⚠️ Required Fields:</strong> Indicate visually and via
+          <code>aria-required="true"</code>.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section class="note">
+      <h2>Summary</h2>
+      <ul>
+        <li>
+          <strong>Criterion:</strong> 3.3.2 Labels or Instructions (WCAG 2.2
+          Level A)
+        </li>
+        <li>
+          <strong>Goal:</strong> Make input purpose and requirements clear
+          before interaction.
+        </li>
+        <li>
+          <strong>Bad Practice:</strong> Missing or unclear labels, using only
+          placeholders.
+        </li>
+        <li>
+          <strong>Good Practice:</strong> - Use proper <code>label</code> tags -
+          Give examples and instructions - Use <code>aria-describedby</code> for
+          extra context - Mark required fields consistently
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

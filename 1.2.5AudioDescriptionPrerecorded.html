@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 2.2 - 1.2.5 Audio Description (Prerecorded)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+      }
+      section {
+        margin-bottom: 40px;
+      }
+      .bad {
+        background-color: #ffebee;
+        padding: 15px;
+        border-left: 6px solid red;
+      }
+      .good {
+        background-color: #e8f5e9;
+        padding: 15px;
+        border-left: 6px solid green;
+      }
+      video {
+        max-width: 100%;
+        border: 1px solid #ccc;
+        display: block;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 1.2.5 Audio Description (Prerecorded)</h1>
+    <p>
+      This page demonstrates <strong>good</strong> and
+      <strong>bad</strong> examples of providing
+      <strong>audio description</strong> for pre-recorded video content.
+    </p>
+
+    <hr />
+
+    <!-- ========================================================== -->
+    <section class="bad">
+      <h2>
+        ❌ Bad Example 1: Video with important visuals but no audio description
+      </h2>
+      <video controls>
+        <source src="movie-without-description.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <p>
+        <strong>Issue:</strong> This video contains important visual actions
+        (e.g., someone picking up a key and unlocking a door) but the narration
+        doesn’t describe them. A blind user cannot understand what’s happening
+        visually.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 1: Video with separate audio description track</h2>
+      <video controls>
+        <source src="movie-with-description.mp4" type="video/mp4" />
+        <track
+          kind="descriptions"
+          src="audiodescription.vtt"
+          srclang="en"
+          label="English audio description"
+        />
+      </video>
+      <p>
+        <strong>Fix:</strong> Provided an additional
+        <code>&lt;track kind="descriptions"&gt;</code> for audio description,
+        describing key visual information for users who cannot see the screen.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="bad">
+      <h2>❌ Bad Example 2: Relying only on captions</h2>
+      <video controls>
+        <source src="movie.mp4" type="video/mp4" />
+        <track
+          kind="captions"
+          src="captions.vtt"
+          srclang="en"
+          label="English"
+        />
+      </video>
+      <p>
+        <strong>Issue:</strong> Captions only display spoken words — they do not
+        describe visual information such as actions or scene changes. Users who
+        are blind cannot follow visual content through captions alone.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>✅ Good Example 2: Audio narration integrated in the main audio</h2>
+      <video controls>
+        <source src="movie-integrated-description.mp4" type="video/mp4" />
+      </video>
+      <p>
+        <strong>Fix:</strong> The main audio track includes both dialogue and
+        narration of visual details (e.g., “John picks up the golden key and
+        unlocks the door.”). This meets the criterion because the visual details
+        are conveyed through sound.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="bad">
+      <h2>❌ Bad Example 3: Important on-screen text not described</h2>
+      <video controls>
+        <source src="intro.mp4" type="video/mp4" />
+      </video>
+      <p>
+        <strong>Issue:</strong> The video shows important text on the screen
+        (“System error detected”) but doesn’t read it aloud or include it in the
+        audio description. Blind users will miss this information.
+      </p>
+    </section>
+
+    <section class="good">
+      <h2>
+        ✅ Good Example 3: Important on-screen text described in narration
+      </h2>
+      <video controls>
+        <source src="intro-with-description.mp4" type="video/mp4" />
+      </video>
+      <p>
+        <strong>Fix:</strong> Narrator includes visual text information (e.g.,
+        “The words ‘System error detected’ appear on screen”). Ensures all
+        meaningful visual information is accessible.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="good">
+      <h2>
+        ✅ Good Example 4: Providing a separate text transcript with
+        descriptions
+      </h2>
+      <p>
+        When full audio description cannot be provided, include a
+        <strong>descriptive text transcript</strong>:
+      </p>
+      <pre>
+  [Scene 1: John enters a dimly lit room. He looks around nervously.]
+  John: “Is anyone here?”
+  [A shadow moves behind him.]
+  Narrator: “A dark figure steps into the light.”
+  </pre
+      >
+      <p>
+        <strong>Fix:</strong> A text transcript that describes both dialogue and
+        visuals gives equivalent access if no described audio is available.
+      </p>
+    </section>
+
+    <hr />
+
+    <h2>🧩 Summary of All Scenarios</h2>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <tr style="background: #f5f5f5">
+        <th>Scenario</th>
+        <th>Requirement</th>
+        <th>Accessible Solution</th>
+      </tr>
+      <tr>
+        <td>Pre-recorded video with meaningful visuals</td>
+        <td>Provide audio description</td>
+        <td>
+          Use <code>&lt;track kind="descriptions"&gt;</code> or include
+          narration in main audio.
+        </td>
+      </tr>
+      <tr>
+        <td>Pre-recorded video with no important visuals</td>
+        <td>Audio description not required</td>
+        <td>Example: talking head video with no critical visuals.</td>
+      </tr>
+      <tr>
+        <td>On-screen text or visual cues only</td>
+        <td>Must be spoken or described</td>
+        <td>Add narration: “Text on screen reads: ‘Welcome to the event.’”</td>
+      </tr>
+      <tr>
+        <td>When description can’t fit in pauses</td>
+        <td>Provide extended audio description or descriptive transcript</td>
+        <td>Separate version or transcript that explains visuals in detail.</td>
+      </tr>
+      <tr>
+        <td>Video without audio (silent animation)</td>
+        <td>Not applicable</td>
+        <td>Handled under 1.2.1 (Audio-only/Video-only Prerecorded)</td>
+      </tr>
+    </table>
+  </body>
+</html>

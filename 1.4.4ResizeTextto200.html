@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WCAG 1.4.4 Resize Text (to 200%) - Simple Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+
+    .example {
+      border: 2px solid #000;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    .bad {
+      background-color: #ffe6e6;
+      border-color: red;
+    }
+
+    .good {
+      background-color: #e6ffe6;
+      border-color: green;
+    }
+
+    /* ❌ BAD EXAMPLE: Fixed pixel font and fixed layout */
+    .bad-text {
+      font-size: 14px; /* Fixed pixel size - does NOT scale well */
+      width: 300px;
+      height: 120px;
+      overflow: hidden;
+      background-color: #f9f9f9;
+      padding: 10px;
+    }
+
+    /* ✅ GOOD EXAMPLE: Relative units and flexible layout */
+    .good-text {
+      font-size: 1em; /* Relative size - scales when user zooms */
+      max-width: 90%;
+      background-color: #f9fff9;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .bad-box-container {
+      width: 400px;
+      background-color: #ddd;
+      overflow: hidden;
+      height: 120px;
+    }
+
+    .good-box-container {
+      max-width: 90%;
+      background-color: #ddd;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .box {
+      background-color: #bbb;
+      padding: 10px;
+      text-align: center;
+      color: #000;
+    }
+
+    .bad-button {
+      font-size: 12px;
+      width: 100px;
+      height: 40px;
+    }
+
+    .good-button {
+      font-size: 1em;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 2.2 – 1.4.4 Resize Text (200%)</h1>
+  <p><strong>Instruction:</strong> Try pressing <kbd>Ctrl</kbd> + <kbd>+</kbd> (or <kbd>Cmd</kbd> + <kbd>+</kbd> on Mac) several times to zoom in.  
+     See which version stays readable and which one breaks.</p>
+
+  <!-- ❌ BAD EXAMPLES -->
+  <div class="example bad">
+    <h2>❌ Bad Example (Fails WCAG 1.4.4)</h2>
+
+    <div class="bad-text">
+      <strong>Fixed text box:</strong><br>
+      This area uses a fixed width and pixel font. When you zoom in 200%, part of this text will be hidden or cut off because of fixed height and width.
+    </div>
+
+    <br>
+
+    <div class="bad-box-container">
+      <div class="box">Box 1</div>
+      <div class="box">Box 2</div>
+      <div class="box">Box 3</div>
+      <div class="box">Box 4</div>
+    </div>
+    <p>These boxes are inside a fixed container. When zoomed in, content will overflow and overlap.</p>
+
+    <button class="bad-button">Submit</button>
+    <p>Button text may be cropped when text size increases because the button size is fixed.</p>
+  </div>
+
+  <!-- ✅ GOOD EXAMPLES -->
+  <div class="example good">
+    <h2>✅ Good Example (Passes WCAG 1.4.4)</h2>
+
+    <div class="good-text">
+      <strong>Flexible text area:</strong><br>
+      This text scales smoothly when you zoom in.  
+      The layout expands, wraps, and adjusts automatically.  
+      No text is hidden or cut off.
+    </div>
+
+    <br>
+
+    <div class="good-box-container">
+      <div class="box">Box 1</div>
+      <div class="box">Box 2</div>
+      <div class="box">Box 3</div>
+      <div class="box">Box 4</div>
+    </div>
+    <p>These boxes use a flexible <code>flex-wrap</code> layout, so they move and adjust when zoomed in, avoiding overlap.</p>
+
+    <button class="good-button">Submit</button>
+    <p>The button uses relative font size and padding, so it grows correctly when zoomed.</p>
+  </div>
+
+  <hr>
+
+  <h2>📘 Explanation of Scenarios</h2>
+  <ul>
+    <li><strong>Scenario 1 – Fixed width/height boxes:</strong> ❌ Fails because text gets hidden or cut off when enlarged.</li>
+    <li><strong>Scenario 2 – Fixed pixel font sizes:</strong> ❌ Fails because text doesn’t scale with user zoom settings.</li>
+    <li><strong>Scenario 3 – Relative (em/rem/%) units:</strong> ✅ Passes because it scales correctly with zoom.</li>
+    <li><strong>Scenario 4 – Responsive layouts:</strong> ✅ Passes because elements reflow and wrap properly.</li>
+    <li><strong>Scenario 5 – Controls (buttons, forms):</strong> ✅ Pass if they resize along with text and stay functional.</li>
+  </ul>
+
+  <h2>💡 Developer Best Practices</h2>
+  <ul>
+    <li>Use <code>em</code> or <code>rem</code> for font size.</li>
+    <li>Use <code>%</code> or <code>max-width</code> for container widths.</li>
+    <li>Avoid <code>px</code> for text or layout sizes.</li>
+    <li>Use <strong>flexbox</strong> or <strong>grid</strong> for layouts that adjust automatically.</li>
+    <li>Always test zoom up to 200% in browsers (Ctrl + +).</li>
+  </ul>
+
+</body>
+</html>

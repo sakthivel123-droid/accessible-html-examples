@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WCAG 2.5.2 – Pointer Cancellation Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+  }
+
+  h1 {
+    background: #1565c0;
+    color: white;
+    padding: 10px;
+  }
+
+  section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+  }
+
+  button {
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .bad button {
+    background-color: #f8d7da;
+    border: 2px solid #dc3545;
+  }
+
+  .good button {
+    background-color: #d4edda;
+    border: 2px solid #28a745;
+  }
+
+  .output {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .confirm-box {
+    background-color: #e3f2fd;
+    border: 2px solid #1976d2;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.5.2 – Pointer Cancellation</h1>
+
+<!-- ❌ BAD EXAMPLE -->
+<section class="bad">
+  <h2>❌ Bad Example – Action triggers immediately on mousedown</h2>
+  <p>Here, clicking the delete button immediately deletes the file on <code>mousedown</code> without giving a chance to cancel.</p>
+  <button id="badDelete">Delete File</button>
+  <div class="output" id="badOutput">File Status: Safe ✅</div>
+</section>
+
+<!-- ✅ GOOD EXAMPLE -->
+<section class="good">
+  <h2>✅ Good Example – Action triggers on mouseup with confirmation</h2>
+  <p>This version waits until the pointer is released (<code>mouseup</code>) and asks for confirmation before deleting.</p>
+  <button id="goodDelete">Delete File</button>
+
+  <div id="confirmBox" class="confirm-box hidden">
+    <p>Are you sure you want to delete this file?</p>
+    <button id="confirmYes">Yes, Delete</button>
+    <button id="confirmNo">Cancel</button>
+  </div>
+
+  <div class="output" id="goodOutput">File Status: Safe ✅</div>
+</section>
+
+<script>
+/* ---------- BAD EXAMPLE ---------- */
+const badDelete = document.getElementById('badDelete');
+const badOutput = document.getElementById('badOutput');
+
+// Action occurs immediately on mousedown (FAILS 2.5.2)
+badDelete.addEventListener('mousedown', () => {
+  badOutput.textContent = "File Status: ❌ Deleted (No cancel option)";
+  badOutput.style.color = "red";
+});
+
+/* ---------- GOOD EXAMPLE ---------- */
+const goodDelete = document.getElementById('goodDelete');
+const goodOutput = document.getElementById('goodOutput');
+const confirmBox = document.getElementById('confirmBox');
+const confirmYes = document.getElementById('confirmYes');
+const confirmNo = document.getElementById('confirmNo');
+
+// Action happens on mouseup (not immediately)
+goodDelete.addEventListener('mouseup', () => {
+  confirmBox.classList.remove('hidden');
+});
+
+// If confirmed
+confirmYes.addEventListener('click', () => {
+  goodOutput.textContent = "File Status: ❌ Deleted";
+  goodOutput.style.color = "red";
+  confirmBox.classList.add('hidden');
+});
+
+// If cancelled
+confirmNo.addEventListener('click', () => {
+  goodOutput.textContent = "File Status: Safe ✅ (Cancelled)";
+  goodOutput.style.color = "green";
+  confirmBox.classList.add('hidden');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WCAG 2.5.1 – Pointer Gestures Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+  }
+
+  h1 {
+    background: #1a73e8;
+    color: white;
+    padding: 10px;
+  }
+
+  section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+  }
+
+  .gesture-box, .good-box {
+    width: 200px;
+    height: 200px;
+    background-color: #f2f2f2;
+    border: 2px solid #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    margin-bottom: 10px;
+  }
+
+  .good-box {
+    background-color: #e8f5e9;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .output {
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.5.1 – Pointer Gestures</h1>
+
+<!-- ❌ BAD EXAMPLE -->
+<section>
+  <h2>❌ Bad Example – Requires Complex Gesture (Swipe Only)</h2>
+  <p>In this example, the user must swipe left or right to change color. There is no alternative button or single tap.</p>
+  
+  <div class="gesture-box" id="badBox">Swipe Here</div>
+  <div class="output" id="badOutput">Color: Gray</div>
+
+  <p><em>⚠️ Keyboard and mouse users, or users with limited mobility, cannot perform this gesture.</em></p>
+</section>
+
+<!-- ✅ GOOD EXAMPLE -->
+<section>
+  <h2>✅ Good Example – Simple Click Alternative Provided</h2>
+  <p>In this version, the same color-changing functionality can be done by swiping or by simply clicking the buttons.</p>
+  
+  <div class="good-box" id="goodBox">Swipe or Use Buttons</div>
+  <button id="prevColor">Previous Color</button>
+  <button id="nextColor">Next Color</button>
+  <div class="output" id="goodOutput">Color: Green</div>
+</section>
+
+<script>
+// ---------------- BAD EXAMPLE ---------------- //
+const badBox = document.getElementById('badBox');
+const badOutput = document.getElementById('badOutput');
+let badColors = ['gray', 'pink', 'lightblue', 'orange'];
+let badIndex = 0;
+
+// Detect swipe gestures (complex gesture only)
+let startX = 0;
+badBox.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+badBox.addEventListener('touchend', e => {
+  let diff = e.changedTouches[0].clientX - startX;
+  if (diff > 50) {
+    badIndex = (badIndex + 1) % badColors.length;
+  } else if (diff < -50) {
+    badIndex = (badIndex - 1 + badColors.length) % badColors.length;
+  }
+  badBox.style.background = badColors[badIndex];
+  badOutput.textContent = 'Color: ' + badColors[badIndex];
+});
+
+// ---------------- GOOD EXAMPLE ---------------- //
+const goodBox = document.getElementById('goodBox');
+const prevBtn = document.getElementById('prevColor');
+const nextBtn = document.getElementById('nextColor');
+const goodOutput = document.getElementById('goodOutput');
+let goodColors = ['green', 'blue', 'yellow', 'red'];
+let goodIndex = 0;
+
+function updateGoodColor() {
+  goodBox.style.background = goodColors[goodIndex];
+  goodOutput.textContent = 'Color: ' + goodColors[goodIndex];
+}
+
+// Swipe support (optional)
+let startX2 = 0;
+goodBox.addEventListener('touchstart', e => startX2 = e.touches[0].clientX);
+goodBox.addEventListener('touchend', e => {
+  let diff = e.changedTouches[0].clientX - startX2;
+  if (diff > 50) nextColor();
+  else if (diff < -50) prevColor();
+});
+
+// Simple click alternatives
+function prevColor() {
+  goodIndex = (goodIndex - 1 + goodColors.length) % goodColors.length;
+  updateGoodColor();
+}
+
+function nextColor() {
+  goodIndex = (goodIndex + 1) % goodColors.length;
+  updateGoodColor();
+}
+
+prevBtn.addEventListener('click', prevColor);
+nextBtn.addEventListener('click', nextColor);
+
+// Initial color setup
+updateGoodColor();
+</script>
+
+</body>
+</html>

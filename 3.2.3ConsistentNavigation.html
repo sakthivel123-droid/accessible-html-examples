@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 – 3.2.3 Consistent Navigation (Level AA)
+--------------------------------------------------
+Requirement:
+  - Navigational components that are repeated on multiple web pages
+    must appear in the same relative order each time they appear.
+  - Examples: menus, search boxes, skip links, footers, etc.
+
+Why important:
+  - Users (especially those with cognitive or visual impairments)
+    rely on predictable layouts.
+  - Inconsistent navigation increases confusion and effort when browsing.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.2.3 – Consistent Navigation</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 30px;
+      }
+      .bad {
+        background-color: #ffe5e5;
+      }
+      .good {
+        background-color: #e5ffe5;
+      }
+      nav {
+        background-color: #007bff;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin-right: 15px;
+        font-weight: bold;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .note {
+        background: #f9f9f9;
+        padding: 10px;
+        border-left: 4px solid #007bff;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 3.2.3 Consistent Navigation</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Inconsistent Navigation Order and Placement</h2>
+
+      <!-- Home Page -->
+      <h3>🏠 Home Page</h3>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Products</a>
+        <a href="#">Contact</a>
+      </nav>
+      <p>
+        The navigation order on the Home page: Home → About → Products → Contact
+      </p>
+
+      <hr />
+
+      <!-- Products Page -->
+      <h3>🛒 Products Page</h3>
+      <nav>
+        <a href="#">Products</a>
+        <a href="#">Home</a>
+        <a href="#">Contact</a>
+        <a href="#">About</a>
+      </nav>
+      <p>
+        The navigation order changes on the Products page: Products → Home →
+        Contact → About
+      </p>
+
+      <p><strong>Issues:</strong></p>
+      <ul>
+        <li>❌ Navigation order changes between pages.</li>
+        <li>
+          ❌ Menu item placement is inconsistent (confuses screen reader users).
+        </li>
+        <li>
+          ❌ Keyboard users cannot predict where the focus will move next.
+        </li>
+        <li>❌ Causes disorientation and extra cognitive load.</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Consistent Navigation Structure and Order</h2>
+
+      <!-- Home Page -->
+      <h3>🏠 Home Page</h3>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Products</a>
+        <a href="#">Contact</a>
+      </nav>
+      <p>The navigation order and structure are consistent and predictable.</p>
+
+      <hr />
+
+      <!-- Products Page -->
+      <h3>🛒 Products Page</h3>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Products</a>
+        <a href="#">Contact</a>
+      </nav>
+      <p>Same menu, same order, same labels — helps users stay oriented.</p>
+
+      <p><strong>Benefits:</strong></p>
+      <ul>
+        <li>✅ Predictable navigation improves usability for all users.</li>
+        <li>✅ Screen reader users hear the same menu order each time.</li>
+        <li>✅ Cognitive users quickly locate items without re-learning.</li>
+        <li>✅ Consistency supports accessibility and user confidence.</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- OTHER SCENARIOS -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Other Possible Scenarios for 3.2.3</h2>
+      <ul>
+        <li>
+          <strong>✅ Consistent “Skip to Content” links:</strong> Must appear in
+          the same location and order on every page.
+        </li>
+        <li>
+          <strong>✅ Same Footer Navigation:</strong> Footer links (Privacy
+          Policy, Terms, etc.) should follow the same order on every page.
+        </li>
+        <li>
+          <strong>✅ Search or Login Boxes:</strong> If present across pages,
+          they should appear in the same area (e.g., top-right corner).
+        </li>
+        <li>
+          <strong>✅ Drop-down Menus:</strong> Menu structure and categories
+          must remain consistent (don’t reorder or rename items).
+        </li>
+        <li>
+          <strong>⚠️ Allowed exceptions:</strong> Minor contextual changes like
+          adding “Back to this section” are fine if they don’t alter main
+          navigation order.
+        </li>
+        <li>
+          <strong>❌ Don’t:</strong> Rearrange menus, rename sections, or hide
+          main navigation elements between pages.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section class="note">
+      <h2>Summary</h2>
+      <ul>
+        <li>
+          <strong>Criterion:</strong> 3.2.3 Consistent Navigation (WCAG 2.2
+          Level AA)
+        </li>
+        <li>
+          <strong>Goal:</strong> Keep navigation mechanisms in the same relative
+          order across pages.
+        </li>
+        <li>
+          <strong>Good Practice:</strong> Use consistent navigation order,
+          labels, and structure across your site.
+        </li>
+        <li>
+          <strong>Bad Practice:</strong> Changing order or position of nav links
+          between pages.
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

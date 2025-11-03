@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!-- 
+WCAG 2.2 – 2.1.1 Keyboard (Level A)
+-----------------------------------
+Requirement:
+  - All functionality of the content must be operable through a keyboard interface
+    without requiring specific timings for individual keystrokes.
+  - This means users who cannot use a mouse (like screen reader or switch device users)
+    must still be able to navigate and activate every interactive element.
+
+Common Failures:
+  ❌ Elements that can only be clicked with a mouse.
+  ❌ Drag/drop, hover-only menus, or custom buttons without keyboard support.
+  ❌ JavaScript functions not listening to keyboard events.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 2.2 – 2.1.1 Keyboard Accessibility Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 30px;
+      }
+      .bad {
+        background-color: #ffe5e5;
+      }
+      .good {
+        background-color: #e5ffe5;
+      }
+      button,
+      a {
+        margin: 10px 0;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+      .bad-btn {
+        background-color: #ff4d4d;
+        color: white;
+      }
+      .good-btn {
+        background-color: #4caf50;
+        color: white;
+      }
+      .focusable {
+        outline: 2px solid #007bff;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .note {
+        background: #f9f9f9;
+        padding: 10px;
+        border-left: 4px solid #007bff;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 2.1.1 Keyboard Accessibility</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Not Keyboard Accessible</h2>
+      <p>This button only responds to mouse clicks (no keyboard support).</p>
+
+      <div
+        id="bad-button"
+        class="bad-btn"
+        style="width: 150px; text-align: center"
+      >
+        Click Me (Mouse Only)
+      </div>
+
+      <p>
+        Try tabbing — you can’t reach it using the keyboard, and pressing Enter
+        or Space does nothing.
+      </p>
+
+      <script>
+        // BAD: Only listens for mouse clicks
+        document
+          .getElementById("bad-button")
+          .addEventListener("click", function () {
+            alert("You clicked using the mouse!");
+          });
+      </script>
+
+      <ul>
+        <li>❌ No <code>tabindex</code> or native focus behavior.</li>
+        <li>
+          ❌ No <code>keydown</code> event listener for keyboard activation.
+        </li>
+        <li>
+          ❌ Users relying on keyboards or assistive tech cannot activate it.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Fully Keyboard Accessible</h2>
+      <p>This button can be activated with both mouse and keyboard.</p>
+
+      <div id="good-button" class="good-btn" tabindex="0" role="button">
+        Press Enter or Space
+      </div>
+
+      <script>
+        const goodButton = document.getElementById("good-button");
+        // Allow both mouse and keyboard activation
+        goodButton.addEventListener("click", function () {
+          alert("Activated by mouse or keyboard!");
+        });
+        goodButton.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            goodButton.click();
+          }
+        });
+      </script>
+
+      <p>✅ Works with:</p>
+      <ul>
+        <li>Keyboard Tab navigation</li>
+        <li>Enter key activation</li>
+        <li>Space key activation</li>
+        <li>Mouse click</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- OTHER SCENARIOS -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Other Possible Scenarios for 2.1.1 Keyboard</h2>
+      <ul>
+        <li>
+          <strong>✅ Good:</strong> All interactive elements (links, buttons,
+          forms) are reachable and usable by keyboard.
+        </li>
+        <li>
+          <strong>✅ Good:</strong> Custom widgets (like sliders, accordions)
+          have keyboard controls (arrow keys, Enter, Space).
+        </li>
+        <li>
+          <strong>✅ Good:</strong> Modal dialogs trap focus properly but allow
+          ESC to close.
+        </li>
+        <li>
+          <strong>❌ Bad:</strong> Drag-and-drop or hover-only interactions
+          without keyboard alternatives.
+        </li>
+        <li>
+          <strong>❌ Bad:</strong> Elements requiring precise timing (e.g.,
+          double-tap, long-press).
+        </li>
+        <li>
+          <strong>❌ Bad:</strong> JavaScript menus triggered only by mouseover.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section class="note">
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>Criterion:</strong> 2.1.1 Keyboard (WCAG 2.2 Level A)</li>
+        <li>
+          <strong>Goal:</strong> Ensure all content is operable via keyboard
+          alone.
+        </li>
+        <li>
+          <strong>Good Practice:</strong> Use native HTML controls or add
+          keyboard event listeners for custom controls.
+        </li>
+        <li>
+          <strong>Bad Practice:</strong> Relying only on mouse or touch
+          interactions.
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

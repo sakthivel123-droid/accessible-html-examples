@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 - 2.3.1 Three Flashes or Below Threshold (Level A)
+-----------------------------------------------------------
+Requirement:
+Web pages MUST NOT contain anything that flashes more than THREE times per second
+UNLESS the flash is below the general flash and red flash thresholds.
+
+Purpose:
+Flashing or strobing content can cause seizures or physical reactions
+for users with photosensitive epilepsy or vestibular disorders.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.2 – 2.3.1 Three Flashes or Below Threshold</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    .bad { background-color: #ffe5e5; }
+    .good { background-color: #e5ffe5; }
+
+    h2 { margin-top: 0; }
+
+    .flash-box {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      text-align: center;
+      line-height: 200px;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+
+    /* BAD Example: Rapid flashing (6 times per second) */
+    @keyframes badFlash {
+      0% { background-color: red; }
+      50% { background-color: white; }
+      100% { background-color: red; }
+    }
+
+    .flashing {
+      animation: badFlash 0.16s infinite; /* ~6 flashes per second */
+    }
+
+    /* GOOD Example: Below 3 flashes per second */
+    @keyframes goodFlash {
+      0% { background-color: green; }
+      50% { background-color: white; }
+      100% { background-color: green; }
+    }
+
+    .slowFlash {
+      animation: goodFlash 1s infinite; /* 1 flash per second */
+    }
+
+    .note {
+      background: #f9f9f9;
+      border-left: 4px solid #007bff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    button {
+      margin: 10px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .good-btn { background-color: #4CAF50; color: #fff; }
+    .bad-btn { background-color: #ff4d4d; color: #fff; }
+
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 2.2 – 2.3.1 Three Flashes or Below Threshold</h1>
+
+  <!-- ============================================================= -->
+  <!-- BAD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Rapid Flashing (>3 times/second)</h2>
+    <p>This box flashes more than three times per second. Such flashing can trigger seizures or physical discomfort in some users.</p>
+
+    <div id="badBox" class="flash-box flashing">
+      FLASHING
+    </div>
+
+    <button id="stopBad" class="bad-btn">Stop Flashing</button>
+    <button id="startBad" class="bad-btn">Start Flashing</button>
+
+    <script>
+      const badBox = document.getElementById("badBox");
+      document.getElementById("stopBad").addEventListener("click", () => {
+        badBox.style.animationPlayState = "paused";
+      });
+      document.getElementById("startBad").addEventListener("click", () => {
+        badBox.style.animationPlayState = "running";
+      });
+    </script>
+
+    <ul>
+      <li>❌ Flashes ~6 times per second.</li>
+      <li>❌ Uses strong red and white contrast (worst combination).</li>
+      <li>❌ Can trigger seizures or dizziness.</li>
+      <li>❌ Fails WCAG 2.3.1.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="good">
+    <h2>✅ Good Example – Below 3 Flashes per Second</h2>
+    <p>This box flashes slowly (about once per second) and uses safer colors.</p>
+
+    <div id="goodBox" class="flash-box slowFlash">
+      SAFE FLASH
+    </div>
+
+    <button id="pauseGood" class="good-btn">Pause</button>
+    <button id="resumeGood" class="good-btn">Resume</button>
+
+    <script>
+      const goodBox = document.getElementById("goodBox");
+      document.getElementById("pauseGood").addEventListener("click", () => {
+        goodBox.style.animationPlayState = "paused";
+      });
+      document.getElementById("resumeGood").addEventListener("click", () => {
+        goodBox.style.animationPlayState = "running";
+      });
+    </script>
+
+    <ul>
+      <li>✅ Flash rate is 1 per second (below 3 Hz).</li>
+      <li>✅ Does not use high-contrast red/white combo.</li>
+      <li>✅ User can pause motion if needed.</li>
+      <li>✅ Meets WCAG 2.3.1.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ============================================================= -->
+  <section>
+    <h2>📘 Other Possible Scenarios for 2.3.1</h2>
+    <ul>
+      <li><strong>❌ Bad:</strong> Animated GIF flashing red/white >3 times/sec → FAIL.</li>
+      <li><strong>✅ Good:</strong> Animation flashes ≤3 times/sec or uses gentle color transitions.</li>
+      <li><strong>❌ Bad:</strong> Video game or ad banner with strobe effects → FAIL.</li>
+      <li><strong>✅ Good:</strong> Videos avoid flashing, or provide a “Reduced Motion” version.</li>
+      <li><strong>✅ Good:</strong> Use gradual fade-in/out instead of instant flashes.</li>
+      <li><strong>✅ Good (Exemption):</strong> Flashing below general & red flash thresholds is acceptable.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SUMMARY -->
+  <!-- ============================================================= -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.3.1 – Three Flashes or Below Threshold (Level A)</li>
+      <li><strong>Goal:</strong> Prevent seizures or physical reactions caused by flashing.</li>
+      <li><strong>Good Practice:</strong> Limit flashing to 3 Hz or below and avoid red/white flashes.</li>
+      <li><strong>Bad Practice:</strong> Rapid flashing content or high-contrast strobe effects.</li>
+      <li><strong>Exceptions:</strong> Flashing that is below threshold (small area, low brightness, safe color contrast).</li>
+    </ul>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 1.4.11 Non-text Contrast Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+  }
+  h1 { text-align: center; }
+
+  .bad-section {
+    background-color: #ffeaea;
+    border: 2px solid red;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .good-section {
+    background-color: #eaffea;
+    border: 2px solid green;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* BAD EXAMPLES */
+  .low-contrast-button {
+    background-color: #f4f4f4; /* light grey */
+    border: 1px solid #ddd; /* very low contrast border */
+    color: #666;
+    padding: 10px 20px;
+    border-radius: 6px;
+  }
+
+  .low-contrast-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc; /* low contrast against background */
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .low-contrast-input {
+    border: 1px solid #ddd; /* very low contrast border */
+    padding: 8px;
+    width: 200px;
+  }
+
+  /* GOOD EXAMPLES */
+  .high-contrast-button {
+    background-color: #0055cc;
+    border: 2px solid #003399;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+  }
+
+  .high-contrast-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #0055cc;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .high-contrast-input {
+    border: 2px solid #222;
+    padding: 8px;
+    width: 200px;
+  }
+
+  /* Focus styles */
+  .bad-focus:focus {
+    outline: 2px solid #ddd; /* low contrast outline */
+  }
+  .good-focus:focus {
+    outline: 3px solid #ff9900; /* strong contrast outline */
+  }
+
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.2 - 1.4.11 Non-text Contrast</h1>
+
+<hr>
+
+<!-- ❌ BAD EXAMPLE -->
+<div class="bad-section">
+  <h2>❌ Bad Example: Low Non-text Contrast</h2>
+  <p>The following UI elements fail because their borders, backgrounds, or focus indicators have <strong>poor contrast</strong> against adjacent colors.</p>
+
+  <!-- Buttons -->
+  <button class="low-contrast-button bad-focus">Low Contrast Button</button>
+
+  <!-- Icons -->
+  <div style="margin-top:15px;">
+    <div class="low-contrast-icon" title="Low contrast icon"></div>
+    <span>Low contrast icon - hard to distinguish</span>
+  </div>
+
+  <!-- Input Field -->
+  <div style="margin-top:15px;">
+    <label for="badInput">Name:</label>
+    <input id="badInput" type="text" class="low-contrast-input bad-focus" placeholder="Low contrast border">
+  </div>
+
+  <ul>
+    <li>Button border and background blend with page color → low visibility.</li>
+    <li>Icon shape is barely visible against background → fails 3:1 ratio.</li>
+    <li>Input field border lacks sufficient contrast (hard to see outline).</li>
+    <li>Focus outline is too faint → keyboard users can’t see focus position.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ✅ GOOD EXAMPLE -->
+<div class="good-section">
+  <h2>✅ Good Example: Sufficient Non-text Contrast</h2>
+  <p>These controls pass accessibility checks — they meet or exceed a <strong>3:1 contrast ratio</strong> for non-text elements like borders and focus indicators.</p>
+
+  <!-- Buttons -->
+  <button class="high-contrast-button good-focus">High Contrast Button</button>
+
+  <!-- Icons -->
+  <div style="margin-top:15px;">
+    <div class="high-contrast-icon" title="High contrast icon"></div>
+    <span>High contrast icon - easily identifiable</span>
+  </div>
+
+  <!-- Input Field -->
+  <div style="margin-top:15px;">
+    <label for="goodInput">Name:</label>
+    <input id="goodInput" type="text" class="high-contrast-input good-focus" placeholder="High contrast border">
+  </div>
+
+  <ul>
+    <li>Button background and border contrast well against the page.</li>
+    <li>Icons stand out clearly even for low-vision users.</li>
+    <li>Input field has dark border for easy identification.</li>
+    <li>Keyboard focus indicator (orange outline) is highly visible.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ✅ EXCEPTION CASE -->
+<div class="good-section">
+  <h2>✅ Exception Example: Disabled Elements or Decorative Graphics</h2>
+  <p>Elements that are <strong>purely decorative</strong> or <strong>disabled</strong> are not required to meet non-text contrast rules.</p>
+
+  <button disabled style="background-color:#ddd; color:#aaa; padding:10px;">Disabled Button</button>
+  <p><em>Explanation:</em> This button is disabled and non-interactive, so low contrast is acceptable.</p>
+</div>
+
+</body>
+</html>

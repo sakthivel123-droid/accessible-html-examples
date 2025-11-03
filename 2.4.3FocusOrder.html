@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- 
+WCAG 2.2 - 2.4.3 Focus Order (Level A)
+---------------------------------------
+Requirement:
+When navigating sequentially (e.g., using the Tab key),
+the focus order must follow a meaningful and logical sequence that preserves relationships and usability.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.4.3 - Focus Order Example</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    .bad {
+      background-color: #ffeaea;
+    }
+
+    .good {
+      background-color: #eaffea;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      max-width: 300px;
+      gap: 10px;
+    }
+
+    input, button, select, a {
+      padding: 8px;
+      border: 1px solid #888;
+      border-radius: 5px;
+    }
+
+    .note {
+      background-color: #f9f9f9;
+      border-left: 4px solid #007bff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .code {
+      background-color: #eee;
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>WCAG 2.2 – 2.4.3 Focus Order</h1>
+
+  <!-- ========================================================== -->
+  <!-- BAD EXAMPLE -->
+  <!-- ========================================================== -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Illogical Focus Order</h2>
+    <p>
+      In this form, the <strong>tab order jumps around illogically</strong> because of incorrect
+      HTML structure and misuse of <code>tabindex</code>.
+      Screen reader and keyboard users find it confusing.
+    </p>
+
+    <div class="form-container">
+      <!-- Tabindex creates an incorrect focus order -->
+      <input type="text" placeholder="First Name" tabindex="3">
+      <a href="#help" tabindex="1">Help Link</a>
+      <input type="text" placeholder="Last Name" tabindex="2">
+      <button tabindex="4">Submit</button>
+    </div>
+
+    <ul>
+      <li>❌ Focus jumps: Help Link → Last Name → First Name → Submit</li>
+      <li>❌ Doesn’t match visual layout or logical reading order.</li>
+      <li>❌ Confusing for keyboard-only users.</li>
+      <li>❌ Fails WCAG 2.4.3 (Focus Order).</li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ========================================================== -->
+  <section class="good">
+    <h2>✅ Good Example – Logical Focus Order</h2>
+    <p>
+      Here, the <strong>focus moves in a logical sequence</strong> that matches both the visual
+      order and reading order. No need to use <code>tabindex</code> unnecessarily.
+    </p>
+
+    <div class="form-container">
+      <label for="fname">First Name:</label>
+      <input type="text" id="fname" placeholder="Enter first name">
+      
+      <label for="lname">Last Name:</label>
+      <input type="text" id="lname" placeholder="Enter last name">
+      
+      <a href="#help2">Need Help?</a>
+      <button>Submit</button>
+    </div>
+
+    <ul>
+      <li>✅ Focus moves: First Name → Last Name → Help Link → Submit</li>
+      <li>✅ Logical and intuitive order for both sighted and non-sighted users.</li>
+      <li>✅ No misuse of <code>tabindex</code>.</li>
+      <li>✅ Passes WCAG 2.4.3 (Focus Order).</li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ========================================================== -->
+  <section>
+    <h2>📘 Other Scenarios for Focus Order</h2>
+    <ul>
+      <li><strong>❌ Skipping focusable elements:</strong> Users can’t reach a button or link → Fail.</li>
+      <li><strong>❌ Hidden elements receive focus:</strong> Confuses screen readers → Fail.</li>
+      <li><strong>❌ Overusing <code>tabindex</code>:</strong> Creates unpredictable order → Fail.</li>
+      <li><strong>✅ Logical HTML structure:</strong> Natural DOM order provides logical focus → Pass.</li>
+      <li><strong>✅ Modal dialogs:</strong> Keep focus trapped inside the modal until closed → Pass.</li>
+      <li><strong>✅ Dynamic updates:</strong> Move focus to new content (like alerts) appropriately → Pass.</li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- SUMMARY -->
+  <!-- ========================================================== -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.4.3 – Focus Order (Level A)</li>
+      <li><strong>Goal:</strong> Ensure focus moves predictably and logically through interactive elements.</li>
+      <li><strong>Best Practices:</strong></li>
+      <ul>
+        <li>Use natural DOM order for form fields and links.</li>
+        <li>Only use <code>tabindex</code> for specific custom widgets (value ≥ 0 carefully).</li>
+        <li>Ensure focus never skips or jumps randomly.</li>
+        <li>Keep visual layout consistent with focus order.</li>
+        <li>Use tools like <strong>Tab key</strong> and <strong>Screen Reader</strong> to test.</li>
+      </ul>
+    </ul>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 1.4.10 Reflow (400% Zoom)</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+  }
+
+  h1 { text-align: center; }
+
+  /* BAD EXAMPLE STYLES */
+  .bad-section {
+    background-color: #ffeaea;
+    border: 2px solid red;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+
+  .bad-container {
+    display: flex;
+    flex-direction: row;
+    width: 1200px; /* fixed width causes horizontal scroll on zoom */
+    gap: 20px;
+  }
+
+  .bad-box {
+    background-color: #ffdddd;
+    border: 1px solid #cc0000;
+    width: 350px;
+    height: 200px;
+    padding: 10px;
+  }
+
+  /* GOOD EXAMPLE STYLES */
+  .good-section {
+    background-color: #eaffea;
+    border: 2px solid green;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .good-container {
+    display: flex;
+    flex-wrap: wrap; /* allows reflow */
+    gap: 20px;
+  }
+
+  .good-box {
+    background-color: #ddffdd;
+    border: 1px solid #009900;
+    flex: 1 1 300px; /* flexible width */
+    min-width: 250px;
+    padding: 10px;
+  }
+
+  /* Extra: making images responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.2 - 1.4.10 Reflow (400% Zoom)</h1>
+
+<hr>
+
+<!-- ❌ BAD EXAMPLE -->
+<div class="bad-section">
+  <h2>❌ Bad Example: Fixed Layout (Fails Reflow)</h2>
+  <p>This layout uses fixed widths and does not adjust when zoomed to 400% — users must scroll horizontally to read all content.</p>
+
+  <div class="bad-container">
+    <div class="bad-box">
+      <h3>Box 1</h3>
+      <p>This box has a fixed width. When zoomed, text overflows and requires horizontal scrolling.</p>
+    </div>
+    <div class="bad-box">
+      <h3>Box 2</h3>
+      <p>Users on small screens or 400% zoom cannot read content easily because of rigid structure.</p>
+    </div>
+    <div class="bad-box">
+      <h3>Box 3</h3>
+      <p>Breaks accessibility because it ignores user zoom and viewport size.</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ✅ GOOD EXAMPLE -->
+<div class="good-section">
+  <h2>✅ Good Example: Responsive & Reflow-Friendly</h2>
+  <p>This layout uses flexible boxes and percentages, allowing text to reflow vertically when zoomed up to 400%.</p>
+
+  <div class="good-container">
+    <div class="good-box">
+      <h3>Box 1</h3>
+      <p>Resize or zoom this page up to 400%. This box will move below others automatically instead of forcing a horizontal scroll.</p>
+    </div>
+    <div class="good-box">
+      <h3>Box 2</h3>
+      <p>Flexible design ensures that all text remains readable and fits within the viewport width.</p>
+    </div>
+    <div class="good-box">
+      <h3>Box 3</h3>
+      <p>Uses CSS <code>flex-wrap</code> and relative widths to support reflow without losing context.</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ✅ EXCEPTION CASE -->
+<div class="good-section">
+  <h2>✅ Exception Example: Complex Content (e.g., Data Table)</h2>
+  <p>Some content, like large data tables or maps, may require two-dimensional scrolling — this is allowed by WCAG.</p>
+
+  <table border="1" cellpadding="5">
+    <caption>Quarterly Sales Data</caption>
+    <tr>
+      <th>Quarter</th>
+      <th>Region A</th>
+      <th>Region B</th>
+      <th>Region C</th>
+      <th>Region D</th>
+    </tr>
+    <tr>
+      <td>Q1</td><td>$5,000</td><td>$6,000</td><td>$4,500</td><td>$7,200</td>
+    </tr>
+    <tr>
+      <td>Q2</td><td>$5,800</td><td>$6,200</td><td>$5,100</td><td>$7,500</td>
+    </tr>
+  </table>
+
+  <p>This table needs both horizontal and vertical scrolling when zoomed — which is acceptable because it’s a data grid.</p>
+</div>
+
+</body>
+</html>

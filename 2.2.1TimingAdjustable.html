@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 – 2.2.1 Timing Adjustable (Level A)
+--------------------------------------------
+Requirement:
+For any time limit set by the content, the user must be able to:
+(a) Turn off the time limit, or
+(b) Adjust it to at least 10 times the original duration, or
+(c) Extend it (with a warning) before time expires.
+
+Exception:
+- If the time limit is essential (e.g., online auction countdown or real-time test).
+- If the time limit is longer than 20 hours.
+
+Purpose:
+Ensures users who need more time due to disability, cognitive, or motor issues
+can still complete tasks.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.2 – 2.2.1 Timing Adjustable</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    .bad {
+      background-color: #ffe5e5;
+    }
+
+    .good {
+      background-color: #e5ffe5;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .bad-btn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .good-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .timer {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .note {
+      background: #f9f9f9;
+      padding: 10px;
+      border-left: 4px solid #007BFF;
+      border-radius: 5px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 2.2 – 2.2.1 Timing Adjustable (Level A)</h1>
+
+  <!-- ============================================================= -->
+  <!-- BAD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Auto Logout with No Warning or Extension</h2>
+
+    <p>This example logs out the user automatically after <strong>10 seconds</strong>
+       without giving any option to extend time.</p>
+
+    <p class="timer" id="badTimer">Time remaining: 10 seconds</p>
+    <p id="badMessage">You are logged in. Do something quickly!</p>
+
+    <script>
+      let badTime = 10;
+      const badTimerElement = document.getElementById("badTimer");
+      const badMessage = document.getElementById("badMessage");
+
+      const badInterval = setInterval(() => {
+        badTime--;
+        badTimerElement.textContent = `Time remaining: ${badTime} seconds`;
+
+        if (badTime <= 0) {
+          clearInterval(badInterval);
+          badMessage.textContent = "❌ Session expired. You’ve been logged out automatically.";
+          badMessage.style.color = "red";
+        }
+      }, 1000);
+    </script>
+
+    <ul>
+      <li>❌ User cannot pause, extend, or adjust the time.</li>
+      <li>❌ No warning before session ends.</li>
+      <li>❌ Difficult for users with mobility, vision, or cognitive delays.</li>
+      <li>❌ Fails WCAG 2.2.1 Timing Adjustable.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="good">
+    <h2>✅ Good Example – Adjustable and Extendable Timer</h2>
+
+    <p>This version lets users extend, turn off, or adjust the timer before it expires.</p>
+
+    <label for="duration">Set your time limit (in seconds):</label>
+    <select id="duration">
+      <option value="10">10</option>
+      <option value="30">30</option>
+      <option value="60">60</option>
+      <option value="0">No Time Limit</option>
+    </select>
+    <button id="startGood" class="good-btn">Start Session</button>
+
+    <p class="timer" id="goodTimer"></p>
+    <p id="goodMessage">You’re logged in and can control your time.</p>
+    <button id="extendTime" class="good-btn" style="display:none;">Extend by 10 seconds</button>
+
+    <script>
+      const durationSelect = document.getElementById("duration");
+      const startBtn = document.getElementById("startGood");
+      const goodTimerElement = document.getElementById("goodTimer");
+      const goodMessage = document.getElementById("goodMessage");
+      const extendBtn = document.getElementById("extendTime");
+
+      let timeLeft = 0;
+      let timerId = null;
+
+      startBtn.addEventListener("click", () => {
+        clearInterval(timerId);
+        const selected = parseInt(durationSelect.value);
+
+        if (selected === 0) {
+          goodMessage.textContent = "✅ No time limit. You can take as long as you need.";
+          goodTimerElement.textContent = "";
+          extendBtn.style.display = "none";
+          return;
+        }
+
+        timeLeft = selected;
+        goodMessage.textContent = "Session started!";
+        extendBtn.style.display = "inline-block";
+
+        goodTimerElement.textContent = `Time remaining: ${timeLeft} seconds`;
+
+        timerId = setInterval(() => {
+          timeLeft--;
+          goodTimerElement.textContent = `Time remaining: ${timeLeft} seconds`;
+
+          if (timeLeft <= 5 && timeLeft > 0) {
+            goodMessage.textContent = "⚠️ Session ending soon. Click 'Extend' to get more time.";
+          }
+
+          if (timeLeft <= 0) {
+            clearInterval(timerId);
+            goodMessage.textContent = "⏰ Session expired. You’ve been logged out.";
+            goodMessage.style.color = "red";
+            extendBtn.style.display = "none";
+          }
+        }, 1000);
+      });
+
+      extendBtn.addEventListener("click", () => {
+        timeLeft += 10;
+        goodMessage.textContent = `✅ Time extended. You now have ${timeLeft} seconds remaining.`;
+      });
+    </script>
+
+    <ul>
+      <li>✅ User can <strong>extend</strong> the timer.</li>
+      <li>✅ User can <strong>adjust</strong> duration before starting.</li>
+      <li>✅ User can choose “No time limit.”</li>
+      <li>✅ Warning appears before time expires.</li>
+      <li>✅ Fully meets WCAG 2.2.1 Timing Adjustable.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ============================================================= -->
+  <section>
+    <h2>📘 Other Possible Scenarios for 2.2.1 Timing Adjustable</h2>
+    <ul>
+      <li><strong>❌ Bad:</strong> Online quiz auto-submits after fixed time with no extension option.</li>
+      <li><strong>❌ Bad:</strong> E-commerce site clears cart after 5 minutes without warning.</li>
+      <li><strong>✅ Good:</strong> Quiz offers “Add 5 minutes” button before time ends.</li>
+      <li><strong>✅ Good:</strong> Websites that have auto-logout show a “Continue session” dialog.</li>
+      <li><strong>✅ Good:</strong> User settings include “disable time limits” option.</li>
+      <li><strong>✅ Good (exception):</strong> Live auction countdown – time limit is essential.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SUMMARY -->
+  <!-- ============================================================= -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.2.1 Timing Adjustable (Level A)</li>
+      <li><strong>Goal:</strong> Users should not lose information or functionality due to time limits.</li>
+      <li><strong>Good Practice:</strong> Provide controls to turn off, extend, or adjust the timer.</li>
+      <li><strong>Bad Practice:</strong> Auto timeouts without warning or user control.</li>
+      <li><strong>Exception:</strong> Essential timing (e.g., auction, live event, real-time system).</li>
+    </ul>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WCAG 2.4.11 – Focus Not Obscured (Hidden)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+      }
+
+      h1 {
+        background: #1a73e8;
+        color: white;
+        padding: 15px;
+      }
+
+      section {
+        margin: 30px;
+        padding: 20px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+      }
+
+      button,
+      a,
+      input {
+        display: block;
+        margin: 15px 0;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+
+      /* Common focus style */
+      :focus {
+        outline: 3px solid orange;
+        outline-offset: 2px;
+      }
+
+      /* -------------------------------
+     ❌ Example 1: Fixed header hides focus
+  --------------------------------*/
+      .fixed-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: red;
+        color: white;
+        width: 100%;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        z-index: 2;
+      }
+
+      .bad-fixed-container {
+        height: 300px;
+        overflow-y: auto;
+        border: 2px solid red;
+        margin-top: 70px;
+      }
+
+      .bad-fixed-container button {
+        width: 100%;
+      }
+
+      /* ✅ Good fix using sticky + scroll margin */
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        background: #4caf50;
+        color: white;
+        padding: 10px;
+      }
+
+      .good-fixed-container button {
+        width: 100%;
+        scroll-margin-top: 70px; /* ensures button scrolls fully into view */
+      }
+
+      /* -------------------------------
+     ❌ Example 2: Focus hidden under modal overlay
+  --------------------------------*/
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 3;
+      }
+
+      .overlay.active {
+        display: block;
+      }
+
+      .overlay-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      /* -------------------------------
+     ❌ Example 3: Focus lost inside scrollable div
+  --------------------------------*/
+      .scroll-div {
+        height: 120px;
+        overflow-y: auto;
+        border: 2px solid red;
+        padding: 10px;
+      }
+
+      .scroll-div button {
+        margin: 20px;
+      }
+
+      /* ✅ Good scroll-div fix */
+      .good-scroll-div {
+        height: 120px;
+        overflow-y: auto;
+        border: 2px solid green;
+        padding: 10px;
+      }
+
+      .good-scroll-div button {
+        margin: 20px;
+        scroll-margin-top: 20px;
+      }
+
+      /* -------------------------------
+     ❌ Example 4: Sticky footer hides focused field
+  --------------------------------*/
+      .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: red;
+        color: white;
+        text-align: center;
+        height: 60px;
+        width: 100%;
+        line-height: 60px;
+      }
+
+      .footer-good {
+        position: sticky;
+        bottom: 0;
+        background: #4caf50;
+        color: white;
+        height: 50px;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .form-section {
+        height: 200px;
+        overflow-y: auto;
+      }
+
+      .form-section input {
+        display: block;
+        margin: 20px 0;
+        width: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.4.11 – Focus Not Obscured (Hidden)</h1>
+
+    <!-- ❌ Example 1: Fixed Header -->
+    <section>
+      <h2>❌ Example 1 – Focus Hidden by Fixed Header</h2>
+      <div class="fixed-header">Fixed Header (Covers Focus)</div>
+      <div class="bad-fixed-container">
+        <p>
+          Press Tab repeatedly — the button near the top may hide behind the red
+          header.
+        </p>
+        <button>Button 1</button>
+        <button>Button 2</button>
+        <button>Button 3</button>
+        <button>Button 4</button>
+        <button>Button 5</button>
+        <button>Button 6</button>
+        <button>Button 7</button>
+      </div>
+    </section>
+
+    <!-- ✅ Example 1 Good -->
+    <section>
+      <h2>✅ Example 1 – Fixed Header Replaced with Sticky Header</h2>
+      <div class="good-fixed-container">
+        <div class="sticky-header">Sticky Header (Focus Visible Below)</div>
+        <button>Button A</button>
+        <button>Button B</button>
+        <button>Button C</button>
+        <button>Button D</button>
+        <button>Button E</button>
+        <button>Button F</button>
+        <button>Button G</button>
+      </div>
+    </section>
+
+    <!-- ❌ Example 2: Focus hidden by modal -->
+    <section>
+      <h2>❌ Example 2 – Focus Hidden by Overlay</h2>
+      <button id="openModal">Open Overlay</button>
+      <div class="overlay" id="modalOverlay">
+        <div class="overlay-content">
+          <p>This overlay blocks focus on background buttons.</p>
+          <button id="closeModal">Close</button>
+        </div>
+      </div>
+      <button>Background Button 1</button>
+      <button>Background Button 2</button>
+      <button>Background Button 3</button>
+    </section>
+
+    <!-- ❌ Example 3: Scrollable div hides focus -->
+    <section>
+      <h2>❌ Example 3 – Focus Hidden in Scrollable Div</h2>
+      <div class="scroll-div">
+        <p>Focus might scroll out of view.</p>
+        <button>Item 1</button>
+        <button>Item 2</button>
+        <button>Item 3</button>
+        <button>Item 4</button>
+        <button>Item 5</button>
+      </div>
+    </section>
+
+    <!-- ✅ Example 3 Good -->
+    <section>
+      <h2>✅ Example 3 – Scrollable Div Keeps Focus Visible</h2>
+      <div class="good-scroll-div">
+        <p>scroll-margin-top ensures focus visibility.</p>
+        <button>Item A</button>
+        <button>Item B</button>
+        <button>Item C</button>
+        <button>Item D</button>
+        <button>Item E</button>
+      </div>
+    </section>
+
+    <!-- ❌ Example 4: Footer hides focused field -->
+    <section>
+      <h2>❌ Example 4 – Focus Hidden by Fixed Footer</h2>
+      <div class="form-section">
+        <p>
+          Tab to the last input field — it will be hidden behind the red footer.
+        </p>
+        <input type="text" placeholder="Name" />
+        <input type="text" placeholder="Email" />
+        <input type="text" placeholder="Address" />
+        <input type="text" placeholder="Phone" />
+        <input type="text" placeholder="Comments" />
+      </div>
+      <div class="footer">Fixed Footer (Hides Input Focus)</div>
+    </section>
+
+    <!-- ✅ Example 4 Good -->
+    <section>
+      <h2>✅ Example 4 – Sticky Footer Keeps Focus Visible</h2>
+      <div class="form-section">
+        <input type="text" placeholder="First Name" />
+        <input type="text" placeholder="Last Name" />
+        <input type="text" placeholder="Email Address" />
+        <input type="text" placeholder="Phone Number" />
+        <input type="text" placeholder="Message" />
+      </div>
+      <div class="footer-good">Sticky Footer (Focus Not Hidden)</div>
+    </section>
+
+    <script>
+      // Simple overlay toggle
+      const modal = document.getElementById("modalOverlay");
+      document.getElementById("openModal").onclick = () =>
+        modal.classList.add("active");
+      document.getElementById("closeModal").onclick = () =>
+        modal.classList.remove("active");
+    </script>
+  </body>
+</html>

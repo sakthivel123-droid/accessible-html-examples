@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 – 2.1.2 No Keyboard Trap (Level A)
+-------------------------------------------
+Requirement:
+  - If a user can move focus to an element using the keyboard,
+    then they must also be able to move focus away from that element
+    using only the keyboard.
+  - In other words: No element should "trap" focus.
+
+Why it matters:
+  - Keyboard-only users or screen reader users can get stuck
+    inside interactive areas (like modals or widgets) if there's no way to exit.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.2 – 2.1.2 No Keyboard Trap</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    .bad {
+      background-color: #ffe5e5;
+    }
+
+    .good {
+      background-color: #e5ffe5;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .bad-btn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .good-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .trap {
+      border: 2px solid red;
+      padding: 15px;
+      margin: 15px 0;
+      width: 300px;
+    }
+
+    .focusable {
+      outline: 2px solid #007BFF;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .note {
+      background: #f9f9f9;
+      padding: 10px;
+      border-left: 4px solid #007BFF;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 2.2 – 2.1.2 No Keyboard Trap</h1>
+
+  <!-- ============================================================= -->
+  <!-- BAD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Focus Trap (Keyboard Trap)</h2>
+
+    <p>In this example, focus gets stuck inside the red box. You cannot tab out once you enter.</p>
+
+    <div class="trap" id="badTrap" tabindex="0">
+      <p>Focus is trapped here!</p>
+      <input type="text" placeholder="Try tabbing..." />
+      <button class="bad-btn">Click Me</button>
+    </div>
+
+    <p>Try pressing <strong>Tab</strong> key repeatedly.  
+       You will notice that the focus cycles inside the red box and never leaves it.</p>
+
+    <script>
+      // BAD: Preventing focus from leaving the div (keyboard trap)
+      const badTrap = document.getElementById('badTrap');
+      badTrap.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          e.preventDefault(); // ❌ Blocking Tab key
+          alert('Focus is trapped! You cannot move out.');
+        }
+      });
+    </script>
+
+    <ul>
+      <li>❌ User can enter the box with Tab but cannot exit it.</li>
+      <li>❌ Focus movement is blocked by JavaScript.</li>
+      <li>❌ Violates WCAG 2.1.2 "No Keyboard Trap".</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="good">
+    <h2>✅ Good Example – Keyboard Focus Freely Moves In and Out</h2>
+
+    <p>In this example, the focus can move into and out of the green box naturally using Tab and Shift+Tab.</p>
+
+    <div class="trap" id="goodTrap" tabindex="0" style="border-color: green;">
+      <p>This area is keyboard accessible.</p>
+      <input type="text" placeholder="Type something..." />
+      <button class="good-btn">Submit</button>
+      <p>Press Tab to move out →</p>
+    </div>
+
+    <script>
+      // GOOD: Does not block Tab or Shift+Tab
+      const goodTrap = document.getElementById('goodTrap');
+      goodTrap.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          goodTrap.blur(); // Optional: ESC key lets user exit easily
+        }
+      });
+    </script>
+
+    <ul>
+      <li>✅ Focus can move in and out freely using Tab/Shift+Tab.</li>
+      <li>✅ Optional: ESC key can remove focus for extra usability.</li>
+      <li>✅ Works with both keyboard and screen readers.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ============================================================= -->
+  <section>
+    <h2>📘 Other Possible Scenarios for 2.1.2 No Keyboard Trap</h2>
+    <ul>
+      <li><strong>✅ Good:</strong> Modal dialogs trap focus temporarily but provide an ESC key or close button to exit.</li>
+      <li><strong>❌ Bad:</strong> Custom widgets (like carousels or sliders) that consume all keyboard input without a way to leave.</li>
+      <li><strong>❌ Bad:</strong> JavaScript “onkeydown” events that block Tab movement.</li>
+      <li><strong>✅ Good:</strong> Use natural HTML focus flow whenever possible.</li>
+      <li><strong>✅ Good:</strong> If trapping focus intentionally (e.g., modal), provide a clear method to release it (close button, ESC key).</li>
+      <li><strong>⚠️ Allowed Exception:</strong> It’s okay to temporarily trap focus (like in modals) *if* the user can easily exit the trap.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SUMMARY -->
+  <!-- ============================================================= -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.1.2 No Keyboard Trap (WCAG 2.2 Level A)</li>
+      <li><strong>Goal:</strong> Ensure users can navigate into and out of every component using only a keyboard.</li>
+      <li><strong>Good Practice:</strong> Let focus move freely; provide ESC or Close option when trapping focus intentionally.</li>
+      <li><strong>Bad Practice:</strong> Preventing Tab or Shift+Tab from leaving a region.</li>
+    </ul>
+  </section>
+
+</body>
+</html>

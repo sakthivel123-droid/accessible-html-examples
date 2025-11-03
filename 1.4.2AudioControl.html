@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WCAG 1.4.2 Audio Control - Good and Bad Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+      }
+      .good,
+      .bad {
+        border: 3px solid;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+      .good {
+        border-color: green;
+        background-color: #e8f5e9;
+      }
+      .bad {
+        border-color: red;
+        background-color: #ffebee;
+      }
+      audio {
+        display: block;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 1.4.2 Audio Control</h1>
+    <p>
+      <strong>Guideline:</strong> If audio plays automatically for more than 3
+      seconds, provide a way to pause, stop, or mute it.
+    </p>
+
+    <!-- ❌ BAD EXAMPLE -->
+    <div class="bad">
+      <h2>Bad Example: Auto-playing background music with no controls</h2>
+      <p>
+        This example fails WCAG 1.4.2 because audio starts automatically and has
+        no pause/stop/mute option. It interferes with screen readers and user
+        control.
+      </p>
+
+      <!-- Bad: Autoplaying audio with no user control -->
+      <audio autoplay loop>
+        <source src="background-music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <!-- ✅ GOOD EXAMPLE -->
+    <div class="good">
+      <h2>Good Example: Audio with user control options</h2>
+      <p>
+        This example meets WCAG 1.4.2 because users can start or stop audio
+        manually. No sound plays automatically.
+      </p>
+
+      <!-- Good: User must start playback manually -->
+      <audio controls>
+        <source src="background-music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <!-- ✅ GOOD EXAMPLE: Auto-playing audio WITH mute/pause -->
+    <div class="good">
+      <h2>
+        Good Example: Auto-playing audio with pause/mute controls provided
+      </h2>
+      <p>
+        This example also passes because autoplay audio includes a visible pause
+        and mute button.
+      </p>
+
+      <audio id="autoplayAudio" autoplay loop>
+        <source src="background-music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
+      <button onclick="document.getElementById('autoplayAudio').pause()">
+        Pause Audio
+      </button>
+      <button onclick="document.getElementById('autoplayAudio').play()">
+        Play Audio
+      </button>
+      <button onclick="document.getElementById('autoplayAudio').muted = true">
+        Mute Audio
+      </button>
+      <button onclick="document.getElementById('autoplayAudio').muted = false">
+        Unmute Audio
+      </button>
+    </div>
+
+    <hr />
+
+    <h2>Explanation of Scenarios</h2>
+    <ul>
+      <li>
+        <strong>Scenario 1 – Autoplay without control:</strong> Fails because
+        user cannot stop audio. Screen readers are disrupted.
+      </li>
+      <li>
+        <strong>Scenario 2 – Manual play (controls attribute):</strong> Passes
+        because no sound starts automatically.
+      </li>
+      <li>
+        <strong>Scenario 3 – Autoplay with control:</strong> Passes because user
+        can pause, stop, or mute the sound anytime.
+      </li>
+      <li>
+        <strong>Scenario 4 – Audio shorter than 3 seconds:</strong> Passes even
+        if it plays automatically (e.g., notification sound).
+      </li>
+    </ul>
+
+    <p>
+      <strong>Note:</strong> This criterion applies to any sound longer than 3
+      seconds that starts automatically. Background music, voice announcements,
+      or sound effects should all provide a way to control audio.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!-- 
+WCAG 2.2 – Success Criterion 2.4.6: Headings and Labels (Level AA)
+-----------------------------------------------------------------
+Requirement:
+Headings and labels must describe the topic or purpose clearly.
+They help users — including screen reader users and users with cognitive disabilities —
+to understand the structure and purpose of content or form fields.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.4.6 – Headings and Labels Example</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+    .bad {
+      background-color: #ffeaea;
+    }
+    .good {
+      background-color: #eaffea;
+    }
+    input, button, select {
+      padding: 8px;
+      border: 1px solid #888;
+      border-radius: 4px;
+    }
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      max-width: 300px;
+      gap: 10px;
+    }
+    .note {
+      background-color: #f9f9f9;
+      border-left: 4px solid #007bff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .code {
+      background-color: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>WCAG 2.2 – 2.4.6 Headings and Labels</h1>
+
+  <!-- ========================================================== -->
+  <!-- BAD EXAMPLES -->
+  <!-- ========================================================== -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Unclear Headings and Labels</h2>
+    <p>
+      The headings and form labels here are either missing, unclear, or unrelated to the content.
+      This makes it difficult for all users (especially screen reader users) to understand structure or purpose.
+    </p>
+
+    <h3>Website Sections</h3>
+    <p><strong>Problems:</strong></p>
+    <ul>
+      <li>❌ Headings like “Section 1” and “Stuff” are not descriptive.</li>
+      <li>❌ Form fields have no or unclear labels.</li>
+      <li>❌ Placeholder text used as labels (not accessible to screen readers).</li>
+    </ul>
+
+    <!-- BAD HEADINGS -->
+    <h2>Section 1</h2>
+    <p>This section contains general info, but heading doesn’t explain what’s inside.</p>
+
+    <h2>Stuff</h2>
+    <p>More random content. The heading “Stuff” is meaningless to users and screen readers.</p>
+
+    <!-- BAD FORM -->
+    <form class="form-container" action="#">
+      <input type="text" placeholder="Enter something..." />
+      <input type="email" placeholder="Your email..." />
+      <button>Submit</button>
+    </form>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- GOOD EXAMPLES -->
+  <!-- ========================================================== -->
+  <section class="good">
+    <h2>✅ Good Example – Clear and Descriptive Headings and Labels</h2>
+    <p>
+      This version uses meaningful headings and proper form labels that describe their purpose.
+      Users can easily find and understand each section.
+    </p>
+
+    <h2>About Our Services</h2>
+    <p>We provide web accessibility audits, remediation, and consulting services.</p>
+
+    <h2>Contact Us</h2>
+    <p>Please fill out the form below to get in touch with our team.</p>
+
+    <!-- GOOD FORM -->
+    <form class="form-container" action="#">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" />
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" />
+
+      <button>Send Message</button>
+    </form>
+
+    <ul>
+      <li>✅ Headings clearly describe the topic (About, Contact).</li>
+      <li>✅ Labels explain each input field clearly.</li>
+      <li>✅ Placeholder text is not used as a label substitute.</li>
+      <li>✅ Passes WCAG 2.4.6 (Headings and Labels).</li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ========================================================== -->
+  <section>
+    <h2>📘 Other Scenarios and Considerations</h2>
+    <ul>
+      <li><strong>❌ Missing Headings:</strong> Content sections lack headings — users can’t navigate easily.</li>
+      <li><strong>❌ Inconsistent Heading Levels:</strong> Skipping from <code>h1</code> to <code>h4</code> may confuse assistive tech.</li>
+      <li><strong>❌ Placeholder as label:</strong> Placeholders disappear after typing — not accessible.</li>
+      <li><strong>✅ Consistent structure:</strong> Use <code>h1</code> for page title, <code>h2</code> for sections, <code>h3</code> for subsections.</li>
+      <li><strong>✅ Descriptive labels:</strong> Use words that clearly describe what’s expected (e.g., “Email address”, not “Input”).</li>
+      <li><strong>✅ Group related fields:</strong> Use <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> for radio/checkbox groups.</li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- SUMMARY -->
+  <!-- ========================================================== -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.4.6 – Headings and Labels (Level AA)</li>
+      <li><strong>Goal:</strong> Help users understand structure and purpose through clear headings and labels.</li>
+      <li><strong>Best Practices:</strong></li>
+      <ul>
+        <li>Use descriptive headings that reflect the section’s topic.</li>
+        <li>Ensure all form controls have visible, meaningful <code>&lt;label&gt;</code> elements.</li>
+        <li>Don’t rely solely on placeholders as labels.</li>
+        <li>Keep heading structure logical and hierarchical.</li>
+        <li>Test with screen readers — each label and heading should make sense independently.</li>
+      </ul>
+    </ul>
+  </section>
+</body>
+</html>

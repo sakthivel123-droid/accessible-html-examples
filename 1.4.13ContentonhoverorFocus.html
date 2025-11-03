@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCAG 1.4.13 - Content on Hover or Focus</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 30px;
+  }
+  h1 { text-align: center; }
+
+  .section {
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+  }
+  .bad {
+    background-color: #ffeaea;
+    border: 2px solid red;
+  }
+  .good {
+    background-color: #eaffea;
+    border: 2px solid green;
+  }
+
+  /* ❌ BAD EXAMPLE */
+  .bad-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .bad-tooltip .tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  .bad-tooltip:hover .tooltip-text,
+  .bad-tooltip:focus .tooltip-text {
+    visibility: visible;
+  }
+  /* The tooltip disappears immediately when mouse moves away — not hoverable, dismissible, or persistent */
+
+  /* ✅ GOOD EXAMPLE */
+  .good-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .good-tooltip .tooltip-content {
+    display: none;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    background-color: #222;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    max-width: 250px;
+    z-index: 10;
+  }
+  .good-tooltip.show .tooltip-content {
+    display: block;
+  }
+  .good-tooltip .tooltip-content:focus,
+  .good-tooltip .tooltip-content:hover {
+    display: block;
+  }
+  .close-btn {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: #ffb3b3;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>WCAG 2.2 - 1.4.13 Content on Hover or Focus</h1>
+
+<!-- ❌ BAD EXAMPLE -->
+<div class="section bad">
+  <h2>❌ Bad Example: Tooltip Not Accessible</h2>
+  <p>
+    Hover or focus on this text:
+    <span class="bad-tooltip" tabindex="0">
+      Hover me
+      <span class="tooltip-text">This tooltip disappears as soon as you move the mouse away.</span>
+    </span>
+  </p>
+
+  <ul>
+    <li>Tooltip vanishes instantly when hover ends — ❌ <strong>Not hoverable</strong></li>
+    <li>No keyboard way (like ESC) to dismiss it — ❌ <strong>Not dismissible</strong></li>
+    <li>Can’t move mouse into tooltip — ❌ <strong>Not persistent</strong></li>
+  </ul>
+</div>
+
+<!-- ✅ GOOD EXAMPLE -->
+<div class="section good">
+  <h2>✅ Good Example: Accessible Tooltip</h2>
+  <p>
+    Hover or focus on this text:
+    <span class="good-tooltip" tabindex="0" aria-describedby="tip1">
+      Hover me
+      <span id="tip1" class="tooltip-content" role="tooltip">
+        <span class="close-btn" tabindex="0" aria-label="Close tooltip">✖</span>
+        This tooltip remains visible when hovered, focused, or until closed manually using the ESC key or clicking ✖.
+      </span>
+    </span>
+  </p>
+
+  <ul>
+    <li>✅ <strong>Dismissible:</strong> ESC key or close button hides it.</li>
+    <li>✅ <strong>Hoverable:</strong> User can move the pointer onto tooltip.</li>
+    <li>✅ <strong>Persistent:</strong> Stays open until user dismisses or moves away.</li>
+    <li>✅ <strong>Keyboard support:</strong> Focusable with TAB and closeable with ESC.</li>
+  </ul>
+</div>
+
+<script>
+  // Accessibility behavior for GOOD tooltip
+  const tooltip = document.querySelector('.good-tooltip');
+  const tooltipContent = tooltip.querySelector('.tooltip-content');
+  const closeBtn = tooltip.querySelector('.close-btn');
+
+  // Show tooltip on hover/focus
+  tooltip.addEventListener('mouseenter', () => tooltip.classList.add('show'));
+  tooltip.addEventListener('focus', () => tooltip.classList.add('show'));
+  
+  // Keep tooltip open while hovered
+  tooltipContent.addEventListener('mouseenter', () => tooltip.classList.add('show'));
+  tooltipContent.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+
+  // Close tooltip when ESC is pressed
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') tooltip.classList.remove('show');
+  });
+
+  // Close tooltip when clicking close button
+  closeBtn.addEventListener('click', () => tooltip.classList.remove('show'));
+</script>
+
+</body>
+</html>

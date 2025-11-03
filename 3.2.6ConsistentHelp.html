@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 Success Criterion 3.2.6 – Consistent Help (Level A)
+-------------------------------------------------------------
+Requirement:
+  - When help mechanisms (like chat, contact form, FAQ, phone number, or help button)
+    are available on multiple pages of a website, they must appear in a consistent location
+    and provide consistent access across pages.
+
+Why important:
+  - Helps users (especially with cognitive disabilities) easily locate assistance.
+  - Consistency reduces confusion and improves predictability.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.2.6 – Consistent Help</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      section {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+      .bad {
+        background-color: #ffe5e5;
+      }
+      .good {
+        background-color: #e5ffe5;
+      }
+      header {
+        background-color: #f1f1f1;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .help-links {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border-radius: 6px;
+        display: inline-block;
+        text-decoration: none;
+        margin-top: 5px;
+      }
+      .help-links:hover {
+        background-color: #0056b3;
+      }
+      .help-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .note {
+        background: #f9f9f9;
+        padding: 10px;
+        border-left: 4px solid #007bff;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WCAG 2.2 – 3.2.6 Consistent Help</h1>
+
+    <!-- ============================================================= -->
+    <!-- BAD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="bad">
+      <h2>🚫 Bad Example – Inconsistent Help Placement and Options</h2>
+
+      <header>
+        <h3>Home Page</h3>
+        <!-- Help link at top-right -->
+        <div style="text-align: right">
+          <a href="#" class="help-links">Chat with Support</a>
+        </div>
+      </header>
+
+      <main>
+        <p>
+          This page provides product information. You can find help at the top.
+        </p>
+      </main>
+
+      <hr />
+
+      <header>
+        <h3>Checkout Page</h3>
+        <!-- Help link moved to bottom-left with different label -->
+        <div style="text-align: left; margin-top: 20px">
+          <a href="#" class="help-links">Need Assistance?</a>
+        </div>
+      </header>
+
+      <main>
+        <p>
+          While checking out, the help link appears in a different place and
+          uses different text.
+        </p>
+      </main>
+
+      <p><strong>Issues:</strong></p>
+      <ul>
+        <li>
+          ❌ Help options are not consistently placed (top-right on one page,
+          bottom-left on another).
+        </li>
+        <li>
+          ❌ Different wording (“Chat with Support” vs “Need Assistance?”)
+          confuses users.
+        </li>
+        <li>
+          ❌ Some pages might lack help options entirely, reducing accessibility
+          for users needing assistance.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- GOOD EXAMPLES -->
+    <!-- ============================================================= -->
+    <section class="good">
+      <h2>✅ Good Example – Consistent Help Placement and Options</h2>
+
+      <header>
+        <h3>Home Page</h3>
+        <div
+          class="help-container"
+          style="position: fixed; right: 20px; top: 20px"
+        >
+          <a href="#" class="help-links">💬 Live Chat</a>
+          <a href="mailto:support@example.com" class="help-links"
+            >📧 Email Support</a
+          >
+          <a href="tel:+1800123456" class="help-links">📞 Call Us</a>
+        </div>
+      </header>
+
+      <main>
+        <p>
+          The same consistent help options (chat, email, phone) appear at the
+          same top-right position on all pages.
+        </p>
+      </main>
+
+      <hr />
+
+      <header>
+        <h3>Checkout Page</h3>
+        <div
+          class="help-container"
+          style="position: fixed; right: 20px; top: 20px"
+        >
+          <a href="#" class="help-links">💬 Live Chat</a>
+          <a href="mailto:support@example.com" class="help-links"
+            >📧 Email Support</a
+          >
+          <a href="tel:+1800123456" class="help-links">📞 Call Us</a>
+        </div>
+      </header>
+
+      <main>
+        <p>
+          Help remains accessible in the same location and uses consistent
+          labels across pages.
+        </p>
+      </main>
+
+      <p><strong>Explanation:</strong></p>
+      <ul>
+        <li>
+          ✅ Help options appear in the same place (top-right) on every page.
+        </li>
+        <li>
+          ✅ The same mechanisms are available: Live Chat, Email, and Phone.
+        </li>
+        <li>✅ Labels and wording are consistent for better recognition.</li>
+        <li>
+          ✅ Users always know where to find help, improving confidence and
+          usability.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- OTHER SCENARIOS -->
+    <!-- ============================================================= -->
+    <section>
+      <h2>📘 Other Possible Scenarios for 3.2.6</h2>
+      <ul>
+        <li>
+          <strong>✅ Same Help Menu:</strong> Ensure help links or buttons
+          appear in a consistent place on all pages (e.g., header, footer, or
+          fixed corner).
+        </li>
+        <li>
+          <strong>✅ Consistent Text Labels:</strong> Use the same names like
+          “Help Center” or “Contact Support” everywhere, not varied terms.
+        </li>
+        <li>
+          <strong>✅ Consistent Icons:</strong> Use the same help icon (e.g., ❓
+          or 💬) for recognizability.
+        </li>
+        <li>
+          <strong>❌ Don’t change placement:</strong> Avoid moving help between
+          pages (top-left → bottom-right).
+        </li>
+        <li>
+          <strong>❌ Don’t rename:</strong> Avoid “Need Help?” on one page and
+          “Get Support” on another if they do the same thing.
+        </li>
+        <li>
+          <strong>⚠️ Exception:</strong> If some pages (like a login or secure
+          page) can’t show chat for security, document that exception properly.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SUMMARY -->
+    <!-- ============================================================= -->
+    <section class="note">
+      <h2>Summary</h2>
+      <ul>
+        <li>
+          <strong>Criterion:</strong> 3.2.6 Consistent Help (WCAG 2.2 Level A)
+        </li>
+        <li>
+          <strong>Goal:</strong> Ensure help mechanisms are easy to find and
+          consistent across all pages.
+        </li>
+        <li>
+          <strong>Good Practice:</strong>
+          - Use consistent labels, icons, and position for help features. - Keep
+          same help options available site-wide.
+        </li>
+        <li>
+          <strong>Bad Practice:</strong>
+          - Changing help label text or location per page. - Removing help links
+          from some pages.
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

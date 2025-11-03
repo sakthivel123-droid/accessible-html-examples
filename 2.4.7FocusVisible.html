@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WCAG 2.4.7 - Focus Visible Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    h1 {
+      color: #1a73e8;
+    }
+
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+
+    /* ❌ BAD EXAMPLE STYLES */
+    .bad-button {
+      background-color: #ff6666;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      outline: none; /* Removes focus indicator */
+    }
+
+    .bad-button:focus {
+      outline: none; /* Still no visible focus */
+    }
+
+    /* ✅ GOOD EXAMPLE STYLES */
+    .good-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .good-button:focus {
+      outline: 3px solid #000; /* Strong visible outline */
+      outline-offset: 3px;
+    }
+
+    /* Link styles */
+    a {
+      text-decoration: none;
+      padding: 5px;
+    }
+
+    /* ❌ Bad link removes focus outline */
+    .bad-link:focus {
+      outline: none;
+    }
+
+    /* ✅ Good link focus style */
+    .good-link:focus {
+      outline: 2px dashed #ff9900;
+      background-color: #fff8e1;
+    }
+  </style>
+</head>
+<body>
+  <h1>WCAG 2.4.7 – Focus Visible</h1>
+
+  <section>
+    <h2>❌ Bad Example: No Visible Focus Indicator</h2>
+    <p>In this example, when you press <strong>Tab</strong>, you won’t see which element is focused.</p>
+    <button class="bad-button">Submit</button>
+    <button class="bad-button">Cancel</button>
+    <a href="#" class="bad-link">Go to Profile</a>
+  </section>
+
+  <section>
+    <h2>✅ Good Example: Clear Visible Focus</h2>
+    <p>Here, the focused element is clearly visible with a strong outline or highlight.</p>
+    <button class="good-button">Submit</button>
+    <button class="good-button">Cancel</button>
+    <a href="#" class="good-link">Go to Profile</a>
+  </section>
+</body>
+</html>

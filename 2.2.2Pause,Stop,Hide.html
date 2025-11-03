@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--
+WCAG 2.2 – 2.2.2 Pause, Stop, Hide (Level A)
+--------------------------------------------
+Requirement:
+For moving, blinking, scrolling, or auto-updating content that:
+(a) starts automatically,
+(b) lasts more than 5 seconds, and
+(c) is presented in parallel with other content,
+
+→ Users must be able to PAUSE, STOP, or HIDE it.
+
+Purpose:
+Avoid distraction and allow users (especially those with cognitive or motor disabilities)
+to focus or read content at their own pace.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG 2.2 – 2.2.2 Pause, Stop, Hide</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    section {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    .bad { background-color: #ffe5e5; }
+    .good { background-color: #e5ffe5; }
+
+    .marquee {
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+      font-weight: bold;
+    }
+
+    @keyframes scrollText {
+      0%   { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .scrolling {
+      animation: scrollText 10s linear infinite;
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .bad-btn { background-color: #ff4d4d; color: #fff; }
+    .good-btn { background-color: #4CAF50; color: #fff; }
+
+    .note {
+      background: #f9f9f9;
+      padding: 10px;
+      border-left: 4px solid #007BFF;
+      border-radius: 5px;
+    }
+
+    h2 { margin-top: 0; }
+  </style>
+</head>
+<body>
+
+  <h1>WCAG 2.2 – 2.2.2 Pause, Stop, Hide (Level A)</h1>
+
+  <!-- ============================================================= -->
+  <!-- BAD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="bad">
+    <h2>🚫 Bad Example – Auto-Scrolling Text with No Controls</h2>
+
+    <p>This banner starts moving automatically and cannot be paused or stopped.</p>
+
+    <div class="marquee scrolling" style="color:red;">
+      🔴 SALE! SALE! SALE! Get 50% off – Limited time only! 🔴 SALE! SALE! SALE! Get 50% off – Limited time only!
+    </div>
+
+    <ul>
+      <li>❌ Starts automatically.</li>
+      <li>❌ No pause/stop/hide option.</li>
+      <li>❌ Continuous movement causes distraction for readers and screen-magnifier users.</li>
+      <li>❌ Fails WCAG 2.2.2.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GOOD EXAMPLE -->
+  <!-- ============================================================= -->
+  <section class="good">
+    <h2>✅ Good Example – User Can Pause, Stop, or Hide Animation</h2>
+
+    <p>The banner below allows the user to control motion:</p>
+
+    <div id="goodBanner" class="marquee scrolling" style="color:green;">
+      🟢 Special Offer: Buy 1 Get 1 Free Today! 🟢 Hurry Up!
+    </div>
+
+    <div>
+      <button id="pause" class="good-btn">Pause</button>
+      <button id="resume" class="good-btn">Resume</button>
+      <button id="hide" class="good-btn">Hide</button>
+      <button id="show" class="good-btn">Show</button>
+    </div>
+
+    <script>
+      const banner = document.getElementById("goodBanner");
+      document.getElementById("pause").addEventListener("click", () => banner.style.animationPlayState = "paused");
+      document.getElementById("resume").addEventListener("click", () => banner.style.animationPlayState = "running");
+      document.getElementById("hide").addEventListener("click", () => banner.style.display = "none");
+      document.getElementById("show").addEventListener("click", () => banner.style.display = "block");
+    </script>
+
+    <ul>
+      <li>✅ User can <strong>pause</strong> movement.</li>
+      <li>✅ User can <strong>stop or hide</strong> the animation entirely.</li>
+      <li>✅ Animation resumes only by user choice.</li>
+      <li>✅ Meets WCAG 2.2.2.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- OTHER SCENARIOS -->
+  <!-- ============================================================= -->
+  <section>
+    <h2>📘 Other Possible Scenarios for 2.2.2 Pause, Stop, Hide</h2>
+    <ul>
+      <li><strong>❌ Bad:</strong> Auto-rotating image carousel with no pause button.</li>
+      <li><strong>✅ Good:</strong> Carousel includes “Pause” and “Next/Prev” controls.</li>
+      <li><strong>❌ Bad:</strong> News ticker moves continuously without control.</li>
+      <li><strong>✅ Good:</strong> Ticker stops moving when user hovers or focuses it.</li>
+      <li><strong>❌ Bad:</strong> Auto-updating chat window steals focus repeatedly.</li>
+      <li><strong>✅ Good:</strong> Auto-updates allowed only if user enables them.</li>
+      <li><strong>✅ Good (Exception):</strong> Essential motion (e.g., loading spinner or live sports feed).</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SUMMARY -->
+  <!-- ============================================================= -->
+  <section class="note">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Criterion:</strong> 2.2.2 Pause, Stop, Hide (Level A)</li>
+      <li><strong>Goal:</strong> Allow users to control motion, blinking, or auto-updating content.</li>
+      <li><strong>Good Practice:</strong> Provide clear buttons or keyboard options to pause, stop, or hide motion.</li>
+      <li><strong>Bad Practice:</strong> Continuous animations or carousels without user control.</li>
+      <li><strong>Exceptions:</strong> Motion is essential (e.g., progress indicator, live event data).</li>
+    </ul>
+  </section>
+
+</body>
+</html>
